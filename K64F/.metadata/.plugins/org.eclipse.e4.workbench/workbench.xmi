@@ -56,10 +56,9 @@
           <tags>persp.showIn:org.eclipse.ui.navigator.ProjectExplorer</tags>
           <tags>persp.viewSC:org.eclipse.ui.navigator.ProjectExplorer</tags>
           <tags>persp.newWizSC:com.nxp.mcuxpresso.addons.sdkbuilder.wizards.NewBoardSDKWizard</tags>
-          <children xsi:type="basic:PartSashContainer" xmi:id="_NXAjceOTEemeTvjMaHP5dQ" selectedElement="_NXAjcuOTEemeTvjMaHP5dQ" horizontal="true">
-            <children xsi:type="basic:PartSashContainer" xmi:id="_NXAjcuOTEemeTvjMaHP5dQ" containerData="2200" selectedElement="_NXAjc-OTEemeTvjMaHP5dQ">
-              <children xsi:type="basic:PartStack" xmi:id="_NXAjc-OTEemeTvjMaHP5dQ" elementId="perspective.area.project.explorer" containerData="6000" selectedElement="_NXAjdOOTEemeTvjMaHP5dQ">
-                <tags>active</tags>
+          <children xsi:type="basic:PartSashContainer" xmi:id="_NXAjceOTEemeTvjMaHP5dQ" selectedElement="_NXAjfuOTEemeTvjMaHP5dQ" horizontal="true">
+            <children xsi:type="basic:PartSashContainer" xmi:id="_NXAjcuOTEemeTvjMaHP5dQ" containerData="1941" selectedElement="_NXAjc-OTEemeTvjMaHP5dQ">
+              <children xsi:type="basic:PartStack" xmi:id="_NXAjc-OTEemeTvjMaHP5dQ" elementId="perspective.area.project.explorer" containerData="6753" selectedElement="_NXAjdOOTEemeTvjMaHP5dQ">
                 <children xsi:type="advanced:Placeholder" xmi:id="_NXAjdOOTEemeTvjMaHP5dQ" elementId="org.eclipse.ui.navigator.ProjectExplorer" ref="_NWxS4OOTEemeTvjMaHP5dQ" closeable="true">
                   <tags>View</tags>
                   <tags>categoryTag:General</tags>
@@ -85,7 +84,7 @@
                   <tags>categoryTag:MCUXpresso IDE</tags>
                 </children>
               </children>
-              <children xsi:type="basic:PartStack" xmi:id="_NXAjeuOTEemeTvjMaHP5dQ" elementId="perspective.area.quickstart" containerData="4000" selectedElement="_NXAje-OTEemeTvjMaHP5dQ">
+              <children xsi:type="basic:PartStack" xmi:id="_NXAjeuOTEemeTvjMaHP5dQ" elementId="perspective.area.quickstart" containerData="3247" selectedElement="_NXAje-OTEemeTvjMaHP5dQ">
                 <children xsi:type="advanced:Placeholder" xmi:id="_NXAje-OTEemeTvjMaHP5dQ" elementId="com.crt.quickstart.views.QuickstartView" ref="_NW0WMOOTEemeTvjMaHP5dQ" closeable="true">
                   <tags>View</tags>
                   <tags>categoryTag:MCUXpresso IDE</tags>
@@ -100,9 +99,9 @@
                 </children>
               </children>
             </children>
-            <children xsi:type="basic:PartSashContainer" xmi:id="_NXAjfuOTEemeTvjMaHP5dQ" containerData="7800" selectedElement="_NXAjf-OTEemeTvjMaHP5dQ">
-              <children xsi:type="basic:PartSashContainer" xmi:id="_NXAjf-OTEemeTvjMaHP5dQ" containerData="6000" selectedElement="_NXAjgOOTEemeTvjMaHP5dQ" horizontal="true">
-                <children xsi:type="basic:PartSashContainer" xmi:id="_NXAjgOOTEemeTvjMaHP5dQ" containerData="6500" selectedElement="_NXAjg-OTEemeTvjMaHP5dQ">
+            <children xsi:type="basic:PartSashContainer" xmi:id="_NXAjfuOTEemeTvjMaHP5dQ" containerData="8059" selectedElement="_NXAjjOOTEemeTvjMaHP5dQ">
+              <children xsi:type="basic:PartSashContainer" xmi:id="_NXAjf-OTEemeTvjMaHP5dQ" containerData="7302" selectedElement="_NXAjgOOTEemeTvjMaHP5dQ" horizontal="true">
+                <children xsi:type="basic:PartSashContainer" xmi:id="_NXAjgOOTEemeTvjMaHP5dQ" containerData="7941" selectedElement="_NXAjg-OTEemeTvjMaHP5dQ">
                   <children xsi:type="basic:PartStack" xmi:id="_NXAjgeOTEemeTvjMaHP5dQ" elementId="perspective.area.debug" toBeRendered="false" containerData="2000">
                     <children xsi:type="advanced:Placeholder" xmi:id="_NXAjguOTEemeTvjMaHP5dQ" elementId="org.eclipse.debug.ui.DebugView" toBeRendered="false" ref="_NW6c0OOTEemeTvjMaHP5dQ" closeable="true">
                       <tags>View</tags>
@@ -111,7 +110,7 @@
                   </children>
                   <children xsi:type="advanced:Placeholder" xmi:id="_NXAjg-OTEemeTvjMaHP5dQ" elementId="org.eclipse.ui.editorss" containerData="8000" ref="_NWatkOOTEemeTvjMaHP5dQ"/>
                 </children>
-                <children xsi:type="basic:PartSashContainer" xmi:id="_NXAjhOOTEemeTvjMaHP5dQ" containerData="3500">
+                <children xsi:type="basic:PartSashContainer" xmi:id="_NXAjhOOTEemeTvjMaHP5dQ" containerData="2059">
                   <children xsi:type="basic:PartStack" xmi:id="_NXAjheOTEemeTvjMaHP5dQ" elementId="perspective.area.outline" containerData="6000" selectedElement="_NXAjhuOTEemeTvjMaHP5dQ">
                     <children xsi:type="advanced:Placeholder" xmi:id="_NXAjhuOTEemeTvjMaHP5dQ" elementId="org.eclipse.ui.views.ContentOutline" ref="_NW4AkOOTEemeTvjMaHP5dQ" closeable="true">
                       <tags>View</tags>
@@ -138,7 +137,7 @@
                   </children>
                 </children>
               </children>
-              <children xsi:type="basic:PartSashContainer" xmi:id="_NXAjjOOTEemeTvjMaHP5dQ" containerData="4000" horizontal="true">
+              <children xsi:type="basic:PartSashContainer" xmi:id="_NXAjjOOTEemeTvjMaHP5dQ" containerData="2698" selectedElement="_NXAjluOTEemeTvjMaHP5dQ" horizontal="true">
                 <children xsi:type="basic:PartStack" xmi:id="_NXAjjeOTEemeTvjMaHP5dQ" elementId="perspective.area.sdk.view" containerData="5500" selectedElement="_NXAjjuOTEemeTvjMaHP5dQ">
                   <children xsi:type="advanced:Placeholder" xmi:id="_NXAjjuOTEemeTvjMaHP5dQ" elementId="com.nxp.mcuxpresso.core.datamodels.ui.views.SDKView" ref="_NW1kUOOTEemeTvjMaHP5dQ" closeable="true">
                     <tags>View</tags>
@@ -173,7 +172,9 @@
                     <tags>categoryTag:Debug</tags>
                   </children>
                 </children>
-                <children xsi:type="basic:PartStack" xmi:id="_NXAjluOTEemeTvjMaHP5dQ" elementId="perspective.area.memory" containerData="4500" selectedElement="_NXAjl-OTEemeTvjMaHP5dQ">
+                <children xsi:type="basic:PartStack" xmi:id="_NXAjluOTEemeTvjMaHP5dQ" elementId="perspective.area.memory" containerData="4500" selectedElement="_NXAjmOOTEemeTvjMaHP5dQ">
+                  <tags>active</tags>
+                  <tags>noFocus</tags>
                   <children xsi:type="advanced:Placeholder" xmi:id="_NXAjl-OTEemeTvjMaHP5dQ" elementId="org.eclipse.debug.ui.MemoryView" ref="_NW5OseOTEemeTvjMaHP5dQ" closeable="true">
                     <tags>View</tags>
                     <tags>categoryTag:Debug</tags>
@@ -411,7 +412,6 @@
       <children xsi:type="basic:PartStack" xmi:id="_NWatkeOTEemeTvjMaHP5dQ" elementId="org.eclipse.e4.primaryDataStack">
         <tags>org.eclipse.e4.primaryDataStack</tags>
         <tags>EditorStack</tags>
-        <tags>noFocus</tags>
       </children>
     </sharedElements>
     <sharedElements xsi:type="basic:Part" xmi:id="_NWpXEOOTEemeTvjMaHP5dQ" elementId="org.eclipse.help.ui.HelpView" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="Help" iconURI="platform:/plugin/org.eclipse.help.ui/icons/view16/help_view.gif" tooltip="" closeable="true">
@@ -438,8 +438,6 @@
       <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;view CommonNavigator.LINKING_ENABLED=&quot;1&quot; org.eclipse.cdt.ui.cview.groupincludes=&quot;false&quot; org.eclipse.cdt.ui.cview.groupmacros=&quot;false&quot; org.eclipse.cdt.ui.editor.CUChildren=&quot;true&quot; org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets=&quot;0&quot;>&#xA;&lt;lastRecentlyUsedFilters/>&#xA;&lt;/view>"/>
       <tags>View</tags>
       <tags>categoryTag:General</tags>
-      <tags>active</tags>
-      <tags>activeOnClose</tags>
       <menus xmi:id="_NovMoOOTEemeTvjMaHP5dQ" elementId="org.eclipse.ui.navigator.ProjectExplorer">
         <tags>ViewMenu</tags>
         <tags>menuContribution:menu</tags>
@@ -582,13 +580,21 @@
         <tags>ViewMenu</tags>
         <tags>menuContribution:menu</tags>
       </menus>
-      <toolbar xmi:id="_QTcfYeOTEemeTvjMaHP5dQ" elementId="org.eclipse.debug.ui.MemoryView"/>
+      <toolbar xmi:id="_QTcfYeOTEemeTvjMaHP5dQ" elementId="org.eclipse.debug.ui.MemoryView" visible="false"/>
     </sharedElements>
     <sharedElements xsi:type="basic:Part" xmi:id="_NW51wOOTEemeTvjMaHP5dQ" elementId="com.nxp.lpcxpresso.debug.ui.views.NXPHeapAndStackUsageView" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="Heap and Stack Usage" iconURI="platform:/plugin/com.nxp.lpcxpresso.debug.ui/icons/variable_view.gif" tooltip="" closeable="true">
       <persistedState key="originalCompatibilityViewClass" value="com.nxp.lpcxpresso.debug.ui.views.HeapStackUsageView"/>
       <persistedState key="originalCompatibilityViewBundle" value="com.nxp.lpcxpresso.debug.ui"/>
+      <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;view memento.delay=&quot;1000&quot;/>"/>
       <tags>View</tags>
       <tags>categoryTag:MCUXpresso IDE</tags>
+      <tags>active</tags>
+      <tags>activeOnClose</tags>
+      <menus xmi:id="_ufkqUOOUEemRE4lj56kYeA" elementId="com.nxp.lpcxpresso.debug.ui.views.NXPHeapAndStackUsageView">
+        <tags>ViewMenu</tags>
+        <tags>menuContribution:menu</tags>
+      </menus>
+      <toolbar xmi:id="_ufkqUeOUEemRE4lj56kYeA" elementId="com.nxp.lpcxpresso.debug.ui.views.NXPHeapAndStackUsageView"/>
     </sharedElements>
     <sharedElements xsi:type="basic:Part" xmi:id="_NW6c0OOTEemeTvjMaHP5dQ" elementId="org.eclipse.debug.ui.DebugView" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="Debug" iconURI="platform:/plugin/org.eclipse.debug.ui/icons/full/eview16/debug_view.png" tooltip="" closeable="true">
       <persistedState key="originalCompatibilityViewClass" value="org.eclipse.debug.internal.ui.views.launch.LaunchView"/>
@@ -687,7 +693,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_NeE0wOOTEemeTvjMaHP5dQ" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_NeazAOOTEemeTvjMaHP5dQ" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_Lyfc0eOTEemeTvjMaHP5dQ"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_e8bFgOOUEemRE4lj56kYeA" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_Lyfc0eOTEemeTvjMaHP5dQ"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_NeFb0OOTEemeTvjMaHP5dQ" elementId="group.edit" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -715,7 +721,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_NeGp8OOTEemeTvjMaHP5dQ" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_NecBIuOTEemeTvjMaHP5dQ" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_LyeOv-OTEemeTvjMaHP5dQ"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_e8glEOOUEemRE4lj56kYeA" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_LyeOv-OTEemeTvjMaHP5dQ"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_NeGp8eOTEemeTvjMaHP5dQ" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -737,6 +743,7 @@
         <tags>HIDEABLE</tags>
         <tags>SHOW_RESTORE_MENU</tags>
       </children>
+      <children xsi:type="menu:ToolControl" xmi:id="_nfkLQOOUEemRE4lj56kYeA" elementId="breadcrumb.toolcontrol" contributionURI="bundleclass://com.genuitec.eclipse.meexplorer/com.genuitec.eclipse.meexplorer.breadcrumb.e4.BreadCrumbContainer"/>
     </trimBars>
     <trimBars xmi:id="_Lvw40-OTEemeTvjMaHP5dQ" elementId="org.eclipse.ui.trim.status" contributorURI="platform:/plugin/org.eclipse.ui.workbench" side="Bottom">
       <children xsi:type="menu:ToolControl" xmi:id="_Nh16cOOTEemeTvjMaHP5dQ" elementId="org.eclipse.ui.StatusLine" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.StandardTrim">
@@ -828,6 +835,8 @@
     <bindings xmi:id="_LzvZ6eOTEemeTvjMaHP5dQ" keySequence="ALT+CTRL+ARROW_UP" command="_Lygq0eOTEemeTvjMaHP5dQ"/>
     <bindings xmi:id="_LzwA8eOTEemeTvjMaHP5dQ" keySequence="ALT+CTRL+ARROW_DOWN" command="_LyZ9K-OTEemeTvjMaHP5dQ"/>
     <bindings xmi:id="_LzwA9OOTEemeTvjMaHP5dQ" keySequence="CTRL+F10" command="_Lyfc1eOTEemeTvjMaHP5dQ"/>
+    <bindings xmi:id="_d2A3EeOUEemRE4lj56kYeA" keySequence="CTRL+F" command="_d1G4I-OUEemRE4lj56kYeA"/>
+    <bindings xmi:id="_d2EhcOOUEemRE4lj56kYeA" keySequence="ESC" command="_d1HfNeOUEemRE4lj56kYeA"/>
   </bindingTables>
   <bindingTables xmi:id="_LzapwOOTEemeTvjMaHP5dQ" elementId="org.eclipse.xtext.ui.embeddedTextEditorScope" bindingContext="_LytfNeOTEemeTvjMaHP5dQ">
     <bindings xmi:id="_LzapweOTEemeTvjMaHP5dQ" keySequence="END" command="_Lyfc8-OTEemeTvjMaHP5dQ"/>
@@ -1287,6 +1296,18 @@
   <bindingTables xmi:id="_NWkeleOTEemeTvjMaHP5dQ" bindingContext="_NWkelOOTEemeTvjMaHP5dQ"/>
   <bindingTables xmi:id="_NWlFoeOTEemeTvjMaHP5dQ" bindingContext="_NWlFoOOTEemeTvjMaHP5dQ"/>
   <bindingTables xmi:id="_NWlFo-OTEemeTvjMaHP5dQ" bindingContext="_NWlFouOTEemeTvjMaHP5dQ"/>
+  <bindingTables xmi:id="_d17-kOOUEemRE4lj56kYeA" elementId="com.genuitec.eclipse.inlinesearch.context" bindingContext="_d1KigOOUEemRE4lj56kYeA">
+    <bindings xmi:id="_d1-a0OOUEemRE4lj56kYeA" keySequence="CTRL+BS" command="_d1HfMOOUEemRE4lj56kYeA"/>
+    <bindings xmi:id="_d1_B4OOUEemRE4lj56kYeA" keySequence="ALT+SHIFT+CR" command="_d1G4IeOUEemRE4lj56kYeA"/>
+    <bindings xmi:id="_d2A3EOOUEemRE4lj56kYeA" keySequence="ALT+SHIFT+1" command="_d1HfNOOUEemRE4lj56kYeA"/>
+    <bindings xmi:id="_d2FvkOOUEemRE4lj56kYeA" keySequence="CTRL+DEL" command="_d1HfM-OUEemRE4lj56kYeA"/>
+    <bindings xmi:id="_d2HkwOOUEemRE4lj56kYeA" keySequence="CTRL+ARROW_UP" command="_d1HfOOOUEemRE4lj56kYeA"/>
+    <bindings xmi:id="_d2IL0OOUEemRE4lj56kYeA" keySequence="CTRL+ARROW_DOWN" command="_d1G4JOOUEemRE4lj56kYeA"/>
+  </bindingTables>
+  <bindingTables xmi:id="_d2DTUOOUEemRE4lj56kYeA" elementId="com.genuitec.eclipse.meExplorerScope" bindingContext="_d1KigeOUEemRE4lj56kYeA">
+    <bindings xmi:id="_d2DTUeOUEemRE4lj56kYeA" keySequence="ALT+SHIFT+R" command="_LySoauOTEemeTvjMaHP5dQ"/>
+    <bindings xmi:id="_d2D6YOOUEemRE4lj56kYeA" keySequence="ALT+SHIFT+V" command="_LySBU-OTEemeTvjMaHP5dQ"/>
+  </bindingTables>
   <rootContext xmi:id="_Lvw41-OTEemeTvjMaHP5dQ" elementId="org.eclipse.ui.contexts.dialogAndWindow" contributorURI="platform:/plugin/org.eclipse.ui.workbench" name="In Dialogs and Windows" description="Either a dialog or a window is open">
     <children xmi:id="_Lvw42OOTEemeTvjMaHP5dQ" elementId="org.eclipse.ui.contexts.window" contributorURI="platform:/plugin/org.eclipse.ui.workbench" name="In Windows" description="A window is open">
       <children xmi:id="_Lvw42eOTEemeTvjMaHP5dQ" elementId="org.eclipse.e4.ui.contexts.views" contributorURI="platform:/plugin/org.eclipse.ui.workbench" name="%bindingcontext.name.bindingView"/>
@@ -1315,6 +1336,7 @@
         <children xmi:id="_LyuGPeOTEemeTvjMaHP5dQ" elementId="org.eclipse.cdt.make.ui.makefileEditorScope" name="Makefile Editor" description="Editor for makefiles"/>
         <children xmi:id="_LyuGP-OTEemeTvjMaHP5dQ" elementId="org.eclipse.cdt.ui.cEditorScope" name="C/C++ Editor" description="Editor for C/C++ Source Files"/>
         <children xmi:id="_LyuGQeOTEemeTvjMaHP5dQ" elementId="org.eclipse.jdt.ui.propertiesEditorScope" name="Editing Properties Files" description="Editing Properties Files Context"/>
+        <children xmi:id="_d1KigOOUEemRE4lj56kYeA" elementId="com.genuitec.eclipse.inlinesearch.context" name="Inline Search is Active"/>
       </children>
       <children xmi:id="_LytfI-OTEemeTvjMaHP5dQ" elementId="org.eclipse.compare.compareEditorScope" name="Comparing in an Editor" description="Comparing in an Editor"/>
       <children xmi:id="_LytfJeOTEemeTvjMaHP5dQ" elementId="org.eclipse.debug.ui.memoryview" name="In Memory View" description="In memory view"/>
@@ -1334,6 +1356,7 @@
       <children xmi:id="_LyuGO-OTEemeTvjMaHP5dQ" elementId="org.eclipse.tm.terminal.TerminalContext" name="Terminal Typing Connected" description="Override ALT+x menu access keys while typing into the Terminal"/>
       <children xmi:id="_LyuGPuOTEemeTvjMaHP5dQ" elementId="com.nxp.swtools.clocks.contexts.diagramView" name="Diagram View Context" description="In Diagram View"/>
       <children xmi:id="_LyuGQuOTEemeTvjMaHP5dQ" elementId="org.eclipse.egit.ui.RepositoriesView" name="In Git Repositories View"/>
+      <children xmi:id="_d1KigeOUEemRE4lj56kYeA" elementId="com.genuitec.eclipse.meExplorerScope" name="Project Explorer +"/>
     </children>
     <children xmi:id="_Lvw42uOTEemeTvjMaHP5dQ" elementId="org.eclipse.ui.contexts.dialog" contributorURI="platform:/plugin/org.eclipse.ui.workbench" name="In Dialogs" description="A dialog is open"/>
     <children xmi:id="_LytfNeOTEemeTvjMaHP5dQ" elementId="org.eclipse.xtext.ui.embeddedTextEditorScope" name="Embedded Xtext Editor context" description="Embedded Xtext Editor is active"/>
@@ -3434,6 +3457,24 @@
   <commands xmi:id="_NVKwYeOTEemeTvjMaHP5dQ" elementId="AUTOGEN:::org.eclipse.jdt.debug.ui.DisplayViewActions/org.eclipse.jdt.debug.ui.displayViewToolbar.Execute" commandName="Execute" description="Execute the Selected Text" category="_LyO-DOOTEemeTvjMaHP5dQ"/>
   <commands xmi:id="_NVKwYuOTEemeTvjMaHP5dQ" elementId="AUTOGEN:::org.eclipse.jdt.debug.ui.DisplayViewActions/org.eclipse.jdt.debug.ui.displayViewToolbar.Display" commandName="Display" description="Display Result of Evaluating Selected Text" category="_LyO-DOOTEemeTvjMaHP5dQ"/>
   <commands xmi:id="_NVKwY-OTEemeTvjMaHP5dQ" elementId="AUTOGEN:::org.eclipse.jdt.debug.ui.DisplayViewActions/org.eclipse.jdt.debug.ui.displayViewToolbar.Inspect" commandName="Inspect" description="Inspect Result of Evaluating Selected Text" category="_LyO-DOOTEemeTvjMaHP5dQ"/>
+  <commands xmi:id="_d1G4IOOUEemRE4lj56kYeA" elementId="net.sourceforge.vrapper.eclipse.commands.toggle" commandName="Toggle Vrapper" description="Toggles Vrapper" category="_d1FqAeOUEemRE4lj56kYeA"/>
+  <commands xmi:id="_d1G4IeOUEemRE4lj56kYeA" elementId="com.genuitec.eclipse.inlinesearch.replaceall" commandName="Replace All" category="_d1FqAuOUEemRE4lj56kYeA"/>
+  <commands xmi:id="_d1G4IuOUEemRE4lj56kYeA" elementId="com.genuitec.myeclipse.perspective.meexplorer.search.searchmodecommand" commandName="Search Mode" category="_LyO-DOOTEemeTvjMaHP5dQ"/>
+  <commands xmi:id="_d1G4I-OUEemRE4lj56kYeA" elementId="com.genuitec.eclipse.inlinesearch.commands.showFindReplaceBarCommand" commandName="Show Inline Search" category="_d1FqAuOUEemRE4lj56kYeA"/>
+  <commands xmi:id="_d1G4JOOUEemRE4lj56kYeA" elementId="com.genuitec.eclipse.inlinesearch.replace.toggle.open" commandName="Open Replace Bar" category="_d1FqAuOUEemRE4lj56kYeA"/>
+  <commands xmi:id="_d1G4JeOUEemRE4lj56kYeA" elementId="com.genuitec.myeclipse.perspective.meexplorer.search.regexcommand" commandName="Regular Expression" category="_LyO-DOOTEemeTvjMaHP5dQ"/>
+  <commands xmi:id="_d1G4JuOUEemRE4lj56kYeA" elementId="com.genuitec.eclipse.core.ui.enableCodeLive" commandName="CodeLive" description="CodeLive Enablement" category="_LyO-DOOTEemeTvjMaHP5dQ"/>
+  <commands xmi:id="_d1HfMOOUEemRE4lj56kYeA" elementId="com.genuitec.eclipse.inlinesearch.delete.previous" commandName="Delete Previous Word" category="_d1FqAuOUEemRE4lj56kYeA"/>
+  <commands xmi:id="_d1HfMeOUEemRE4lj56kYeA" elementId="com.genuitec.myeclipse.perspective.meexplorer.search.folderfiltertogglecommand" commandName="Do not match folders" category="_LyO-DOOTEemeTvjMaHP5dQ"/>
+  <commands xmi:id="_d1HfMuOUEemRE4lj56kYeA" elementId="com.genuitec.myeclipse.breadcrumb.togglebreadcrumbcommand" commandName="BreadCrumb" category="_LyO-DOOTEemeTvjMaHP5dQ"/>
+  <commands xmi:id="_d1HfM-OUEemRE4lj56kYeA" elementId="com.genuitec.eclipse.inlinesearch.delete.next" commandName="Delete Next Word" category="_d1FqAuOUEemRE4lj56kYeA"/>
+  <commands xmi:id="_d1HfNOOUEemRE4lj56kYeA" elementId="com.genuitec.eclipse.inlinesearch.replaceone" commandName="Replace and Find Next" category="_d1FqAuOUEemRE4lj56kYeA"/>
+  <commands xmi:id="_d1HfNeOUEemRE4lj56kYeA" elementId="com.genuitec.eclipse.inlinesearch.commands.hideFindReplaceBarCommand" commandName="Close Inline Search" category="_d1FqAuOUEemRE4lj56kYeA"/>
+  <commands xmi:id="_d1HfNuOUEemRE4lj56kYeA" elementId="com.genuitec.myeclipse.perspective.meexplorer.search.casesensitivecommand" commandName="Case Sensitive" category="_LyO-DOOTEemeTvjMaHP5dQ"/>
+  <commands xmi:id="_d1HfN-OUEemRE4lj56kYeA" elementId="com.genuitec.eclipse.webclipse.evergreen.checkForUpdates" commandName="Check for Updates" category="_LyO-DOOTEemeTvjMaHP5dQ"/>
+  <commands xmi:id="_d1HfOOOUEemRE4lj56kYeA" elementId="com.genuitec.eclipse.inlinesearch.replace.toggle.close" commandName="Close Replace Bar" category="_d1FqAuOUEemRE4lj56kYeA"/>
+  <commands xmi:id="_d90vQOOUEemRE4lj56kYeA" elementId="com.genuitec.myeclipse.help.darktheme.commandid" commandName="com.genuitec.myeclipse.help.darktheme.commandid"/>
+  <commands xmi:id="_d92kcOOUEemRE4lj56kYeA" elementId="com.genuitec.migrate.to.codemix" commandName="com.genuitec.migrate.to.codemix"/>
   <addons xmi:id="_Lvw42-OTEemeTvjMaHP5dQ" elementId="org.eclipse.e4.core.commands.service" contributorURI="platform:/plugin/org.eclipse.ui.workbench" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_Lvw43OOTEemeTvjMaHP5dQ" elementId="org.eclipse.e4.ui.contexts.service" contributorURI="platform:/plugin/org.eclipse.ui.workbench" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_Lvw43eOTEemeTvjMaHP5dQ" elementId="org.eclipse.e4.ui.bindings.service" contributorURI="platform:/plugin/org.eclipse.ui.workbench" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
@@ -3445,7 +3486,7 @@
   <addons xmi:id="_Lvw44-OTEemeTvjMaHP5dQ" elementId="MinMax Addon" contributorURI="platform:/plugin/org.eclipse.ui.workbench" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.minmax.MinMaxAddon"/>
   <addons xmi:id="_Lvw45OOTEemeTvjMaHP5dQ" elementId="org.eclipse.ui.workbench.addon.0" contributorURI="platform:/plugin/org.eclipse.ui.workbench" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.HandlerProcessingAddon"/>
   <addons xmi:id="_LwkxIOOTEemeTvjMaHP5dQ" elementId="SplitterAddon" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.splitteraddon.SplitterAddon"/>
-  <addons xmi:id="_IYS0IKimEeS11vbz3f9ezw" elementId="org.eclipse.ui.ide.addon.0" contributorURI="platform:/plugin/org.eclipse.ui.ide" contributionURI="bundleclass://org.eclipse.ui.ide/org.eclipse.ui.internal.ide.addons.SaveAllDirtyPartsAddon"/>
+  <addons xmi:id="_d21WcOOUEemRE4lj56kYeA" elementId="org.eclipse.ui.ide.addon.0" contributionURI="bundleclass://org.eclipse.ui.ide/org.eclipse.ui.internal.ide.addons.SaveAllDirtyPartsAddon"/>
   <addons xmi:id="_dz0JgGOlEeSMMaPQU2nlzw" elementId="org.eclipse.ui.ide.application.addon.0" contributorURI="platform:/plugin/org.eclipse.ui.ide.application" contributionURI="bundleclass://org.eclipse.ui.ide.application/org.eclipse.ui.internal.ide.application.addons.ModelCleanupAddon"/>
   <categories xmi:id="_LyNv4OOTEemeTvjMaHP5dQ" elementId="org.eclipse.team.ui.category.team" name="Team" description="Actions that apply when working with a Team"/>
   <categories xmi:id="_LyNv4eOTEemeTvjMaHP5dQ" elementId="org.eclipse.ui.category.views" name="Views" description="Commands for opening views"/>
@@ -3495,4 +3536,6 @@
   <categories xmi:id="_LyO-DOOTEemeTvjMaHP5dQ" elementId="org.eclipse.core.commands.categories.autogenerated" name="Uncategorized" description="Commands that were either auto-generated or have no category"/>
   <categories xmi:id="_LyO-DeOTEemeTvjMaHP5dQ" elementId="org.eclipse.cdt.debug.ui.category.tracing" name="Tracing Commands" description="Category for Tracing Commands"/>
   <categories xmi:id="_LyO-DuOTEemeTvjMaHP5dQ" elementId="org.eclipse.cdt.managedbuilder.ui.category.build" name="C/C++ Build" description="C/C++ Build Actions"/>
+  <categories xmi:id="_d1FqAeOUEemRE4lj56kYeA" elementId="net.sourceforge.vrapper.eclipse.commands" name="Vrapper" description="Commands for Vrapper"/>
+  <categories xmi:id="_d1FqAuOUEemRE4lj56kYeA" elementId="com.genuitec.eclipse.inlinesearch.commands.category" name="Inline Search"/>
 </application:Application>
