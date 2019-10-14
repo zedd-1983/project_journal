@@ -8,3 +8,13 @@ During my last week I have setup the MCUXpresso and FreeRTOS and tested everythi
 and works. I have created and submitted the project proposal.
 Plan for this week is to get SystemView working with K64F to monitor the FreeRTOS and to
 start working on the moisture detection. This will likely be an external interrupt.
+
+
+14/10/2019
+I have order two K64F development boards off Brian today along with a J-Link EDU debugging
+probe that will help me to monitor the behaviour of the FreeRTOS using SystemView. Waiting
+for confirmation from Brian that the order is OK and expected delivery times. I have also 
+acquired 2 Bluetooth modules to get the wireless communication going. Didn't get to work on
+the boards at all unfortunately but giving myself this week the get the external interrupt 
+going and start working on the RTC for timekeeping. Will probably have to talk to Paul or 
+Niall about the design of the FreeRTOS system and it's tasks
