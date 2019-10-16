@@ -2368,3 +2368,6 @@ Binding(CTRL+U,
 
 !ENTRY org.eclipse.jface.text 2 0 2019-10-16 20:33:11.544
 !MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.boolean'
+
+!ENTRY net.sourceforge.vrapper.eclipse 1 0 2019-10-16 20:49:39.054
+!MESSAGE No .vrapperrc or _vrapperrc found.

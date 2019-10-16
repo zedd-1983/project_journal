@@ -36,7 +36,7 @@ void PORTC_IRQHandler()
 
 	// clear pending bits
 	GPIO_PortClearInterruptFlags(BOARD_SW2_GPIO, 1 << BOARD_SW2_GPIO_PIN);
-	PRINTF("\r\nMoisture detected\r\n");
+	PRINTF("\r\nMoisture detected (Button 2 Pressed)\r\n");
 	xHigherPriorityTaskWoken = pdFALSE;
 	xSemaphoreGiveFromISR(moistureDetectionSemphr, &xHigherPriorityTaskWoken);
 	portYIELD_FROM_ISR(xHigherPriorityTaskWoken);

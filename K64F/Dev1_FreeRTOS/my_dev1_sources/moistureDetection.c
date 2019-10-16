@@ -9,6 +9,14 @@
 void moistureDetection(void* pvParameters)
 {
 	for(;;)
-		PRINTF("\r\nMoisture Detection\r\n");
+	{
+		// receive semaphore
+		if(xSemaphoreTake(moistureDetectionSemphr, portMAX_DELAY));
+			PRINTF("\r\nMoisture detected in moistureDetection task\r\n");
+
+		// request time
+
+		// assemble message for transmission
+	}
 }
 
