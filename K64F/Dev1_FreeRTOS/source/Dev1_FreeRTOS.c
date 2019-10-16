@@ -23,7 +23,6 @@
 TaskHandle_t detectMoistureHandle = NULL;
 TaskHandle_t timeKeepingHandle = NULL;
 SemaphoreHandle_t moistureDetectionSemphr = NULL;
-
 /* TODO: interrupts */
 
 // this interrupt will simulate interrupt received from moisture detection
@@ -53,17 +52,22 @@ int main(void) {
   	/* Init FSL debug console. */
     BOARD_InitDebugConsole();
 
-    PRINTF("Hello World\n");
+    // enable interrupts in NVIC
+    NVIC_SetPriority(BOARD_SW2_IRQ, 10);
+    NVIC_ClearPendingIRQ(BOARD_SW2_IRQ);
+    NVIC_EnableIRQ(BOARD_SW2_IRQ);
+
+    PRINTF("Easysleep - moisture detection\r\n");
 
     if(xTaskCreate(moistureDetection, "Moisture Detection Task", configMINIMAL_STACK_SIZE + 10, NULL, 2, &detectMoistureHandle) == pdFALSE)
     {
     	PRINTF("\r\nFailed to start \"Moisture Detection Task\"\r\n");
     }
 
-    if(xTaskCreate(timeKeeping, "Time Keeping Task", configMINIMAL_STACK_SIZE + 10, NULL, 2, &timeKeepingHandle) == pdFALSE)
-    {
-    	PRINTF("\r\nFailed to start \"Time Keeping Task\"\r\n");
-    }
+//    if(xTaskCreate(timeKeeping, "Time Keeping Task", configMINIMAL_STACK_SIZE + 10, NULL, 2, &timeKeepingHandle) == pdFALSE)
+//    {
+//    	PRINTF("\r\nFailed to start \"Time Keeping Task\"\r\n");
+//    }
 
     moistureDetectionSemphr = xSemaphoreCreateBinary();
 

@@ -1,0 +1,30 @@
+"FreeRTOS Task Aware Debugger for GDB" version 11.0.1 (201907311258)
+(c) 2016-2018 NXP Semiconductors, Inc.
+==================================
+23:04:32.782 INFO: [TadModel] DSF session ID 0 has started.
+23:04:46.956 INFO: [TadState] TAD state changed:  DEBUG_STARTED -> DEBUG_INIT_0 (SUSPENDED, USER_REQUEST)
+23:04:50.12 INFO: [TadState] TAD state changed:  DEBUG_INIT_0 -> DEBUG_INIT_1 (RESUMED, USER_REQUEST)
+23:04:50.181 INFO: [TadState] TAD state changed:  DEBUG_INIT_1 -> DEBUG_SUSPENDED (SUSPENDED, BREAKPOINT)
+23:05:14.567 INFO: [TadState] TAD state changed:  DEBUG_SUSPENDED -> DEBUG_RESUMED (RESUMED, USER_REQUEST)
+23:05:35.427 INFO: [TadState] TAD state changed:  DEBUG_RESUMED -> READY (SUSPENDED, SIGNAL)
+23:05:35.502 INFO: [Benchmark] Loading data for "Determine FreeRTOS version" has started.
+23:05:35.752 ERROR: [VariableReader] Could not read variable expression: "&(FreeRTOSDebugConfig)".
+23:05:35.759 ERROR: [VariableReader] Could not read variable expression: "sizeof(struct TaskControlBlock_t)".
+23:05:35.766 ERROR: [VariableReader] Could not read variable expression: "&(((struct QueueDefinition *) 0)->pcTail)".
+23:05:35.767 INFO: [TadModel] FreeRTOS version has been identified from available FreeRTOS symbols as 10.11.
+23:05:35.767 INFO: [Benchmark] Loading data for "Determine FreeRTOS version" took 275 ms.
+23:05:35.767 INFO: [Benchmark] Loading data for "Task List" has started.
+23:05:36.174 ERROR: [VariableReader] Could not read variable expression: "ulTotalRunTime".
+23:05:36.175 ERROR: [TaskFactory] ulTotalRunTime not available
+23:05:36.241 ERROR: [VariableReader] Could not read variable expression: "(((struct tskTaskControlBlock *) 0x20000690)->pxEndOfStack)".
+23:05:36.241 INFO: [FreeRTOS] FreeRTOS macro "configRECORD_STACK_HIGH_ADDRESS" is disabled.
+23:05:36.285 ERROR: [VariableReader] Could not read variable expression: "(((struct tskTaskControlBlock *) 0x20000690)->xEventListItem.pxContainer)".
+23:05:36.285 ERROR: [TaskFactory] Cannot read information from "pxReadyTasksLists[0]".
+23:05:36.410 ERROR: [VariableReader] Could not read variable expression: "(((struct tskTaskControlBlock *) 0x20000230)->xEventListItem.pxContainer)".
+23:05:36.410 ERROR: [TaskFactory] Cannot read information from "pxReadyTasksLists[2]".
+23:05:36.648 ERROR: [VariableReader] Could not read variable expression: "(((struct tskTaskControlBlock *) 0x20000ae0)->xEventListItem.pxContainer)".
+23:05:36.648 ERROR: [TaskFactory] Cannot read information from "xSuspendedTaskList".
+23:05:36.648 ERROR: [TaskFactory] Could not read pxEndOfStack variable needed for determining correct stack size! 
+	Please enable "configRECORD_STACK_HIGH_ADDRESS" macro in FreeRTOSConfig.h.
+23:05:36.649 INFO: [Benchmark] Loading data for "Task List" took 882 ms.
+23:06:01.261 INFO: [TadModel] DSF session ID 0 has ended.

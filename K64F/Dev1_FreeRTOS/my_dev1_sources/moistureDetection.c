@@ -5,6 +5,10 @@
  *      Author: zedd
  */
 #include "fsl_debug_console.h"
+#include "FreeRTOS.h"
+#include "semphr.h"
+
+extern SemaphoreHandle_t moistureDetectionSemphr;
 
 void moistureDetection(void* pvParameters)
 {

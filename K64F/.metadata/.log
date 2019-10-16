@@ -2371,3 +2371,183 @@ Binding(CTRL+U,
 
 !ENTRY net.sourceforge.vrapper.eclipse 1 0 2019-10-16 20:49:39.054
 !MESSAGE No .vrapperrc or _vrapperrc found.
+
+!ENTRY net.sourceforge.vrapper.eclipse 1 0 2019-10-16 21:05:54.718
+!MESSAGE No .vrapperrc or _vrapperrc found.
+
+!ENTRY com.crt.log 1 0 2019-10-16 23:04:17.649
+!MESSAGE Trying to connect to redlink server on port 3025.
+
+!ENTRY com.crt.debugcommon 1 0 2019-10-16 23:04:17.653
+!MESSAGE RedlinkServer telnet session connected on port 3025->48498 @ 127.0.0.1
+
+!ENTRY com.crt.dsfdebug 1 0 2019-10-16 23:04:46.416
+!MESSAGE Telnet session connected on port 3330->55198 @ 127.0.0.1
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-10-16 23:05:35.752
+!MESSAGE Request for monitor: '52^error,msg="No symbol "FreeRTOSDebugConfig" in current context."' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-10-16 23:05:35.752
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression &(FreeRTOSDebugConfig)
+Error message from debugger back end:
+No symbol "FreeRTOSDebugConfig" in current context.
+!STACK 0
+java.lang.Exception: No symbol "FreeRTOSDebugConfig" in current context.
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:993)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:822)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-10-16 23:05:35.758
+!MESSAGE Request for monitor: '53^error,msg="No struct type named TaskControlBlock_t."' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-10-16 23:05:35.758
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression "sizeof(struct TaskControlBlock_t)"
+Error message from debugger back end:
+No struct type named TaskControlBlock_t.
+!STACK 0
+java.lang.Exception: No struct type named TaskControlBlock_t.
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:993)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:822)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-10-16 23:05:35.766
+!MESSAGE Request for monitor: '55^error,msg="There is no member named pcTail."' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-10-16 23:05:35.766
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression "&(((struct QueueDefinition *) 0)->pcTail)"
+Error message from debugger back end:
+There is no member named pcTail.
+!STACK 0
+java.lang.Exception: There is no member named pcTail.
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:993)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:822)
+
+!ENTRY net.sourceforge.vrapper.eclipse 1 0 2019-10-16 23:05:36.071
+!MESSAGE No .vrapperrc or _vrapperrc found.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-10-16 23:05:36.173
+!MESSAGE Request for monitor: '103^error,msg="No symbol "ulTotalRunTime" in current context."' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-10-16 23:05:36.174
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression ulTotalRunTime
+Error message from debugger back end:
+No symbol "ulTotalRunTime" in current context.
+!STACK 0
+java.lang.Exception: No symbol "ulTotalRunTime" in current context.
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:993)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:822)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-10-16 23:05:36.240
+!MESSAGE Request for monitor: '113^error,msg="There is no member named pxEndOfStack."' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-10-16 23:05:36.240
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression "(((struct tskTaskControlBlock *) 0x20000690)->pxEndOfStack)"
+Error message from debugger back end:
+There is no member named pxEndOfStack.
+!STACK 0
+java.lang.Exception: There is no member named pxEndOfStack.
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:993)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:822)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-10-16 23:05:36.284
+!MESSAGE Request for monitor: '117^error,msg="There is no member named pxContainer."' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-10-16 23:05:36.284
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression "(((struct tskTaskControlBlock *) 0x20000690)->xEventListItem.pxContainer)"
+Error message from debugger back end:
+There is no member named pxContainer.
+!STACK 0
+java.lang.Exception: There is no member named pxContainer.
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:993)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:822)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-10-16 23:05:36.409
+!MESSAGE Request for monitor: '132^error,msg="There is no member named pxContainer."' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-10-16 23:05:36.409
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression "(((struct tskTaskControlBlock *) 0x20000230)->xEventListItem.pxContainer)"
+Error message from debugger back end:
+There is no member named pxContainer.
+!STACK 0
+java.lang.Exception: There is no member named pxContainer.
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:993)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:822)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-10-16 23:05:36.647
+!MESSAGE Request for monitor: '155^error,msg="There is no member named pxContainer."' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-10-16 23:05:36.647
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression "(((struct tskTaskControlBlock *) 0x20000ae0)->xEventListItem.pxContainer)"
+Error message from debugger back end:
+There is no member named pxContainer.
+!STACK 0
+java.lang.Exception: There is no member named pxContainer.
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:993)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:822)
+
+!ENTRY com.crt.log 1 0 2019-10-16 23:06:44.494
+!MESSAGE Trying to connect to redlink server on port 3025.
+
+!ENTRY com.crt.debugcommon 1 0 2019-10-16 23:06:44.496
+!MESSAGE RedlinkServer telnet session connected on port 3025->48510 @ 127.0.0.1
+
+!ENTRY com.crt.dsfdebug 1 0 2019-10-16 23:06:51.117
+!MESSAGE Telnet session connected on port 3330->55210 @ 127.0.0.1
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-10-16 23:07:40.232
+!MESSAGE Request for monitor: '51^error,msg="No symbol "FreeRTOSDebugConfig" in current context."' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-10-16 23:07:40.232
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression &(FreeRTOSDebugConfig)
+Error message from debugger back end:
+No symbol "FreeRTOSDebugConfig" in current context.
+!STACK 0
+java.lang.Exception: No symbol "FreeRTOSDebugConfig" in current context.
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:993)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:822)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-10-16 23:07:40.235
+!MESSAGE Request for monitor: '53^error,msg="No struct type named TaskControlBlock_t."' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-10-16 23:07:40.235
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression "sizeof(struct TaskControlBlock_t)"
+Error message from debugger back end:
+No struct type named TaskControlBlock_t.
+!STACK 0
+java.lang.Exception: No struct type named TaskControlBlock_t.
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:993)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:822)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-10-16 23:07:40.278
+!MESSAGE Request for monitor: '55^error,msg="There is no member named pcTail."' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-10-16 23:07:40.278
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression "&(((struct QueueDefinition *) 0)->pcTail)"
+Error message from debugger back end:
+There is no member named pcTail.
+!STACK 0
+java.lang.Exception: There is no member named pcTail.
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:993)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:822)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-10-16 23:07:40.564
+!MESSAGE Request for monitor: '102^error,msg="No symbol "ulTotalRunTime" in current context."' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-10-16 23:07:40.564
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression ulTotalRunTime
+Error message from debugger back end:
+No symbol "ulTotalRunTime" in current context.
+!STACK 0
+java.lang.Exception: No symbol "ulTotalRunTime" in current context.
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:993)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:822)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-10-16 23:07:40.579
+!MESSAGE Request for monitor: '119^error,msg="Unable to read memory."' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-10-16 23:07:40.579
+!MESSAGE Failed to execute MI command:
+-data-read-memory-bytes 0x8f3f014 32
+Error message from debugger back end:
+Unable to read memory.
+!STACK 0
+java.lang.Exception: Unable to read memory.
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:993)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:822)
