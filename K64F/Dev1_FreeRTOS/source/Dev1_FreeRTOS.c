@@ -17,11 +17,30 @@
 #include "moistureDetection.h"
 #include "timeKeeping.h"
 #include "task.h"
+#include "semphr.h"
 
 /* TODO: insert other definitions and declarations here. */
 TaskHandle_t detectMoistureHandle = NULL;
 TaskHandle_t timeKeepingHandle = NULL;
+SemaphoreHandle_t moistureDetectionSemphr = NULL;
 
+/* TODO: interrupts */
+
+// this interrupt will simulate interrupt received from moisture detection
+// device. It should pass a semaphore to moisture detection task that will
+// request current time from timekeeping task and assemble a message that will
+// be transmitted via BT
+void PORTC_IRQHandler()
+{
+	static BaseType_t xHigherPriorityTaskWoken;
+
+	// clear pending bits
+	GPIO_PortClearInterruptFlags(BOARD_SW2_GPIO, 1 << BOARD_SW2_GPIO_PIN);
+	PRINTF("\r\nMoisture detected\r\n");
+	xHigherPriorityTaskWoken = pdFALSE;
+	xSemaphoreGiveFromISR(moistureDetectionSemphr, &xHigherPriorityTaskWoken);
+	portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+}
 /*
  * @brief   Application entry point.
  */
@@ -46,6 +65,7 @@ int main(void) {
     	PRINTF("\r\nFailed to start \"Time Keeping Task\"\r\n");
     }
 
+    moistureDetectionSemphr = xSemaphoreCreateBinary();
 
     vTaskStartScheduler();
 
