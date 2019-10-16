@@ -26,9 +26,10 @@ SemaphoreHandle_t moistureDetectionSemphr = NULL;
 /* TODO: interrupts */
 
 // this interrupt will simulate interrupt received from moisture detection
-// device. It should pass a semaphore to moisture detection task that will
-// request current time from timekeeping task and assemble a message that will
-// be transmitted via BT
+// device. Eventually the switch will be replaced by this device. It should
+// pass a semaphore to moisture detection task that will request current
+// time from timekeeping task and assemble a message that will be transmitted
+// via BT to the other K64F
 void PORTC_IRQHandler()
 {
 	static BaseType_t xHigherPriorityTaskWoken;
@@ -72,8 +73,6 @@ int main(void) {
     moistureDetectionSemphr = xSemaphoreCreateBinary();
 
     vTaskStartScheduler();
-
-    // should never reach here
 
     return 0 ;
 }
