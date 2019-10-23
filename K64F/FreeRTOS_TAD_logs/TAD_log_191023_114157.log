@@ -1,0 +1,28 @@
+"FreeRTOS Task Aware Debugger for GDB" version 11.0.1 (201907311258)
+(c) 2016-2018 NXP Semiconductors, Inc.
+==================================
+11:32:24.579 ERROR: [MemoryReader] Read bytes method timed out!
+11:32:24.580 EXCEPTION: [TadModel] NullPointerException while "Task List" data load.
+	com.nxp.mcuxpresso.freertos.gdb.tad.model.readers.VariableReader.readVariable(VariableReader.java:214)
+	com.nxp.mcuxpresso.freertos.gdb.tad.model.readers.VariableReader.getValueAtAddress(VariableReader.java:136)
+	com.nxp.mcuxpresso.freertos.gdb.tad.controller.TadFactory.readIntAtAddress(TadFactory.java:212)
+	com.nxp.mcuxpresso.freertos.gdb.tad.controller.tasklist.TaskFactory.readTasksFromList(TaskFactory.java:197)
+	com.nxp.mcuxpresso.freertos.gdb.tad.controller.tasklist.TaskFactory.getData(TaskFactory.java:142)
+	com.nxp.mcuxpresso.freertos.gdb.tad.model.TadModel$2.execute(TadModel.java:218)
+	com.nxp.mcuxpresso.freertos.gdb.tad.model.TadModel$3.run(TadModel.java:414)
+11:41:02.656 INFO: [TadModel] DSF session ID 10 has started.
+11:41:08.494 INFO: [TadState] TAD state changed:  DEBUG_STARTED -> DEBUG_INIT_0 (SUSPENDED, USER_REQUEST)
+11:41:11.332 INFO: [TadState] TAD state changed:  DEBUG_INIT_0 -> DEBUG_INIT_1 (RESUMED, USER_REQUEST)
+11:41:11.484 INFO: [TadState] TAD state changed:  DEBUG_INIT_1 -> DEBUG_SUSPENDED (SUSPENDED, BREAKPOINT)
+11:41:17.211 INFO: [TadState] TAD state changed:  DEBUG_SUSPENDED -> DEBUG_RESUMED (RESUMED, USER_REQUEST)
+11:41:55.393 INFO: [TadState] TAD state changed:  DEBUG_RESUMED -> READY (SUSPENDED, SIGNAL)
+11:41:55.417 INFO: [Benchmark] Loading data for "Determine FreeRTOS version" has started.
+11:41:55.419 ERROR: [VariableReader] Could not read variable expression: "&(FreeRTOSDebugConfig)".
+11:41:55.428 ERROR: [VariableReader] Could not read variable expression: "sizeof(struct TaskControlBlock_t)".
+11:41:55.475 ERROR: [VariableReader] Could not read variable expression: "&(((struct QueueDefinition *) 0)->pcTail)".
+11:41:55.476 INFO: [TadModel] FreeRTOS version has been identified from available FreeRTOS symbols as 10.11.
+11:41:55.476 INFO: [Benchmark] Loading data for "Determine FreeRTOS version" took 59 ms.
+11:41:55.476 INFO: [Benchmark] Loading data for "Task List" has started.
+11:41:55.738 ERROR: [VariableReader] Could not read variable expression: "ulTotalRunTime".
+11:41:55.739 ERROR: [TaskFactory] ulTotalRunTime not available
+11:41:57.375 INFO: [TadModel] DSF session ID 10 has ended.

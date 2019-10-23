@@ -8,6 +8,7 @@
 #include "fsl_debug_console.h"
 #include "FreeRTOS.h"
 #include "semphr.h"
+#include "pin_mux.h"
 
 extern SemaphoreHandle_t moistureDetectionSemphr;
 
@@ -19,7 +20,7 @@ void moistureDetection(void* pvParameters)
 		if(xSemaphoreTake(moistureDetectionSemphr, portMAX_DELAY)) {
 			PRINTF("\r\nMoisture detected in moistureDetection task\r\n");
 			for(int i = 0; i < 6; i++) {
-				GPIO_PortToggle(BOARD_LED_RED_GPIO, 1 << BOARD_LED_RED_GPIO_PIN);
+				GPIO_PortToggle(BOARD_MD_LED_GPIO, 1 << BOARD_MD_LED_PIN);
 				vTaskDelay(pdMS_TO_TICKS(150));
 			}
 		}
