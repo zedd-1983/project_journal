@@ -17,7 +17,7 @@ void moistureDetection(void* pvParameters)
 	for(;;)
 	{
 		// receive semaphore, indicate success
-		if(xSemaphoreTake(moistureDetectionSemphr, portMAX_DELAY)) {
+		if(xSemaphoreTake(moistureDetectionSemphr, 0)) {
 			PRINTF("\r\nMoisture detected in moistureDetection task\r\n");
 			for(int i = 0; i < 6; i++) {
 				GPIO_PortToggle(BOARD_MD_LED_GPIO, 1 << BOARD_MD_LED_PIN);

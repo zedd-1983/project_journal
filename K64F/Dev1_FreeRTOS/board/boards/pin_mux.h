@@ -32,6 +32,13 @@ void BOARD_InitBootPins(void);
 #define BOARD_MD_PIN 6U     /*!<@brief PORTC pin index: 6 */
                             /* @} */
 
+/*! @name PORTA4 (number 38), SW3
+  @{ */
+#define BOARD_SET_AL_GPIO GPIOA /*!<@brief GPIO device name: GPIOA */
+#define BOARD_SET_AL_PORT PORTA /*!<@brief PORT device name: PORTA */
+#define BOARD_SET_AL_PIN 4U     /*!<@brief PORTA pin index: 4 */
+                                /* @} */
+
 /*! @name PORTB22 (number 68), D12[1]/LEDRGB_RED
   @{ */
 #define BOARD_MD_LED_GPIO GPIOB /*!<@brief GPIO device name: GPIOB */
