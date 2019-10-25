@@ -28,12 +28,6 @@ extern "C" {
 #define RTC_1_COMMON_IRQ_PRIORITY 11
 /* RTC_1 interrupt handler identifier. */
 #define RTC_1_COMMON_IRQHANDLER RTC_IRQHandler
-/* RTC_1 interrupt vector ID (number). */
-#define RTC_1_SECONDS_IRQN RTC_Seconds_IRQn
-/* RTC_1 interrupt vector priority. */
-#define RTC_1_SECONDS_IRQ_PRIORITY 12
-/* RTC_1 interrupt handler identifier. */
-#define RTC_1_SECONDS_IRQHANDLER RTC_Seconds_IRQHandler
 
 /***********************************************************************************************************************
  * Global variables

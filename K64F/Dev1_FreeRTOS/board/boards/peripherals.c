@@ -73,7 +73,7 @@ instance:
       - start: 'true'
     - interruptsCfg:
       - interruptSources: 'kRTC_AlarmInterruptEnable'
-      - isSecondsInterruptEnabled: 'true'
+      - isSecondsInterruptEnabled: 'false'
       - secondsInterrupt:
         - IRQn: 'RTC_Seconds_IRQn'
         - enable_priority: 'true'
@@ -118,10 +118,6 @@ void RTC_1_init(void) {
   NVIC_SetPriority(RTC_IRQn, RTC_1_COMMON_IRQ_PRIORITY);
   /* Enable interrupt RTC_IRQn request in the NVIC */
   EnableIRQ(RTC_IRQn);
-  /* Interrupt vector RTC_Seconds_IRQn priority settings in the NVIC */
-  NVIC_SetPriority(RTC_Seconds_IRQn, RTC_1_SECONDS_IRQ_PRIORITY);
-  /* Enable interrupt RTC_Seconds_IRQn request in the NVIC */
-  EnableIRQ(RTC_Seconds_IRQn);
 }
 
 /***********************************************************************************************************************

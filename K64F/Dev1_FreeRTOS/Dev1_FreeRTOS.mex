@@ -944,7 +944,7 @@
                                  <id>kRTC_AlarmInterruptEnable</id>
                               </selected>
                            </set>
-                           <setting name="isSecondsInterruptEnabled" value="true"/>
+                           <setting name="isSecondsInterruptEnabled" value="false"/>
                            <struct name="secondsInterrupt">
                               <setting name="IRQn" value="RTC_Seconds_IRQn"/>
                               <setting name="enable_priority" value="true"/>
