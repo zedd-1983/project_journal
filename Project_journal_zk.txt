@@ -18,3 +18,14 @@ acquired 2 Bluetooth modules to get the wireless communication going. Didn't get
 the boards at all unfortunately but giving myself this week the get the external interrupt 
 going and start working on the RTC for timekeeping. Will probably have to talk to Paul or 
 Niall about the design of the FreeRTOS system and it's tasks
+
+25/10/2019
+Last week I have been working on the development of the software for K64F. I still haven't 
+received any components but at the moment I am not dependent on them. So I got the external
+interrupt working that is suppose to happen when moisture is detected and at the moment
+this event is simulated by pushing a button on the development board. I have also worked on
+development of the RTC to allow timekeeping which was a bit of a struggle as the example
+provided by NXP in their software development kit wouldn't work properly for me and I was
+running into all sorts of errors when I was trying to compile it or include snippets of it
+in my code. Got it working eventually but thinking of re-designing the RTOS as at the moment
+seems somewhat cumbersome.
