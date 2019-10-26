@@ -1,0 +1,19 @@
+"FreeRTOS Task Aware Debugger for GDB" version 11.0.1 (201907311258)
+(c) 2016-2018 NXP Semiconductors, Inc.
+==================================
+23:06:45.132 INFO: [TadModel] DSF session ID 1 has started.
+23:06:51.303 INFO: [TadState] TAD state changed:  DEBUG_STARTED -> DEBUG_INIT_0 (SUSPENDED, USER_REQUEST)
+23:06:54.131 INFO: [TadState] TAD state changed:  DEBUG_INIT_0 -> DEBUG_INIT_1 (RESUMED, USER_REQUEST)
+23:06:54.282 INFO: [TadState] TAD state changed:  DEBUG_INIT_1 -> DEBUG_SUSPENDED (SUSPENDED, BREAKPOINT)
+23:07:05.129 INFO: [TadState] TAD state changed:  DEBUG_SUSPENDED -> DEBUG_RESUMED (RESUMED, USER_REQUEST)
+23:07:40.209 INFO: [TadState] TAD state changed:  DEBUG_RESUMED -> READY (SUSPENDED, SIGNAL)
+23:07:40.231 INFO: [Benchmark] Loading data for "Determine FreeRTOS version" has started.
+23:07:40.233 ERROR: [VariableReader] Could not read variable expression: "&(FreeRTOSDebugConfig)".
+23:07:40.240 ERROR: [VariableReader] Could not read variable expression: "sizeof(struct TaskControlBlock_t)".
+23:07:40.279 ERROR: [VariableReader] Could not read variable expression: "&(((struct QueueDefinition *) 0)->pcTail)".
+23:07:40.280 INFO: [TadModel] FreeRTOS version has been identified from available FreeRTOS symbols as 10.11.
+23:07:40.280 INFO: [Benchmark] Loading data for "Determine FreeRTOS version" took 50 ms.
+23:07:40.280 INFO: [Benchmark] Loading data for "Task List" has started.
+23:07:40.565 ERROR: [VariableReader] Could not read variable expression: "ulTotalRunTime".
+23:07:40.565 ERROR: [TaskFactory] ulTotalRunTime not available
+23:07:42.178 INFO: [TadModel] DSF session ID 1 has ended.

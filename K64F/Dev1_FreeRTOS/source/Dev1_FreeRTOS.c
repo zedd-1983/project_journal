@@ -23,10 +23,6 @@
 TaskHandle_t detectMoistureHandle = NULL;
 TaskHandle_t timeKeepingHandle = NULL;
 SemaphoreHandle_t moistureDetectionSemphr = NULL;
-SemaphoreHandle_t alarmSemphr = NULL;
-SemaphoreHandle_t setAlarmSemphr = NULL;
-
-bool busyWait = false;
 /* TODO: interrupts */
 
 // this interrupt will simulate interrupt received from moisture detection
@@ -39,39 +35,12 @@ void PORTC_IRQHandler()
 	static BaseType_t xHigherPriorityTaskWoken;
 
 	// clear pending bits
-	GPIO_PortClearInterruptFlags(BOARD_MD_GPIO, 1 << BOARD_MD_PIN);
+	GPIO_PortClearInterruptFlags(BOARD_SW2_GPIO, 1 << BOARD_SW2_GPIO_PIN);
 	PRINTF("\r\nMoisture detected (Button 2 Pressed)\r\n");
 	xHigherPriorityTaskWoken = pdFALSE;
 	xSemaphoreGiveFromISR(moistureDetectionSemphr, &xHigherPriorityTaskWoken);
 	portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 }
-
-//void PORTA_IRQHandler()
-//{
-//	static BaseType_t xHigherPriorityTaskWoken;
-//
-//	// clear pending bits
-//	GPIO_PortClearInterruptFlags(BOARD_SET_AL_GPIO, 1 << BOARD_SET_AL_PIN);
-//	PRINTF("\r\nSetting alarm (in ISR)\r\n");
-//	xHigherPriorityTaskWoken = pdFALSE;
-//	xSemaphoreGiveFromISR(setAlarmSemphr, &xHigherPriorityTaskWoken);
-//	portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
-//}
-
-// RTC interrupt that sets flag when an alarm interrupt occurs. Currently gets
-// set to 10s after moisture detection but in actual run would be set to occur
-// approx 23 hours 45 mins later to try to make the child/person more aware/awake
-void RTC_1_COMMON_IRQHANDLER()
-{
-	uint32_t status = RTC_GetStatusFlags(RTC_1_PERIPHERAL);
-
-	if(status & kRTC_AlarmFlag)
-	{
-		busyWait = true;
-		RTC_ClearStatusFlags(RTC_1_PERIPHERAL, kRTC_AlarmInterruptEnable);
-	}
-}
-
 /*
  * @brief   Application entry point.
  */
@@ -89,18 +58,14 @@ int main(void) {
     NVIC_ClearPendingIRQ(BOARD_SW2_IRQ);
     NVIC_EnableIRQ(BOARD_SW2_IRQ);
 
-//    NVIC_SetPriority(BOARD_SW3_IRQ, 10);
-//    NVIC_ClearPendingIRQ(BOARD_SW3_IRQ);
-//    NVIC_EnableIRQ(BOARD_SW3_IRQ);
-
     PRINTF("Easysleep - moisture detection\r\n");
 
-    if(xTaskCreate(moistureDetection, "Moisture Detection Task", configMINIMAL_STACK_SIZE + 50, NULL, 2, &detectMoistureHandle) == pdFALSE)
+    if(xTaskCreate(moistureDetection, "Moisture Detection Task", configMINIMAL_STACK_SIZE + 10, NULL, 2, &detectMoistureHandle) == pdFALSE)
     {
     	PRINTF("\r\nFailed to start \"Moisture Detection Task\"\r\n");
     }
 
-//    if(xTaskCreate(timeKeeping, "Time Keeping Task", configMINIMAL_STACK_SIZE + 50, NULL, 3, &timeKeepingHandle) == pdFALSE)
+//    if(xTaskCreate(timeKeeping, "Time Keeping Task", configMINIMAL_STACK_SIZE + 10, NULL, 2, &timeKeepingHandle) == pdFALSE)
 //    {
 //    	PRINTF("\r\nFailed to start \"Time Keeping Task\"\r\n");
 //    }
