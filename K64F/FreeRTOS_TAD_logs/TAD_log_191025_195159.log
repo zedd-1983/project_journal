@@ -1,0 +1,26 @@
+"FreeRTOS Task Aware Debugger for GDB" version 11.0.1 (201907311258)
+(c) 2016-2018 NXP Semiconductors, Inc.
+==================================
+19:51:38.61 INFO: [TadModel] DSF session ID 16 has started.
+19:51:43.03 INFO: [TadState] TAD state changed:  DEBUG_STARTED -> DEBUG_INIT_0 (SUSPENDED, USER_REQUEST)
+19:51:45.820 INFO: [TadState] TAD state changed:  DEBUG_INIT_0 -> DEBUG_INIT_1 (RESUMED, USER_REQUEST)
+19:51:45.969 INFO: [TadState] TAD state changed:  DEBUG_INIT_1 -> DEBUG_SUSPENDED (SUSPENDED, BREAKPOINT)
+19:51:50.13 INFO: [TadState] TAD state changed:  DEBUG_SUSPENDED -> DEBUG_RESUMED (RESUMED, USER_REQUEST)
+19:51:57.630 INFO: [TadState] TAD state changed:  DEBUG_RESUMED -> READY (SUSPENDED, SIGNAL)
+19:51:57.652 INFO: [Benchmark] Loading data for "Determine FreeRTOS version" has started.
+19:51:57.654 ERROR: [VariableReader] Could not read variable expression: "&(FreeRTOSDebugConfig)".
+19:51:57.657 ERROR: [VariableReader] Could not read variable expression: "sizeof(struct TaskControlBlock_t)".
+19:51:57.707 ERROR: [VariableReader] Could not read variable expression: "&(((struct QueueDefinition *) 0)->pcTail)".
+19:51:57.708 INFO: [TadModel] FreeRTOS version has been identified from available FreeRTOS symbols as 10.11.
+19:51:57.708 INFO: [Benchmark] Loading data for "Determine FreeRTOS version" took 57 ms.
+19:51:57.708 INFO: [Benchmark] Loading data for "Task List" has started.
+19:51:57.860 ERROR: [VariableReader] Could not read variable expression: "ulTotalRunTime".
+19:51:57.860 ERROR: [TaskFactory] ulTotalRunTime not available
+19:51:59.06 ERROR: [TaskFactory] Cannot read information from "pxDelayedTaskList".
+19:51:59.73 ERROR: [VariableReader] Could not read variable expression: "&(((struct tskTaskControlBlock *) 0)->pcTaskName)".
+19:51:59.73 ERROR: [VariableReader] Could not read variable expression: "pxOverflowDelayedTaskList.uxNumberOfItems".
+19:51:59.74 ERROR: [TaskFactory] Cannot read information from "pxOverflowDelayedTaskList".
+19:51:59.89 ERROR: [VariableReader] Could not read variable expression: "xSuspendedTaskList.uxNumberOfItems".
+19:51:59.89 ERROR: [TaskFactory] Cannot read information from "xSuspendedTaskList".
+19:51:59.89 INFO: [Benchmark] Loading data for "Task List" took 1381 ms.
+19:51:59.150 INFO: [TadModel] DSF session ID 16 has ended.

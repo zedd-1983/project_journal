@@ -25,6 +25,27 @@ extern "C" {
  */
 void BOARD_InitBootPins(void);
 
+/*! @name PORTC6 (number 78), U8[11]/SW2
+  @{ */
+#define BOARD_MD_GPIO GPIOC /*!<@brief GPIO device name: GPIOC */
+#define BOARD_MD_PORT PORTC /*!<@brief PORT device name: PORTC */
+#define BOARD_MD_PIN 6U     /*!<@brief PORTC pin index: 6 */
+                            /* @} */
+
+/*! @name PORTA4 (number 38), SW3
+  @{ */
+#define BOARD_SET_AL_GPIO GPIOA /*!<@brief GPIO device name: GPIOA */
+#define BOARD_SET_AL_PORT PORTA /*!<@brief PORT device name: PORTA */
+#define BOARD_SET_AL_PIN 4U     /*!<@brief PORTA pin index: 4 */
+                                /* @} */
+
+/*! @name PORTB22 (number 68), D12[1]/LEDRGB_RED
+  @{ */
+#define BOARD_MD_LED_GPIO GPIOB /*!<@brief GPIO device name: GPIOB */
+#define BOARD_MD_LED_PORT PORTB /*!<@brief PORT device name: PORTB */
+#define BOARD_MD_LED_PIN 22U    /*!<@brief PORTB pin index: 22 */
+                                /* @} */
+
 /*!
  * @brief Configures pin routing and optionally pin electrical features.
  *
