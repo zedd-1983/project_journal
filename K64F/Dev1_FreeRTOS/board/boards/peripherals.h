@@ -6,35 +6,9 @@
 #ifndef _PERIPHERALS_H_
 #define _PERIPHERALS_H_
 
-/***********************************************************************************************************************
- * Included files
- **********************************************************************************************************************/
-#include "fsl_common.h"
-#include "fsl_rtc.h"
-
 #if defined(__cplusplus)
 extern "C" {
 #endif /* __cplusplus */
-
-/***********************************************************************************************************************
- * Definitions
- **********************************************************************************************************************/
-/* Definitions for BOARD_InitPeripherals functional group */
-/* Definition of peripheral ID */
-#define RTC_1_PERIPHERAL RTC
-/* RTC_1 interrupt vector ID (number). */
-#define RTC_1_COMMON_IRQN RTC_IRQn
-/* RTC_1 interrupt vector priority. */
-#define RTC_1_COMMON_IRQ_PRIORITY 11
-/* RTC_1 interrupt handler identifier. */
-#define RTC_1_COMMON_IRQHANDLER RTC_IRQHandler
-
-/***********************************************************************************************************************
- * Global variables
- **********************************************************************************************************************/
-extern const rtc_config_t RTC_1_config;
-/* Date and time structure */
-extern rtc_datetime_t RTC_1_dateTimeStruct;
 
 /***********************************************************************************************************************
  * Initialization functions
