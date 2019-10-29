@@ -10,6 +10,6 @@
 
 
 // functions
-void moistureDetection(void*);
+void mainTask(void*);
 
 #endif /* MOISTUREDETECTION_H_ */
