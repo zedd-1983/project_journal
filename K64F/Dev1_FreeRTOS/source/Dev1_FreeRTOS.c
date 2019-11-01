@@ -17,18 +17,18 @@
 /* TODO: insert other include files here. */
 #include "moistureDetection.h"
 #include "helperFunctions.h"
-//#include "timeKeeping.h"
+#include "timeKeeping.h"
 #include "task.h"
 #include "semphr.h"
 
 /* TODO: insert other definitions and declarations here. */
 TaskHandle_t mainTaskHandle = NULL;
 TaskHandle_t timeKeepingHandle = NULL;
-//TaskHandle_t userTimeConfig = NULL;
+TaskHandle_t userTimeConfig = NULL;
 SemaphoreHandle_t moistureDetectionSemphr = NULL;
 SemaphoreHandle_t alarmSemphr = NULL;
 SemaphoreHandle_t setAlarmSemphr = NULL;
-SemaphoreHandle_t userTimeConfig = NULL;
+//SemaphoreHandle_t userTimeConfig = NULL;
 
 bool busyWait = false;
 /* TODO: interrupts */
@@ -146,6 +146,9 @@ void UART0_RX_TX_IRQHandler() {
  */
 int main(void) {
 
+	// enable cycle counter for SYSTEMVIEW
+	DWT->CTRL |= (1 << 0);
+
   	/* Init board hardware. */
     BOARD_InitBootPins();
     BOARD_InitBootClocks();
@@ -168,15 +171,19 @@ int main(void) {
 
     PRINTF("\033[92mEasysleep - moisture detection\033[0m\r\n");
 
+    // start recording
+    SEGGER_SYSVIEW_Conf();
+    SEGGER_SYSVIEW_Start();
+
     if(xTaskCreate(mainTask, "Main Task", configMINIMAL_STACK_SIZE + 50, NULL, 2, &mainTaskHandle) == pdFALSE)
     {
     	PRINTF("\r\nFailed to start \"Main Task\"\r\n");
     }
 
-//    if(xTaskCreate(timeKeeping, "Time Keeping Task", configMINIMAL_STACK_SIZE + 50, NULL, 3, &timeKeepingHandle) == pdFALSE)
-//    {
-//    	PRINTF("\r\nFailed to start \"Time Keeping Task\"\r\n");
-//    }
+    if(xTaskCreate(timeKeeping, "Time Keeping Task", configMINIMAL_STACK_SIZE + 50, NULL, 2, &timeKeepingHandle) == pdFALSE)
+    {
+    	PRINTF("\r\nFailed to start \"Time Keeping Task\"\r\n");
+    }
 
     moistureDetectionSemphr = xSemaphoreCreateBinary();
     //userTimeConfig = xSemaphoreCreateBinary();

@@ -10,10 +10,17 @@
 #include "semphr.h"
 #include "peripherals.h"
 
-extern SemaphoreHandle_t userTimeConfig;
+//extern SemaphoreHandle_t userTimeConfig;
 extern SemaphoreHandle_t setAlarmSemphr;
 extern rtc_datetime_t RTC_1_dateTimeStruct;
 
+void timeKeeping(void* pvParameters)
+{
+	for(;;)
+	{
+		vTaskDelay(pdMS_TO_TICKS(100));
+	}
+}
 //void userTimeConfig(void* pvParameters)
 //{
 //	uint32_t currSec = 0;
