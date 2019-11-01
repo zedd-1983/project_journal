@@ -29,3 +29,18 @@ provided by NXP in their software development kit wouldn't work properly for me 
 running into all sorts of errors when I was trying to compile it or include snippets of it
 in my code. Got it working eventually but thinking of re-designing the RTOS as at the moment
 seems somewhat cumbersome.
+
+1/11/2019
+Since my last contribution to this journal a number of things have happened. I have managed to
+get the RTC working using the Peripheral config tool of MCUXpresso IDE. This worked fine
+and I did commit my changes to my branch back then. However, upon merging my branch to 
+master it stopped working and I wasn't at that time able to fix it. So in my desperation
+I have reverted the merge thus creating a crazy mess in my repository. While thinking of
+how to fix this I kept working on my project and got the RTC up and running again. In order
+to clean the mess up, I ended up copying all my code from the newest commit and applying it
+directly to master branch. This was followed by removal of the used branch. I think thanks to
+this, there might be some history issues. But the repository is now working again and I am 
+continuing to develop more code.
+I have also received my two K64Fs along with J-Link EDU programmer so I have started working
+with those. I have successfully integrated SystemView into my code and am able to continuously
+monitor the behaviour of the FreeRTOS running on my MCU.
