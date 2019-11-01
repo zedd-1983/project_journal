@@ -3,14 +3,14 @@ the project is to finalize my project idea, discuss it with my supervisor and fe
 lecturers and write up a proposal to be submitted by Sunday 6th.
 
 
-##07/10/2019  
+##### 07/10/2019  
 During my last week I have setup the **MCUXpresso and FreeRTOS** and tested everything compiles
 and works. I have created and submitted the project proposal.
 Plan for this week is to get SystemView working with K64F to monitor the FreeRTOS and to
 start working on the moisture detection. This will likely be an external interrupt.
 
 
-##14/10/2019  
+##### 14/10/2019  
 I have order two K64F development boards off Brian today along with a **J-Link EDU** debugging
 probe that will help me to monitor the behaviour of the FreeRTOS using **SystemView**. Waiting
 for confirmation from Brian that the order is OK and expected delivery times. I have also 
@@ -19,7 +19,7 @@ the boards at all unfortunately but giving myself this week the get the external
 going and start working on the RTC for timekeeping. Will probably have to talk to Paul or 
 Niall about the design of the FreeRTOS system and it's tasks
 
-##25/10/2019   
+##### 25/10/2019   
 Last week I have been working on the development of the software for K64F. I still haven't 
 received any components but at the moment I am not dependent on them. So I got the external
 interrupt working that is suppose to happen when moisture is detected and at the moment
@@ -30,7 +30,7 @@ running into all sorts of errors when I was trying to compile it or include snip
 in my code. Got it working eventually but thinking of re-designing the RTOS as at the moment
 seems somewhat cumbersome.
 
-##1/11/2019   
+##### 1/11/2019   
 Since my last contribution to this journal a number of things have happened. I have managed to
 get the **RTC** working using the **Peripheral config tool** of MCUXpresso IDE. This worked fine
 and I did commit my changes to my branch back then. However, upon merging my branch to 
