@@ -14,6 +14,7 @@
 #include "MK64F12.h"
 #include "fsl_debug_console.h"
 #include "fsl_uart.h"
+#include "SEGGER_RTT.h"
 /* TODO: insert other include files here. */
 #include "moistureDetection.h"
 #include "helperFunctions.h"
@@ -76,74 +77,30 @@ void RTC_1_COMMON_IRQHANDLER()
 	}
 }
 
-void UART0_RX_TX_IRQHandler() {
-
-	static uint8_t charReceived;
-
-	if(UART_GetStatusFlags(UART0) & kUART_RxDataRegFullFlag)
-	{
-		charReceived = UART_ReadByte(UART0);
-		PRINTF("\n\r%c\n\r");
-
-		switch(charReceived)
-		{
-			case 'T':
-			case 't': printCurrentTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct); break;
-			case 'A':
-			case 'a': displayAlarmTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct); break;
-			case 'C':
-			case 'c': PRINTF("\n\rConfigure user time\n\r"); break;
-			default:
-				PRINTF("\n\rInvalid option\n\r");
-		}
-	}
-}
-
-//void UART0_RX_TX_IRQHANDLER() {
+//void UART0_RX_TX_IRQHandler() {
 //
-//	static BaseType_t xHigherPriorityTaskWoken;
-//	static uint8_t buffer[12] = "";
-//	uint8_t count = 0;
+//	static uint8_t charReceived;
 //
 //	if(UART_GetStatusFlags(UART0) & kUART_RxDataRegFullFlag)
 //	{
-//		buffer[count] = UART_ReadByte(UART0);
-//		PRINTF("%c", buffer[count]);
-//		if(buffer[count] == '\r')
+//		charReceived = UART_ReadByte(UART0);
+//		PRINTF("\n\r%c\n\r");
+//
+//		switch(charReceived)
 //		{
-//			// parse the date
-//			uint16_t year = ((buffer[0]-48) * 1000) + ((buffer[1]-48) * 100) +
-//							((buffer[2]-48) * 10) + (buffer[3]-48);
-//			uint8_t month = ((buffer[5]-48) * 10) + (buffer[6]-48);
-//			uint8_t day = 	((buffer[8]-48) * 10) + (buffer[9]-48);
-//
-//			RTC_1_dateTimeStruct.year = year;
-//			RTC_1_dateTimeStruct.month = month;
-//			RTC_1_dateTimeStruct.day = day;
-//
-//			RTC_StopTimer(RTC_1_PERIPHERAL);
-//			RTC_SetDateTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
-//			RTC_StartTimer(RTC_1_PERIPHERAL);
-//
-//			PRINTF("\n\rTime changed to: %04hd-%02hd-%02hd Time: %02hd-%02hd-%02hd\r",
-//				RTC_1_dateTimeStruct.year,
-//				RTC_1_dateTimeStruct.month,
-//				RTC_1_dateTimeStruct.day,
-//				RTC_1_dateTimeStruct.hour,
-//				RTC_1_dateTimeStruct.minute,
-//				RTC_1_dateTimeStruct.second
-//				);
-//		}
-//		else
-//		{
-//			count++;
+//			case 'T':
+//			case 't': printCurrentTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct); break;
+//			case 'A':
+//			case 'a': displayAlarmTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct); break;
+//			case 'C':
+//			case 'c': PRINTF("\n\rConfigure user time\n\r"); break;
+//			default:
+//				PRINTF("\n\rInvalid option\n\r");
 //		}
 //	}
 //}
-//
-/*
- * @brief   Application entry point.
- */
+
+
 int main(void) {
 
 	// enable cycle counter for SYSTEMVIEW
@@ -169,7 +126,14 @@ int main(void) {
 //    NVIC_ClearPendingIRQ(BOARD_SW3_IRQ);
 //    NVIC_EnableIRQ(BOARD_SW3_IRQ);
 
-    PRINTF("\033[92mEasysleep - moisture detection\033[0m\r\n");
+    SEGGER_RTT_SetTerminal(0);
+    SEGGER_RTT_WriteString(0, RTT_CTRL_TEXT_BRIGHT_GREEN"Easysleep - moisture detection");
+    SEGGER_RTT_WriteString(0, RTT_CTRL_TEXT_BRIGHT_BLUE"Terminal 0");
+
+    //SEGGER_RTT_SetTerminal(1);
+
+    SEGGER_RTT_TerminalOut(1, RTT_CTRL_TEXT_BRIGHT_RED"Terminal 1");
+    //SEGGER_RTT_WriteString(0, RTT_CTRL_TEXT_BRIGHT_RED"Terminal 1");
 
     // start recording
     SEGGER_SYSVIEW_Conf();
