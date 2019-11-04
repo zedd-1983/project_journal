@@ -43,10 +43,10 @@ void configureAlarm(uint32_t secIncrement)
 			RTC->TAR = currSec;
 }
 
-void displayAlarmTime(RTC_Type* base, rtc_datetime_t* datetime)
+void displayAlarmTime(RTC_Type* base, rtc_datetime_t* datetime, int rttTerminalId)
 {
 		RTC_GetAlarm(base, datetime);
-		SEGGER_RTT_SetTerminal(0);
+		SEGGER_RTT_SetTerminal(rttTerminalId);
 		SEGGER_RTT_printf(0, "\n\rAlarm will occur at: %04hd-%02hd-%02hd %02hd:%02hd:%02hd\n\r",
 				datetime->year,
 				datetime->month,

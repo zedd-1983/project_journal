@@ -24,12 +24,14 @@
 
 /* TODO: insert other definitions and declarations here. */
 TaskHandle_t mainTaskHandle = NULL;
-TaskHandle_t timeKeepingHandle = NULL;
+TaskHandle_t terminalTaskHandle = NULL;
 TaskHandle_t userTimeConfig = NULL;
 SemaphoreHandle_t moistureDetectionSemphr = NULL;
 SemaphoreHandle_t alarmSemphr = NULL;
 SemaphoreHandle_t setAlarmSemphr = NULL;
 //SemaphoreHandle_t userTimeConfig = NULL;
+
+static void terminalTask(void*);
 
 bool busyWait = false;
 /* TODO: interrupts */
@@ -144,9 +146,9 @@ int main(void) {
     	PRINTF("\r\nFailed to start \"Main Task\"\r\n");
     }
 
-    if(xTaskCreate(timeKeeping, "Time Keeping Task", configMINIMAL_STACK_SIZE + 50, NULL, 2, &timeKeepingHandle) == pdFALSE)
+    if(xTaskCreate(terminalTask, "Terminal Task", configMINIMAL_STACK_SIZE + 50, NULL, 2, &terminalTaskHandle) == pdFALSE)
     {
-    	PRINTF("\r\nFailed to start \"Time Keeping Task\"\r\n");
+    	PRINTF("\r\nFailed to start \"Terminal Task\"\r\n");
     }
 
     moistureDetectionSemphr = xSemaphoreCreateBinary();
@@ -155,4 +157,26 @@ int main(void) {
     vTaskStartScheduler();
 
     return 0 ;
+}
+
+void terminalTask(void* pvParameters)
+{
+	for(;;)
+	{
+		uint8_t character = '\0';
+		if(SEGGER_RTT_HasKey())
+		{
+			character = SEGGER_RTT_GetKey();
+			switch(character)
+			{
+				case 't':
+				case 'T': printCurrentTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct); break;
+				case 'a':
+				case 'A': displayAlarmTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct, 0); break;
+				case 'c':
+				case 'C': SEGGER_RTT_WriteString(1, "Time configuration"); break;
+			}
+		}
+	vTaskDelay(pdMS_TO_TICKS(100));
+	}
 }
