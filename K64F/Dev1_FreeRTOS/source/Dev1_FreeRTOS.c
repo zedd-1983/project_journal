@@ -32,6 +32,7 @@ SemaphoreHandle_t setAlarmSemphr = NULL;
 //SemaphoreHandle_t userTimeConfig = NULL;
 
 static void terminalTask(void*);
+void configureTime(void*);
 
 bool busyWait = false;
 /* TODO: interrupts */
@@ -174,9 +175,40 @@ void terminalTask(void* pvParameters)
 				case 'a':
 				case 'A': displayAlarmTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct, 0); break;
 				case 'c':
-				case 'C': SEGGER_RTT_WriteString(1, "Time configuration"); break;
+				case 'C': xTaskCreate(configureTime, "Time configuration task", configMINIMAL_STACK_SIZE + 50, NULL, 3, NULL);
 			}
 		}
 	vTaskDelay(pdMS_TO_TICKS(100));
 	}
+}
+
+void configureTime(void* pvParameters)
+{
+	uint8_t buffer[17];
+	SEGGER_RTT_TerminalOut(0, RTT_CTRL_TEXT_BRIGHT_CYAN"Time config"RTT_CTRL_RESET);
+	SEGGER_RTT_TerminalOut(0, "Enter datetime in YYYY-MM-DD-HH-MM format: ");
+
+	if(SEGGER_RTT_HasData(0)) {
+		uint16_t year = ((buffer[0] - 48) * 1000) + ((buffer[1] - 48) * 100) + ((buffer[2] - 48) * 10) + ((buffer[3] - 48));
+		uint8_t month = ((buffer[5] - 48) * 10) + ((buffer[6] - 48));
+		uint8_t day = ((buffer[8] - 48) * 10) + ((buffer[9] - 48));
+		uint8_t hour = ((buffer[11] - 48) * 10) + ((buffer[12] - 48));
+		uint8_t minute = ((buffer[14] - 48) * 10) + ((buffer[15] - 48));
+
+		// stop rtc timer
+		RTC_StopTimer(RTC_1_PERIPHERAL);
+
+		RTC_1_dateTimeStruct.year = year;
+		RTC_1_dateTimeStruct.month = month;
+		RTC_1_dateTimeStruct.day = day;
+		RTC_1_dateTimeStruct.hour = hour;
+		RTC_1_dateTimeStruct.minute = minute;
+		RTC_1_dateTimeStruct.second = 0;
+
+		// reconfigure rtc timer and start again
+		RTC_SetDatetime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
+		RTC_StartTimer(RTC_1_PERIPHERAL);
+	}
+
+	vTaskDelete(NULL);
 }
