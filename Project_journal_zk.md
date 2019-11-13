@@ -47,3 +47,14 @@ continuing to develop more code.
 I have also received my two K64Fs along with J-Link EDU programmer so I have started working
 with those. I have successfully integrated **SystemView** into my code and am able to continuously
 monitor the behaviour of the FreeRTOS running on my MCU.
+
+#### 13/11/2019
+I have been stuck on running the **J-Link** along with the **UART0** that is connected to **OpenSDA USB**
+port on K64F. I have been playing with the code, trying various things or workarounds such as using the 
+**JLinkRTTViewer** to substitute the UART functionality. Got most of it working however was unable to
+obtain user input correctly. After some investigation I opted for a solution that would allow the
+JLink to work with the OpenSDA port. This solution involved **cutting some traces on the board** and 
+I was quite nervous about doing so but it seems to have worked so I started to revert to the UART
+code I have previously implemented. I intend to get this to work quite quickly so I can close and
+merge the userTimeConfig branch and move onto the **Bluetooth** communication. For this I have installed
+the necessary headers onto the board but have yet to test it's functionality.
