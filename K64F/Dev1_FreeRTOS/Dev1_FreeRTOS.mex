@@ -203,14 +203,9 @@
                         <pin_feature name="gpio_init_state" value="true"/>
                      </pin_features>
                   </pin>
-                  <pin peripheral="UART4" signal="RX" pin_num="32" pin_signal="ADC0_SE18/PTE25/UART4_RX/I2C0_SDA/EWM_IN">
+                  <pin peripheral="UART4" signal="RX" pin_num="86" pin_signal="PTC14/UART4_RX/FB_AD25"/>
+                  <pin peripheral="UART4" signal="TX" pin_num="87" pin_signal="PTC15/UART4_TX/FB_AD24">
                      <pin_features>
-                        <pin_feature name="identifier" value="BT_PTE25_RX"/>
-                     </pin_features>
-                  </pin>
-                  <pin peripheral="UART4" signal="TX" pin_num="31" pin_signal="ADC0_SE17/PTE24/UART4_TX/I2C0_SCL/EWM_OUT_b">
-                     <pin_features>
-                        <pin_feature name="identifier" value="BT_PTE24_TX"/>
                         <pin_feature name="direction" value="OUTPUT"/>
                      </pin_features>
                   </pin>

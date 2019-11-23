@@ -135,7 +135,17 @@ int main(void) {
     NVIC_ClearPendingIRQ(BOARD_SW3_IRQ);
     NVIC_EnableIRQ(BOARD_SW3_IRQ);
 
+//    char* message = "AT";
+//    uint8_t buffer[2];
+//    UART_WriteBlocking(UART4, (uint8_t*)message, 3);
+//    UART_ReadBlocking(UART4, buffer, 2);
+//
+//    for(int i = 0; i < 2; i++)
+//    	PRINTF("%c", buffer[i]);
 
+//    if(UART_GetStatuFlags(UART4) & kUART_RxDataRegFullFlag) {
+//    	ch = UART_ReadByte(UART4);
+//    }
     // start recording
 //    SEGGER_SYSVIEW_Conf();
 //    SEGGER_SYSVIEW_Start();

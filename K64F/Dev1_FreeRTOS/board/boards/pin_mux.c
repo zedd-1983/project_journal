@@ -147,8 +147,8 @@ BOARD_InitPins:
   - {pin_num: '38', peripheral: GPIOA, signal: 'GPIO, 4', pin_signal: PTA4/LLWU_P3/FTM0_CH1/NMI_b/EZP_CS_b, identifier: SET_AL, direction: INPUT, gpio_interrupt: kPORT_InterruptFallingEdge,
     pull_select: down}
   - {pin_num: '68', peripheral: GPIOB, signal: 'GPIO, 22', pin_signal: PTB22/SPI2_SOUT/FB_AD29/CMP2_OUT, identifier: MD_LED, direction: OUTPUT, gpio_init_state: 'true'}
-  - {pin_num: '32', peripheral: UART4, signal: RX, pin_signal: ADC0_SE18/PTE25/UART4_RX/I2C0_SDA/EWM_IN, identifier: BT_PTE25_RX}
-  - {pin_num: '31', peripheral: UART4, signal: TX, pin_signal: ADC0_SE17/PTE24/UART4_TX/I2C0_SCL/EWM_OUT_b, identifier: BT_PTE24_TX, direction: OUTPUT}
+  - {pin_num: '86', peripheral: UART4, signal: RX, pin_signal: PTC14/UART4_RX/FB_AD25}
+  - {pin_num: '87', peripheral: UART4, signal: TX, pin_signal: PTC15/UART4_TX/FB_AD24, direction: OUTPUT}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 /* clang-format on */
@@ -167,8 +167,6 @@ void BOARD_InitPins(void)
     CLOCK_EnableClock(kCLOCK_PortB);
     /* Port C Clock Gate Control: Clock enabled */
     CLOCK_EnableClock(kCLOCK_PortC);
-    /* Port E Clock Gate Control: Clock enabled */
-    CLOCK_EnableClock(kCLOCK_PortE);
 
     gpio_pin_config_t SET_AL_config = {
         .pinDirection = kGPIO_DigitalInput,
@@ -226,6 +224,12 @@ void BOARD_InitPins(void)
     /* PORTB22 (pin 68) is configured as PTB22 */
     PORT_SetPinMux(BOARD_MD_LED_PORT, BOARD_MD_LED_PIN, kPORT_MuxAsGpio);
 
+    /* PORTC14 (pin 86) is configured as UART4_RX */
+    PORT_SetPinMux(BOARD_BT_TX_PORT, BOARD_BT_TX_PIN, kPORT_MuxAlt3);
+
+    /* PORTC15 (pin 87) is configured as UART4_TX */
+    PORT_SetPinMux(BOARD_BT_RX_PORT, BOARD_BT_RX_PIN, kPORT_MuxAlt3);
+
     /* PORTC6 (pin 78) is configured as PTC6 */
     PORT_SetPinMux(BOARD_MD_PORT, BOARD_MD_PIN, kPORT_MuxAsGpio);
 
@@ -238,12 +242,6 @@ void BOARD_InitPins(void)
 
                      /* Pull Enable: Internal pullup or pulldown resistor is enabled on the corresponding pin. */
                      | (uint32_t)(PORT_PCR_PE_MASK));
-
-    /* PORTE24 (pin 31) is configured as UART4_TX */
-    PORT_SetPinMux(BOARD_BT_PTE24_TX_PORT, BOARD_BT_PTE24_TX_PIN, kPORT_MuxAlt3);
-
-    /* PORTE25 (pin 32) is configured as UART4_RX */
-    PORT_SetPinMux(BOARD_BT_PTE25_RX_PORT, BOARD_BT_PTE25_RX_PIN, kPORT_MuxAlt3);
 }
 
 /* clang-format off */
