@@ -46,8 +46,8 @@
                <pin_label pin_num="95" pin_signal="PTD2/LLWU_P13/SPI0_SOUT/UART2_RX/FTM3_CH2/FB_AD4/I2C0_SCL" label="J2[8]" identifier="UART2_RX"/>
                <pin_label pin_num="96" pin_signal="PTD3/SPI0_SIN/UART2_TX/FTM3_CH3/FB_AD3/I2C0_SDA" label="J2[10]" identifier="UART2_TX"/>
                <pin_label pin_num="94" pin_signal="ADC0_SE5b/PTD1/SPI0_SCK/UART2_CTS_b/FTM3_CH1/FB_CS0_b" label="J2[12]"/>
-               <pin_label pin_num="32" pin_signal="ADC0_SE18/PTE25/UART4_RX/I2C0_SDA/EWM_IN" label="J2[18]/U8[6]/I2C0_SDA" identifier="ACCEL_SDA"/>
-               <pin_label pin_num="31" pin_signal="ADC0_SE17/PTE24/UART4_TX/I2C0_SCL/EWM_OUT_b" label="J2[20]/U8[4]/I2C0_SCL" identifier="ACCEL_SCL"/>
+               <pin_label pin_num="32" pin_signal="ADC0_SE18/PTE25/UART4_RX/I2C0_SDA/EWM_IN" label="J2[18]/U8[6]/I2C0_SDA" identifier="ACCEL_SDA;BT_PTE25_RX"/>
+               <pin_label pin_num="31" pin_signal="ADC0_SE17/PTE24/UART4_TX/I2C0_SCL/EWM_OUT_b" label="J2[20]/U8[4]/I2C0_SCL" identifier="ACCEL_SCL;BT_PTE24_TX"/>
                <pin_label pin_num="26" pin_signal="VREF_OUT/CMP1_IN5/CMP0_IN5/ADC1_SE18" label="J2[17]"/>
                <pin_label pin_num="21" pin_signal="ADC1_DM0/ADC0_DM3" label="J2[13]"/>
                <pin_label pin_num="18" pin_signal="ADC0_DP0/ADC1_DP3" label="J2[5]"/>
@@ -203,9 +203,14 @@
                         <pin_feature name="gpio_init_state" value="true"/>
                      </pin_features>
                   </pin>
-                  <pin peripheral="UART4" signal="RX" pin_num="86" pin_signal="PTC14/UART4_RX/FB_AD25"/>
-                  <pin peripheral="UART4" signal="TX" pin_num="87" pin_signal="PTC15/UART4_TX/FB_AD24">
+                  <pin peripheral="UART4" signal="RX" pin_num="32" pin_signal="ADC0_SE18/PTE25/UART4_RX/I2C0_SDA/EWM_IN">
                      <pin_features>
+                        <pin_feature name="identifier" value="BT_PTE25_RX"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="UART4" signal="TX" pin_num="31" pin_signal="ADC0_SE17/PTE24/UART4_TX/I2C0_SCL/EWM_OUT_b">
+                     <pin_features>
+                        <pin_feature name="identifier" value="BT_PTE24_TX"/>
                         <pin_feature name="direction" value="OUTPUT"/>
                      </pin_features>
                   </pin>
@@ -464,6 +469,7 @@
                <pins>
                   <pin peripheral="I2C0" signal="SDA" pin_num="32" pin_signal="ADC0_SE18/PTE25/UART4_RX/I2C0_SDA/EWM_IN">
                      <pin_features>
+                        <pin_feature name="identifier" value="ACCEL_SDA"/>
                         <pin_feature name="slew_rate" value="fast"/>
                         <pin_feature name="open_drain" value="enable"/>
                         <pin_feature name="drive_strength" value="low"/>
@@ -474,6 +480,7 @@
                   </pin>
                   <pin peripheral="I2C0" signal="SCL" pin_num="31" pin_signal="ADC0_SE17/PTE24/UART4_TX/I2C0_SCL/EWM_OUT_b">
                      <pin_features>
+                        <pin_feature name="identifier" value="ACCEL_SCL"/>
                         <pin_feature name="slew_rate" value="fast"/>
                         <pin_feature name="open_drain" value="enable"/>
                         <pin_feature name="drive_strength" value="low"/>

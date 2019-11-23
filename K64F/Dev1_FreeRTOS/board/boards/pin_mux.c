@@ -36,8 +36,8 @@ pin_labels:
 - {pin_num: '95', pin_signal: PTD2/LLWU_P13/SPI0_SOUT/UART2_RX/FTM3_CH2/FB_AD4/I2C0_SCL, label: 'J2[8]', identifier: UART2_RX}
 - {pin_num: '96', pin_signal: PTD3/SPI0_SIN/UART2_TX/FTM3_CH3/FB_AD3/I2C0_SDA, label: 'J2[10]', identifier: UART2_TX}
 - {pin_num: '94', pin_signal: ADC0_SE5b/PTD1/SPI0_SCK/UART2_CTS_b/FTM3_CH1/FB_CS0_b, label: 'J2[12]'}
-- {pin_num: '32', pin_signal: ADC0_SE18/PTE25/UART4_RX/I2C0_SDA/EWM_IN, label: 'J2[18]/U8[6]/I2C0_SDA', identifier: ACCEL_SDA}
-- {pin_num: '31', pin_signal: ADC0_SE17/PTE24/UART4_TX/I2C0_SCL/EWM_OUT_b, label: 'J2[20]/U8[4]/I2C0_SCL', identifier: ACCEL_SCL}
+- {pin_num: '32', pin_signal: ADC0_SE18/PTE25/UART4_RX/I2C0_SDA/EWM_IN, label: 'J2[18]/U8[6]/I2C0_SDA', identifier: ACCEL_SDA;BT_PTE25_RX}
+- {pin_num: '31', pin_signal: ADC0_SE17/PTE24/UART4_TX/I2C0_SCL/EWM_OUT_b, label: 'J2[20]/U8[4]/I2C0_SCL', identifier: ACCEL_SCL;BT_PTE24_TX}
 - {pin_num: '26', pin_signal: VREF_OUT/CMP1_IN5/CMP0_IN5/ADC1_SE18, label: 'J2[17]'}
 - {pin_num: '21', pin_signal: ADC1_DM0/ADC0_DM3, label: 'J2[13]'}
 - {pin_num: '18', pin_signal: ADC0_DP0/ADC1_DP3, label: 'J2[5]'}
@@ -147,8 +147,8 @@ BOARD_InitPins:
   - {pin_num: '38', peripheral: GPIOA, signal: 'GPIO, 4', pin_signal: PTA4/LLWU_P3/FTM0_CH1/NMI_b/EZP_CS_b, identifier: SET_AL, direction: INPUT, gpio_interrupt: kPORT_InterruptFallingEdge,
     pull_select: down}
   - {pin_num: '68', peripheral: GPIOB, signal: 'GPIO, 22', pin_signal: PTB22/SPI2_SOUT/FB_AD29/CMP2_OUT, identifier: MD_LED, direction: OUTPUT, gpio_init_state: 'true'}
-  - {pin_num: '86', peripheral: UART4, signal: RX, pin_signal: PTC14/UART4_RX/FB_AD25}
-  - {pin_num: '87', peripheral: UART4, signal: TX, pin_signal: PTC15/UART4_TX/FB_AD24, direction: OUTPUT}
+  - {pin_num: '32', peripheral: UART4, signal: RX, pin_signal: ADC0_SE18/PTE25/UART4_RX/I2C0_SDA/EWM_IN, identifier: BT_PTE25_RX}
+  - {pin_num: '31', peripheral: UART4, signal: TX, pin_signal: ADC0_SE17/PTE24/UART4_TX/I2C0_SCL/EWM_OUT_b, identifier: BT_PTE24_TX, direction: OUTPUT}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 /* clang-format on */
@@ -167,6 +167,8 @@ void BOARD_InitPins(void)
     CLOCK_EnableClock(kCLOCK_PortB);
     /* Port C Clock Gate Control: Clock enabled */
     CLOCK_EnableClock(kCLOCK_PortC);
+    /* Port E Clock Gate Control: Clock enabled */
+    CLOCK_EnableClock(kCLOCK_PortE);
 
     gpio_pin_config_t SET_AL_config = {
         .pinDirection = kGPIO_DigitalInput,
@@ -224,12 +226,6 @@ void BOARD_InitPins(void)
     /* PORTB22 (pin 68) is configured as PTB22 */
     PORT_SetPinMux(BOARD_MD_LED_PORT, BOARD_MD_LED_PIN, kPORT_MuxAsGpio);
 
-    /* PORTC14 (pin 86) is configured as UART4_RX */
-    PORT_SetPinMux(BOARD_BT_TX_PORT, BOARD_BT_TX_PIN, kPORT_MuxAlt3);
-
-    /* PORTC15 (pin 87) is configured as UART4_TX */
-    PORT_SetPinMux(BOARD_BT_RX_PORT, BOARD_BT_RX_PIN, kPORT_MuxAlt3);
-
     /* PORTC6 (pin 78) is configured as PTC6 */
     PORT_SetPinMux(BOARD_MD_PORT, BOARD_MD_PIN, kPORT_MuxAsGpio);
 
@@ -242,6 +238,12 @@ void BOARD_InitPins(void)
 
                      /* Pull Enable: Internal pullup or pulldown resistor is enabled on the corresponding pin. */
                      | (uint32_t)(PORT_PCR_PE_MASK));
+
+    /* PORTE24 (pin 31) is configured as UART4_TX */
+    PORT_SetPinMux(BOARD_BT_PTE24_TX_PORT, BOARD_BT_PTE24_TX_PIN, kPORT_MuxAlt3);
+
+    /* PORTE25 (pin 32) is configured as UART4_RX */
+    PORT_SetPinMux(BOARD_BT_PTE25_RX_PORT, BOARD_BT_PTE25_RX_PIN, kPORT_MuxAlt3);
 }
 
 /* clang-format off */
@@ -531,10 +533,10 @@ void BOARD_InitOSCPins(void)
 BOARD_InitACCELPins:
 - options: {prefix: BOARD_, coreID: core0, enableClock: 'true'}
 - pin_list:
-  - {pin_num: '32', peripheral: I2C0, signal: SDA, pin_signal: ADC0_SE18/PTE25/UART4_RX/I2C0_SDA/EWM_IN, slew_rate: fast, open_drain: enable, drive_strength: low,
-    pull_select: down, pull_enable: disable, passive_filter: disable}
-  - {pin_num: '31', peripheral: I2C0, signal: SCL, pin_signal: ADC0_SE17/PTE24/UART4_TX/I2C0_SCL/EWM_OUT_b, slew_rate: fast, open_drain: enable, drive_strength: low,
-    pull_select: down, pull_enable: disable, passive_filter: disable}
+  - {pin_num: '32', peripheral: I2C0, signal: SDA, pin_signal: ADC0_SE18/PTE25/UART4_RX/I2C0_SDA/EWM_IN, identifier: ACCEL_SDA, slew_rate: fast, open_drain: enable,
+    drive_strength: low, pull_select: down, pull_enable: disable, passive_filter: disable}
+  - {pin_num: '31', peripheral: I2C0, signal: SCL, pin_signal: ADC0_SE17/PTE24/UART4_TX/I2C0_SCL/EWM_OUT_b, identifier: ACCEL_SCL, slew_rate: fast, open_drain: enable,
+    drive_strength: low, pull_select: down, pull_enable: disable, passive_filter: disable}
   - {pin_num: '78', peripheral: GPIOC, signal: 'GPIO, 6', pin_signal: CMP0_IN0/PTC6/LLWU_P10/SPI0_SOUT/PDB0_EXTRG/I2S0_RX_BCLK/FB_AD9/I2S0_MCLK, identifier: ACCEL_INT1,
     direction: INPUT, slew_rate: fast, open_drain: enable, drive_strength: low, pull_select: up, pull_enable: enable, passive_filter: disable}
   - {pin_num: '85', peripheral: GPIOC, signal: 'GPIO, 13', pin_signal: PTC13/UART4_CTS_b/FB_AD26, direction: INPUT, slew_rate: fast, open_drain: enable, drive_strength: low,

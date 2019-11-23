@@ -103,6 +103,11 @@ void UART0_RX_TX_IRQHandler() {
 	}
 }
 
+void UART4_RX_TX_IRQHandler()
+{
+
+}
+
 
 int main(void) {
 

@@ -46,17 +46,17 @@ void BOARD_InitBootPins(void);
 #define BOARD_MD_LED_PIN 22U    /*!<@brief PORTB pin index: 22 */
                                 /* @} */
 
-/*! @name PORTC14 (number 86), J199[3]/BT_TX
+/*! @name PORTE25 (number 32), J2[18]/U8[6]/I2C0_SDA
   @{ */
-#define BOARD_BT_TX_PORT PORTC /*!<@brief PORT device name: PORTC */
-#define BOARD_BT_TX_PIN 14U    /*!<@brief PORTC pin index: 14 */
-                               /* @} */
+#define BOARD_BT_PTE25_RX_PORT PORTE /*!<@brief PORT device name: PORTE */
+#define BOARD_BT_PTE25_RX_PIN 25U    /*!<@brief PORTE pin index: 25 */
+                                     /* @} */
 
-/*! @name PORTC15 (number 87), J199[4]/BT_RX
+/*! @name PORTE24 (number 31), J2[20]/U8[4]/I2C0_SCL
   @{ */
-#define BOARD_BT_RX_PORT PORTC /*!<@brief PORT device name: PORTC */
-#define BOARD_BT_RX_PIN 15U    /*!<@brief PORTC pin index: 15 */
-                               /* @} */
+#define BOARD_BT_PTE24_TX_PORT PORTE /*!<@brief PORT device name: PORTE */
+#define BOARD_BT_PTE24_TX_PIN 24U    /*!<@brief PORTE pin index: 24 */
+                                     /* @} */
 
 /*!
  * @brief Configures pin routing and optionally pin electrical features.
