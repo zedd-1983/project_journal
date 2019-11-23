@@ -80,28 +80,28 @@ void RTC_1_COMMON_IRQHANDLER()
 	}
 }
 
-//void UART0_RX_TX_IRQHandler() {
-//
-//	static uint8_t charReceived;
-//
-//	if(UART_GetStatusFlags(UART0) & kUART_RxDataRegFullFlag)
-//	{
-//		charReceived = UART_ReadByte(UART0);
-//		PRINTF("\n\r%c\n\r");
-//
-//		switch(charReceived)
-//		{
-//			case 'T':
-//			case 't': printCurrentTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct); break;
-//			case 'A':
-//			case 'a': displayAlarmTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct); break;
-//			case 'C':
-//			case 'c': PRINTF("\n\rConfigure user time\n\r"); break;
-//			default:
-//				PRINTF("\n\rInvalid option\n\r");
-//		}
-//	}
-//}
+void UART0_RX_TX_IRQHandler() {
+
+	uint8_t charReceived;
+
+	if(UART_GetStatusFlags(UART0) & kUART_RxDataRegFullFlag)
+	{
+		charReceived = UART_ReadByte(UART0);
+		PRINTF("\n\r%c\n\r");
+
+		switch(charReceived)
+		{
+			case 'T':
+			case 't': printCurrentTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct); break;
+			case 'A':
+			case 'a': displayAlarmTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct); break;
+			case 'C':
+			case 'c': PRINTF("\n\rConfigure user time\n\r"); break;
+			default:
+				PRINTF("\n\rInvalid option\n\r");
+		}
+	}
+}
 
 
 int main(void) {
@@ -121,10 +121,10 @@ int main(void) {
     NVIC_ClearPendingIRQ(BOARD_SW2_IRQ);
     NVIC_EnableIRQ(BOARD_SW2_IRQ);
 
-//    UART_EnableInterrupts(UART0, kUART_RxDataRegFullInterruptEnable);
-//    NVIC_SetPriority(UART0_RX_TX_IRQn, 11);
-//    NVIC_ClearPendingIRQ(UART0_RX_TX_IRQn);
-//    NVIC_EnableIRQ(UART0_RX_TX_IRQn);
+    UART_EnableInterrupts(UART0, kUART_RxDataRegFullInterruptEnable);
+    NVIC_SetPriority(UART0_RX_TX_IRQn, 11);
+    NVIC_ClearPendingIRQ(UART0_RX_TX_IRQn);
+    NVIC_EnableIRQ(UART0_RX_TX_IRQn);
 
     NVIC_SetPriority(BOARD_SW3_IRQ, 10);
     NVIC_ClearPendingIRQ(BOARD_SW3_IRQ);

@@ -25,10 +25,8 @@ void userTimeConfig(void* pvParameters)
 
 		for(;;)
 		{
-			// disable ENC_BUTTON interrupt
-			//NVIC_DisableIRQ(PORTB_IRQn);
-			//portENTER_CRITICAL();
-			// configure time
+			NVIC_DisableIRQ(UART0_RX_TX_IRQn);
+
 			RTC_StopTimer(RTC);
 
 			// get the new time
@@ -89,10 +87,7 @@ void userTimeConfig(void* pvParameters)
 			PRINTF("\n\rMinute: %d", RTC_1_dateTimeStruct.minute);
 	#endif
 			RTC_StartTimer(RTC);
-			// enable ENC_BUTTON interrupt
-			//GPIO_PortClearInterruptFlags(BOARD_ENC_BUTTON_GPIO, 1 << BOARD_ENC_BUTTON_PIN);
-			//NVIC_EnableIRQ(PORTB_IRQn);
-			// delete itself
+			NVIC_EnableIRQ(UART0_RX_TX_IRQn);
 			vTaskDelete(NULL);
 		}
 }
