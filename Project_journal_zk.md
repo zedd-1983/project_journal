@@ -58,3 +58,15 @@ I was quite nervous about doing so but it seems to have worked so I started to r
 code I have previously implemented. I intend to get this to work quite quickly so I can close and
 merge the userTimeConfig branch and move onto the **Bluetooth** communication. For this I have installed
 the necessary headers onto the board but have yet to test it's functionality.
+
+#### 23/11/2019
+I have finaly managed to implement user time configuration task. One of the issues I haven't considered was
+the lack of memory assigned to the freertos task. Increasing this, helped and I can now successfully 
+adjust the time and date, including simple error checking for those. I was able to reuse some code from
+my other embedded systems project that I have written. During my attempts I have disabled the UART0 interrupt
+so my menu doesn't work at the moment, but will get it working quickly. I have started playing with the 
+Bluetooth module and will be trying to get it working also. I will have to enable UART4 for this and 
+took me a while to realize that I need to somehow communicate with the module through it. Wasn't sure
+how to do this at first but luckily I have obtained a USBtoTTL module a while back for my own projects so I
+think that this will be perfect for the communication. Once I have established the connection between the board
+and the BT module I will start working on the second device and try to receive communication wirelessly.
