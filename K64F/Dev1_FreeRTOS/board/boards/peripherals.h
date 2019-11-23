@@ -11,6 +11,8 @@
  **********************************************************************************************************************/
 #include "fsl_common.h"
 #include "fsl_rtc.h"
+#include "fsl_uart.h"
+#include "fsl_clock.h"
 
 #if defined(__cplusplus)
 extern "C" {
@@ -28,6 +30,20 @@ extern "C" {
 #define RTC_1_COMMON_IRQ_PRIORITY 11
 /* RTC_1 interrupt handler identifier. */
 #define RTC_1_COMMON_IRQHANDLER RTC_IRQHandler
+/* Definition of peripheral ID */
+#define BLUETOOTH_PERIPHERAL UART4
+/* Definition of the clock source frequency */
+#define BLUETOOTH_CLOCK_SOURCE CLOCK_GetFreq(UART4_CLK_SRC)
+/* BLUETOOTH interrupt vector ID (number). */
+#define BLUETOOTH_SERIAL_RX_TX_IRQN UART4_RX_TX_IRQn
+/* BLUETOOTH interrupt vector priority. */
+#define BLUETOOTH_SERIAL_RX_TX_IRQ_PRIORITY 13
+/* BLUETOOTH interrupt handler identifier. */
+#define BLUETOOTH_SERIAL_RX_TX_IRQHANDLER UART4_RX_TX_IRQHandler
+/* BLUETOOTH interrupt vector ID (number). */
+#define BLUETOOTH_SERIAL_ERROR_IRQN UART4_ERR_IRQn
+/* BLUETOOTH interrupt handler identifier. */
+#define BLUETOOTH_SERIAL_ERROR_IRQHANDLER UART4_ERR_IRQHandler
 
 /***********************************************************************************************************************
  * Global variables
@@ -35,6 +51,7 @@ extern "C" {
 extern const rtc_config_t RTC_1_config;
 /* Date and time structure */
 extern rtc_datetime_t RTC_1_dateTimeStruct;
+extern const uart_config_t BLUETOOTH_config;
 
 /***********************************************************************************************************************
  * Initialization functions
