@@ -8,6 +8,7 @@
 #ifndef TIMEKEEPING_H_
 #define TIMEKEEPING_H_
 
-void timeKeeping(void*);
+//void timeKeeping(void*);
+void userTimeConfig(void*);
 
 #endif /* TIMEKEEPING_H_ */

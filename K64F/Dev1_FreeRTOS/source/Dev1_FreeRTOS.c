@@ -25,13 +25,13 @@
 /* TODO: insert other definitions and declarations here. */
 TaskHandle_t mainTaskHandle = NULL;
 TaskHandle_t terminalTaskHandle = NULL;
-TaskHandle_t userTimeConfig = NULL;
+TaskHandle_t userTimeConfigHandle = NULL;
 SemaphoreHandle_t moistureDetectionSemphr = NULL;
 SemaphoreHandle_t alarmSemphr = NULL;
 SemaphoreHandle_t setAlarmSemphr = NULL;
-//SemaphoreHandle_t userTimeConfig = NULL;
+SemaphoreHandle_t userTimeConfigSemphr = NULL;
 
-static void terminalTask(void*);
+//static void terminalTask(void*);
 void configureTime(void*);
 
 bool busyWait = false;
@@ -54,17 +54,17 @@ void PORTC_IRQHandler()
 	portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 }
 
-//void PORTA_IRQHandler()
-//{
-//	static BaseType_t xHigherPriorityTaskWoken;
-//
-//	// clear pending bits
-//	GPIO_PortClearInterruptFlags(BOARD_SET_AL_GPIO, 1 << BOARD_SET_AL_PIN);
-//	PRINTF("\r\nTime configuration (in ISR)\r\n");
-//	xHigherPriorityTaskWoken = pdFALSE;
-//	xSemaphoreGiveFromISR(userTimeConfig, &xHigherPriorityTaskWoken);
-//	portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
-//}
+void PORTA_IRQHandler()
+{
+	static BaseType_t xHigherPriorityTaskWoken;
+
+	// clear pending bits
+	GPIO_PortClearInterruptFlags(BOARD_SET_AL_GPIO, 1 << BOARD_SET_AL_PIN);
+	PRINTF("\r\nTime configuration (in ISR)\r\n");
+	xHigherPriorityTaskWoken = pdFALSE;
+	xSemaphoreGiveFromISR(userTimeConfigSemphr, &xHigherPriorityTaskWoken);
+	portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+}
 
 // RTC interrupt that sets flag when an alarm interrupt occurs. Currently gets
 // set to 10s after moisture detection but in actual run would be set to occur
@@ -80,28 +80,28 @@ void RTC_1_COMMON_IRQHANDLER()
 	}
 }
 
-void UART0_RX_TX_IRQHandler() {
-
-	static uint8_t charReceived;
-
-	if(UART_GetStatusFlags(UART0) & kUART_RxDataRegFullFlag)
-	{
-		charReceived = UART_ReadByte(UART0);
-		PRINTF("\n\r%c\n\r");
-
-		switch(charReceived)
-		{
-			case 'T':
-			case 't': printCurrentTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct); break;
-			case 'A':
-			case 'a': displayAlarmTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct); break;
-			case 'C':
-			case 'c': PRINTF("\n\rConfigure user time\n\r"); break;
-			default:
-				PRINTF("\n\rInvalid option\n\r");
-		}
-	}
-}
+//void UART0_RX_TX_IRQHandler() {
+//
+//	static uint8_t charReceived;
+//
+//	if(UART_GetStatusFlags(UART0) & kUART_RxDataRegFullFlag)
+//	{
+//		charReceived = UART_ReadByte(UART0);
+//		PRINTF("\n\r%c\n\r");
+//
+//		switch(charReceived)
+//		{
+//			case 'T':
+//			case 't': printCurrentTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct); break;
+//			case 'A':
+//			case 'a': displayAlarmTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct); break;
+//			case 'C':
+//			case 'c': PRINTF("\n\rConfigure user time\n\r"); break;
+//			default:
+//				PRINTF("\n\rInvalid option\n\r");
+//		}
+//	}
+//}
 
 
 int main(void) {
@@ -121,28 +121,19 @@ int main(void) {
     NVIC_ClearPendingIRQ(BOARD_SW2_IRQ);
     NVIC_EnableIRQ(BOARD_SW2_IRQ);
 
-    UART_EnableInterrupts(UART0, kUART_RxDataRegFullInterruptEnable);
-    NVIC_SetPriority(UART0_RX_TX_IRQn, 11);
-    NVIC_ClearPendingIRQ(UART0_RX_TX_IRQn);
-    NVIC_EnableIRQ(UART0_RX_TX_IRQn);
+//    UART_EnableInterrupts(UART0, kUART_RxDataRegFullInterruptEnable);
+//    NVIC_SetPriority(UART0_RX_TX_IRQn, 11);
+//    NVIC_ClearPendingIRQ(UART0_RX_TX_IRQn);
+//    NVIC_EnableIRQ(UART0_RX_TX_IRQn);
 
-//    NVIC_SetPriority(BOARD_SW3_IRQ, 10);
-//    NVIC_ClearPendingIRQ(BOARD_SW3_IRQ);
-//    NVIC_EnableIRQ(BOARD_SW3_IRQ);
+    NVIC_SetPriority(BOARD_SW3_IRQ, 10);
+    NVIC_ClearPendingIRQ(BOARD_SW3_IRQ);
+    NVIC_EnableIRQ(BOARD_SW3_IRQ);
 
-//    PRINTF("Lets see if it works");
-//    SEGGER_RTT_SetTerminal(0);
-//    SEGGER_RTT_WriteString(0, RTT_CTRL_TEXT_BRIGHT_GREEN"Easysleep - moisture detection");
-//    SEGGER_RTT_WriteString(0, RTT_CTRL_TEXT_BRIGHT_BLUE"Terminal 0");
-
-    //SEGGER_RTT_SetTerminal(1);
-
-    //SEGGER_RTT_TerminalOut(1, RTT_CTRL_TEXT_BRIGHT_RED"Terminal 1");
-    //SEGGER_RTT_WriteString(0, RTT_CTRL_TEXT_BRIGHT_RED"Terminal 1");
 
     // start recording
-    SEGGER_SYSVIEW_Conf();
-    SEGGER_SYSVIEW_Start();
+//    SEGGER_SYSVIEW_Conf();
+//    SEGGER_SYSVIEW_Start();
 
     if(xTaskCreate(mainTask, "Main Task", configMINIMAL_STACK_SIZE + 50, NULL, 2, &mainTaskHandle) == pdFALSE)
     {
@@ -155,75 +146,32 @@ int main(void) {
 //    }
 
     moistureDetectionSemphr = xSemaphoreCreateBinary();
-    //userTimeConfig = xSemaphoreCreateBinary();
+    userTimeConfigSemphr = xSemaphoreCreateBinary();
 
     vTaskStartScheduler();
 
     return 0 ;
 }
 
-void terminalTask(void* pvParameters)
-{
-	for(;;)
-	{
-		uint8_t character = '\0';
-		if(SEGGER_RTT_HasKey())
-		{
-			character = SEGGER_RTT_GetKey();
-			switch(character)
-			{
-				case 't':
-				case 'T': printCurrentTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct); break;
-				case 'a':
-				case 'A': displayAlarmTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct); break;
-				case 'c':
-				case 'C': xTaskCreate(configureTime, "Time configuration task", configMINIMAL_STACK_SIZE + 50, NULL, 3, NULL);
-			}
-		}
-	vTaskDelay(pdMS_TO_TICKS(100));
-	}
-}
+//void terminalTask(void* pvParameters)
+//{
+//	for(;;)
+//	{
+//		uint8_t character = '\0';
+//		if(SEGGER_RTT_HasKey())
+//		{
+//			character = SEGGER_RTT_GetKey();
+//			switch(character)
+//			{
+//				case 't':
+//				case 'T': printCurrentTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct); break;
+//				case 'a':
+//				case 'A': displayAlarmTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct); break;
+//				case 'c':
+//				case 'C': xTaskCreate(configureTime, "Time configuration task", configMINIMAL_STACK_SIZE + 50, NULL, 3, NULL);
+//			}
+//		}
+//	vTaskDelay(pdMS_TO_TICKS(100));
+//	}
+//}
 
-void configureTime(void* pvParameters)
-{
-	uint8_t buffer[17] = {};
-	//uint8_t count = 0;
-	SEGGER_RTT_TerminalOut(0, RTT_CTRL_TEXT_BRIGHT_CYAN"Time config"RTT_CTRL_RESET);
-
-	//taskENTER_CRITICAL();
-	SEGGER_RTT_TerminalOut(0, "\nEnter datetime in YYYY-MM-DD-HH-MM format: ");
-	//if(SEGGER_RTT_HasData())
-	//	SEGGER_RTT_Read(0, &buffer, 17);
-	//taskEXIT_CRITICAL();
-
-	uint16_t year = ((buffer[0] - 48) * 1000) + ((buffer[1] - 48) * 100) + ((buffer[2] - 48) * 10) + ((buffer[3] - 48));
-	uint8_t month = ((buffer[5] - 48) * 10) + ((buffer[6] - 48));
-	uint8_t day = ((buffer[8] - 48) * 10) + ((buffer[9] - 48));
-	uint8_t hour = ((buffer[11] - 48) * 10) + ((buffer[12] - 48));
-	uint8_t minute = ((buffer[14] - 48) * 10) + ((buffer[15] - 48));
-
-	// print new time
-	SEGGER_RTT_SetTerminal(0);
-	SEGGER_RTT_printf(0, "\nYear: %d\n", year);
-	SEGGER_RTT_printf(0, "Month: %d\n", month);
-	SEGGER_RTT_printf(0, "Day: %d\n", day);
-	SEGGER_RTT_printf(0, "Hour: %d\n", hour);
-	SEGGER_RTT_printf(0, "Minute: %d\n", minute);
-
-	// stop rtc timer
-	RTC_StopTimer(RTC_1_PERIPHERAL);
-
-	// configure new values for datetime structure
-	RTC_1_dateTimeStruct.year = year;
-	RTC_1_dateTimeStruct.month = month;
-	RTC_1_dateTimeStruct.day = day;
-	RTC_1_dateTimeStruct.hour = hour;
-	RTC_1_dateTimeStruct.minute = minute;
-	RTC_1_dateTimeStruct.second = 0;
-
-	// reconfigure rtc timer and start again
-	RTC_SetDatetime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
-	RTC_StartTimer(RTC_1_PERIPHERAL);
-
-	vTaskDelete(NULL);
-}

@@ -7,12 +7,15 @@
 #include "fsl_debug_console.h"
 #include "fsl_rtc.h"
 #include "SEGGER_RTT.h"
+#include "helperFunctions.h"
 
-#define NRF_LOG_USES_RTT  1
+//#define NRF_LOG_USES_RTT  1
+
+//struct userDate_t date;
+//struct userTime_t time;
 
 void displayMenu()
 {
-	//SEGGER_RTT_SetTerminal(0);
 	PRINTF("\n\rMenu\n\r");
 	PRINTF("\n\rT\t- display time\n\r");
 	PRINTF("A\t- display alarm time\n\r");
@@ -21,10 +24,8 @@ void displayMenu()
 
 void printCurrentTime(RTC_Type * base, rtc_datetime_t* datetime)
 {
-	// request time and print it
 	RTC_GetDatetime(base, datetime );
-	//SEGGER_RTT_SetTerminal(1);
-	PRINTF("\033[1A\rDate: %04hd-%02hd-%02hd Time: %02hd-%02hd-%02hd",
+	PRINTF("\rDate: %04hd-%02hd-%02hd Time: %02hd-%02hd-%02hd",
 			datetime->year,
 			datetime->month,
 			datetime->day,
@@ -66,3 +67,28 @@ uint8_t getMenuOption()
 
 	return ch;
 }
+
+struct userDate_t getDate(char* stringDate)
+{
+	struct userDate_t date = {};
+
+	date.year = ((stringDate[0] - 48) * 1000) +
+				((stringDate[1] - 48) * 100) +
+				((stringDate[2] - 48) * 10) +
+				((stringDate[3] - 48));
+	date.month = ((stringDate[5] - 48) * 10) + ((stringDate[6] - 48));
+	date.day = ((stringDate[8] - 48) * 10) + ((stringDate[9] - 48));
+
+	return date;
+}
+
+struct userTime_t getTime(char* stringTime)
+{
+	struct userTime_t time;
+
+	time.hour = ((stringTime[0] - 48) * 10) + ((stringTime[1] - 48));
+	time.minute = ((stringTime[3] - 48) * 10) + ((stringTime[4] - 48));
+
+	return time;
+}
+

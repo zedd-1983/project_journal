@@ -12,10 +12,13 @@
 #include "peripherals.h"
 #include "fsl_rtc.h"
 #include "helperFunctions.h"
+#include "timeKeeping.h"
 #include "SEGGER_RTT.h"
 
 extern bool busyWait;
 extern SemaphoreHandle_t moistureDetectionSemphr;
+extern SemaphoreHandle_t userTimeConfigSemphr;
+extern TaskHandle_t userTimeConfigHandle;
 extern rtc_datetime_t RTC_1_dateTimeStruct;
 
 void mainTask(void* pvParameters)
@@ -40,11 +43,17 @@ void mainTask(void* pvParameters)
 
 		}	 // moistureDetectionSemphr
 
+		if(xSemaphoreTake(userTimeConfigSemphr, 0) == pdTRUE) {
+		    if(xTaskCreate(userTimeConfig, "UserTimeConfig Task", configMINIMAL_STACK_SIZE + 150, NULL, 3, &userTimeConfigHandle) == pdFALSE)
+		    {
+		    	PRINTF("\r\nFailed to start \"UserTimeConfig Task\"\r\n");
+		    }
+		}
 		// trigger alarm, flag is set by an alarm interrupt in RTC_1_COMMON_IRQHANDLER()
 		if(busyWait)
 		{
 			busyWait = false;
-			PRINTF(RTT_CTRL_TEXT_BRIGHT_RED"************ ALARM **************"RTT_CTRL_RESET);
+			PRINTF(RTT_CTRL_TEXT_BRIGHT_RED"\n\r************ ALARM **************\n\r"RTT_CTRL_RESET);
 		}
 
 		vTaskDelay(pdMS_TO_TICKS(150));
