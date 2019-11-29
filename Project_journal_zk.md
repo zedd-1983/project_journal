@@ -9,7 +9,7 @@ lecturers and write up a proposal to be submitted by Sunday 6th.
 ##### 07/10/2019  
 During my last week I have setup the **MCUXpresso and FreeRTOS** and tested everything compiles
 and works. I have created and submitted the project proposal.
-Plan for this week is to get SystemView working with K64F to monitor the FreeRTOS and to
+//Plan for this week is to get SystemView working with K64F to monitor the FreeRTOS and to/
 start working on the moisture detection. This will likely be an external interrupt.
 
 
@@ -70,3 +70,14 @@ took me a while to realize that I need to somehow communicate with the module th
 how to do this at first but luckily I have obtained a USBtoTTL module a while back for my own projects so I
 think that this will be perfect for the communication. Once I have established the connection between the board
 and the BT module I will start working on the second device and try to receive communication wirelessly.
+
+#### 29/11/2019  
+I have been working on getting the Bluetooth module to work with K64F. But wasn't successful so far. I can connect
+to the module from my phone and it even generates an interrupt but that is as far as it gets. On top of it
+nothing gets printed into the terminal anymore for an unknow reason. Worst case scenario, I can revert to master
+just before the bluetooth module started to be implemented. I have also realized
+that I will need a different module for the main device (the one I am currently working on) as the one 
+I am currently using cannot be configured in **master mode** and communication between two slaves isn't possible.
+Should however receive this module soon so will start implementing it's functionality then. I can still however
+keep trying to get communication going between my phone and the current bluetooth device as reconfiguration of
+the new device shouldn't be too complicated.
