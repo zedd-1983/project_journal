@@ -36,10 +36,8 @@ extern "C" {
 #define BLUETOOTH_CLOCK_SOURCE CLOCK_GetFreq(UART4_CLK_SRC)
 /* BLUETOOTH interrupt vector ID (number). */
 #define BLUETOOTH_SERIAL_RX_TX_IRQN UART4_RX_TX_IRQn
-/* BLUETOOTH interrupt vector priority. */
-#define BLUETOOTH_SERIAL_RX_TX_IRQ_PRIORITY 13
 /* BLUETOOTH interrupt handler identifier. */
-#define BLUETOOTH_SERIAL_RX_TX_IRQHANDLER UART4_RX_TX_IRQHandler
+#define BLUETOOTH_IRQHandler UART4_RX_TX_IRQHandler
 /* BLUETOOTH interrupt vector ID (number). */
 #define BLUETOOTH_SERIAL_ERROR_IRQN UART4_ERR_IRQn
 /* BLUETOOTH interrupt handler identifier. */

@@ -137,7 +137,7 @@ instance:
     - uartConfig:
       - clockSource: 'BusInterfaceClock'
       - clockSourceFreq: 'GetFreq'
-      - baudRate_Bps: '38400'
+      - baudRate_Bps: '9600'
       - parityMode: 'kUART_ParityDisabled'
       - stopBitCount: 'kUART_OneStopBit'
       - txFifoWatermark: '0'
@@ -145,15 +145,17 @@ instance:
       - idleType: 'kUART_IdleTypeStartBit'
       - enableTx: 'true'
       - enableRx: 'true'
+    - quick_selection: 'QuickSelection5'
   - interruptsCfg:
     - interrupts: 'kUART_TxDataRegEmptyInterruptEnable kUART_TransmissionCompleteInterruptEnable kUART_RxDataRegFullInterruptEnable kUART_RxOverrunInterruptEnable'
     - interrupt_vectors:
       - enable_rx_tx_irq: 'true'
       - interrupt_rx_tx:
         - IRQn: 'UART4_RX_TX_IRQn'
-        - enable_priority: 'true'
-        - priority: '13'
-        - enable_custom_name: 'false'
+        - enable_priority: 'false'
+        - priority: '0'
+        - enable_custom_name: 'true'
+        - handler_custom_name: 'BLUETOOTH_IRQHandler'
       - enable_err_irq: 'false'
       - interrupt_err:
         - IRQn: 'UART4_ERR_IRQn'
@@ -163,7 +165,7 @@ instance:
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/
 /* clang-format on */
 const uart_config_t BLUETOOTH_config = {
-  .baudRate_Bps = 38400,
+  .baudRate_Bps = 9600,
   .parityMode = kUART_ParityDisabled,
   .stopBitCount = kUART_OneStopBit,
   .txFifoWatermark = 0,
@@ -176,8 +178,6 @@ const uart_config_t BLUETOOTH_config = {
 void BLUETOOTH_init(void) {
   UART_Init(BLUETOOTH_PERIPHERAL, &BLUETOOTH_config, BLUETOOTH_CLOCK_SOURCE);
   UART_EnableInterrupts(BLUETOOTH_PERIPHERAL, kUART_TxDataRegEmptyInterruptEnable | kUART_TransmissionCompleteInterruptEnable | kUART_RxDataRegFullInterruptEnable | kUART_RxOverrunInterruptEnable);
-  /* Interrupt vector UART4_RX_TX_IRQn priority settings in the NVIC */
-  NVIC_SetPriority(BLUETOOTH_SERIAL_RX_TX_IRQN, BLUETOOTH_SERIAL_RX_TX_IRQ_PRIORITY);
   /* Enable interrupt UART4_RX_TX_IRQn request in the NVIC */
   EnableIRQ(BLUETOOTH_SERIAL_RX_TX_IRQN);
 }

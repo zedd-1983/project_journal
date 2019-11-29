@@ -36,8 +36,8 @@ pin_labels:
 - {pin_num: '95', pin_signal: PTD2/LLWU_P13/SPI0_SOUT/UART2_RX/FTM3_CH2/FB_AD4/I2C0_SCL, label: 'J2[8]', identifier: UART2_RX}
 - {pin_num: '96', pin_signal: PTD3/SPI0_SIN/UART2_TX/FTM3_CH3/FB_AD3/I2C0_SDA, label: 'J2[10]', identifier: UART2_TX}
 - {pin_num: '94', pin_signal: ADC0_SE5b/PTD1/SPI0_SCK/UART2_CTS_b/FTM3_CH1/FB_CS0_b, label: 'J2[12]'}
-- {pin_num: '32', pin_signal: ADC0_SE18/PTE25/UART4_RX/I2C0_SDA/EWM_IN, label: 'J2[18]/U8[6]/I2C0_SDA', identifier: ACCEL_SDA;BT_PTE25_RX}
-- {pin_num: '31', pin_signal: ADC0_SE17/PTE24/UART4_TX/I2C0_SCL/EWM_OUT_b, label: 'J2[20]/U8[4]/I2C0_SCL', identifier: ACCEL_SCL;BT_PTE24_TX}
+- {pin_num: '32', pin_signal: ADC0_SE18/PTE25/UART4_RX/I2C0_SDA/EWM_IN, label: 'J2[18]/U8[6]/I2C0_SDA', identifier: ACCEL_SDA}
+- {pin_num: '31', pin_signal: ADC0_SE17/PTE24/UART4_TX/I2C0_SCL/EWM_OUT_b, label: 'J2[20]/U8[4]/I2C0_SCL', identifier: ACCEL_SCL}
 - {pin_num: '26', pin_signal: VREF_OUT/CMP1_IN5/CMP0_IN5/ADC1_SE18, label: 'J2[17]'}
 - {pin_num: '21', pin_signal: ADC1_DM0/ADC0_DM3, label: 'J2[13]'}
 - {pin_num: '18', pin_signal: ADC0_DP0/ADC1_DP3, label: 'J2[5]'}
@@ -71,8 +71,8 @@ pin_labels:
 - {pin_num: '97', pin_signal: PTD4/LLWU_P14/SPI0_PCS1/UART0_RTS_b/FTM0_CH4/FB_AD2/EWM_IN/SPI1_PCS0, label: 'J6[4]/RF_WIFI_CS', identifier: WIFI_CS}
 - {pin_num: '99', pin_signal: ADC0_SE7b/PTD6/LLWU_P15/SPI0_PCS3/UART0_RX/FTM0_CH6/FB_AD0/FTM0_FLT0/SPI1_SOUT, label: 'J6[6]/RF_WIFI_MOSI', identifier: WIFI_MOSI}
 - {pin_num: '92', pin_signal: PTC18/UART3_RTS_b/ENET0_1588_TMR2/FB_TBST_b/FB_CS2_b/FB_BE15_8_BLS23_16_b, label: 'J6[8]/RF_WIFI_IRQ', identifier: WIFI_IRQ;TMR_1588_2}
-- {pin_num: '86', pin_signal: PTC14/UART4_RX/FB_AD25, label: 'J199[3]/BT_TX', identifier: BT_TX}
-- {pin_num: '87', pin_signal: PTC15/UART4_TX/FB_AD24, label: 'J199[4]/BT_RX', identifier: BT_RX}
+- {pin_num: '86', pin_signal: PTC14/UART4_RX/FB_AD25, label: BT_TX, identifier: BT_TX}
+- {pin_num: '87', pin_signal: PTC15/UART4_TX/FB_AD24, label: BT_RX, identifier: BT_RX}
 - {pin_num: '54', pin_signal: ADC0_SE9/ADC1_SE9/PTB1/I2C0_SDA/FTM1_CH1/RMII0_MDC/MII0_MDC/FTM1_QD_PHB, label: 'U13[11]/RMII0_MDC', identifier: RMII0_MDC}
 - {pin_num: '53', pin_signal: ADC0_SE8/ADC1_SE8/PTB0/LLWU_P5/I2C0_SCL/FTM1_CH0/RMII0_MDIO/MII0_MDIO/FTM1_QD_PHA, label: 'U13[10]/RMII0_MDIO', identifier: RMII0_MDIO}
 - {pin_num: '50', pin_signal: EXTAL0/PTA18/FTM0_FLT2/FTM_CLKIN0, label: 'U13[16]/RMII_RXCLK', identifier: EXTAL0;RMII_RXCLK}
@@ -148,7 +148,7 @@ BOARD_InitPins:
     pull_select: down}
   - {pin_num: '68', peripheral: GPIOB, signal: 'GPIO, 22', pin_signal: PTB22/SPI2_SOUT/FB_AD29/CMP2_OUT, identifier: MD_LED, direction: OUTPUT, gpio_init_state: 'true'}
   - {pin_num: '86', peripheral: UART4, signal: RX, pin_signal: PTC14/UART4_RX/FB_AD25}
-  - {pin_num: '87', peripheral: UART4, signal: TX, pin_signal: PTC15/UART4_TX/FB_AD24, direction: OUTPUT}
+  - {pin_num: '87', peripheral: UART4, signal: TX, pin_signal: PTC15/UART4_TX/FB_AD24}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 /* clang-format on */
@@ -531,10 +531,10 @@ void BOARD_InitOSCPins(void)
 BOARD_InitACCELPins:
 - options: {prefix: BOARD_, coreID: core0, enableClock: 'true'}
 - pin_list:
-  - {pin_num: '32', peripheral: I2C0, signal: SDA, pin_signal: ADC0_SE18/PTE25/UART4_RX/I2C0_SDA/EWM_IN, identifier: ACCEL_SDA, slew_rate: fast, open_drain: enable,
-    drive_strength: low, pull_select: down, pull_enable: disable, passive_filter: disable}
-  - {pin_num: '31', peripheral: I2C0, signal: SCL, pin_signal: ADC0_SE17/PTE24/UART4_TX/I2C0_SCL/EWM_OUT_b, identifier: ACCEL_SCL, slew_rate: fast, open_drain: enable,
-    drive_strength: low, pull_select: down, pull_enable: disable, passive_filter: disable}
+  - {pin_num: '32', peripheral: I2C0, signal: SDA, pin_signal: ADC0_SE18/PTE25/UART4_RX/I2C0_SDA/EWM_IN, slew_rate: fast, open_drain: enable, drive_strength: low,
+    pull_select: down, pull_enable: disable, passive_filter: disable}
+  - {pin_num: '31', peripheral: I2C0, signal: SCL, pin_signal: ADC0_SE17/PTE24/UART4_TX/I2C0_SCL/EWM_OUT_b, slew_rate: fast, open_drain: enable, drive_strength: low,
+    pull_select: down, pull_enable: disable, passive_filter: disable}
   - {pin_num: '78', peripheral: GPIOC, signal: 'GPIO, 6', pin_signal: CMP0_IN0/PTC6/LLWU_P10/SPI0_SOUT/PDB0_EXTRG/I2S0_RX_BCLK/FB_AD9/I2S0_MCLK, identifier: ACCEL_INT1,
     direction: INPUT, slew_rate: fast, open_drain: enable, drive_strength: low, pull_select: up, pull_enable: enable, passive_filter: disable}
   - {pin_num: '85', peripheral: GPIOC, signal: 'GPIO, 13', pin_signal: PTC13/UART4_CTS_b/FB_AD26, direction: INPUT, slew_rate: fast, open_drain: enable, drive_strength: low,

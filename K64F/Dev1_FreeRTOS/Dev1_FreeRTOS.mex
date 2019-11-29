@@ -46,8 +46,8 @@
                <pin_label pin_num="95" pin_signal="PTD2/LLWU_P13/SPI0_SOUT/UART2_RX/FTM3_CH2/FB_AD4/I2C0_SCL" label="J2[8]" identifier="UART2_RX"/>
                <pin_label pin_num="96" pin_signal="PTD3/SPI0_SIN/UART2_TX/FTM3_CH3/FB_AD3/I2C0_SDA" label="J2[10]" identifier="UART2_TX"/>
                <pin_label pin_num="94" pin_signal="ADC0_SE5b/PTD1/SPI0_SCK/UART2_CTS_b/FTM3_CH1/FB_CS0_b" label="J2[12]"/>
-               <pin_label pin_num="32" pin_signal="ADC0_SE18/PTE25/UART4_RX/I2C0_SDA/EWM_IN" label="J2[18]/U8[6]/I2C0_SDA" identifier="ACCEL_SDA;BT_PTE25_RX"/>
-               <pin_label pin_num="31" pin_signal="ADC0_SE17/PTE24/UART4_TX/I2C0_SCL/EWM_OUT_b" label="J2[20]/U8[4]/I2C0_SCL" identifier="ACCEL_SCL;BT_PTE24_TX"/>
+               <pin_label pin_num="32" pin_signal="ADC0_SE18/PTE25/UART4_RX/I2C0_SDA/EWM_IN" label="J2[18]/U8[6]/I2C0_SDA" identifier="ACCEL_SDA"/>
+               <pin_label pin_num="31" pin_signal="ADC0_SE17/PTE24/UART4_TX/I2C0_SCL/EWM_OUT_b" label="J2[20]/U8[4]/I2C0_SCL" identifier="ACCEL_SCL"/>
                <pin_label pin_num="26" pin_signal="VREF_OUT/CMP1_IN5/CMP0_IN5/ADC1_SE18" label="J2[17]"/>
                <pin_label pin_num="21" pin_signal="ADC1_DM0/ADC0_DM3" label="J2[13]"/>
                <pin_label pin_num="18" pin_signal="ADC0_DP0/ADC1_DP3" label="J2[5]"/>
@@ -81,8 +81,8 @@
                <pin_label pin_num="97" pin_signal="PTD4/LLWU_P14/SPI0_PCS1/UART0_RTS_b/FTM0_CH4/FB_AD2/EWM_IN/SPI1_PCS0" label="J6[4]/RF_WIFI_CS" identifier="WIFI_CS"/>
                <pin_label pin_num="99" pin_signal="ADC0_SE7b/PTD6/LLWU_P15/SPI0_PCS3/UART0_RX/FTM0_CH6/FB_AD0/FTM0_FLT0/SPI1_SOUT" label="J6[6]/RF_WIFI_MOSI" identifier="WIFI_MOSI"/>
                <pin_label pin_num="92" pin_signal="PTC18/UART3_RTS_b/ENET0_1588_TMR2/FB_TBST_b/FB_CS2_b/FB_BE15_8_BLS23_16_b" label="J6[8]/RF_WIFI_IRQ" identifier="WIFI_IRQ;TMR_1588_2"/>
-               <pin_label pin_num="86" pin_signal="PTC14/UART4_RX/FB_AD25" label="J199[3]/BT_TX" identifier="BT_TX"/>
-               <pin_label pin_num="87" pin_signal="PTC15/UART4_TX/FB_AD24" label="J199[4]/BT_RX" identifier="BT_RX"/>
+               <pin_label pin_num="86" pin_signal="PTC14/UART4_RX/FB_AD25" label="BT_TX" identifier="BT_TX"/>
+               <pin_label pin_num="87" pin_signal="PTC15/UART4_TX/FB_AD24" label="BT_RX" identifier="BT_RX"/>
                <pin_label pin_num="54" pin_signal="ADC0_SE9/ADC1_SE9/PTB1/I2C0_SDA/FTM1_CH1/RMII0_MDC/MII0_MDC/FTM1_QD_PHB" label="U13[11]/RMII0_MDC" identifier="RMII0_MDC"/>
                <pin_label pin_num="53" pin_signal="ADC0_SE8/ADC1_SE8/PTB0/LLWU_P5/I2C0_SCL/FTM1_CH0/RMII0_MDIO/MII0_MDIO/FTM1_QD_PHA" label="U13[10]/RMII0_MDIO" identifier="RMII0_MDIO"/>
                <pin_label pin_num="50" pin_signal="EXTAL0/PTA18/FTM0_FLT2/FTM_CLKIN0" label="U13[16]/RMII_RXCLK" identifier="EXTAL0;RMII_RXCLK"/>
@@ -204,11 +204,7 @@
                      </pin_features>
                   </pin>
                   <pin peripheral="UART4" signal="RX" pin_num="86" pin_signal="PTC14/UART4_RX/FB_AD25"/>
-                  <pin peripheral="UART4" signal="TX" pin_num="87" pin_signal="PTC15/UART4_TX/FB_AD24">
-                     <pin_features>
-                        <pin_feature name="direction" value="OUTPUT"/>
-                     </pin_features>
-                  </pin>
+                  <pin peripheral="UART4" signal="TX" pin_num="87" pin_signal="PTC15/UART4_TX/FB_AD24"/>
                </pins>
             </function>
             <function name="BOARD_InitButtonsPins">
@@ -464,7 +460,6 @@
                <pins>
                   <pin peripheral="I2C0" signal="SDA" pin_num="32" pin_signal="ADC0_SE18/PTE25/UART4_RX/I2C0_SDA/EWM_IN">
                      <pin_features>
-                        <pin_feature name="identifier" value="ACCEL_SDA"/>
                         <pin_feature name="slew_rate" value="fast"/>
                         <pin_feature name="open_drain" value="enable"/>
                         <pin_feature name="drive_strength" value="low"/>
@@ -475,7 +470,6 @@
                   </pin>
                   <pin peripheral="I2C0" signal="SCL" pin_num="31" pin_signal="ADC0_SE17/PTE24/UART4_TX/I2C0_SCL/EWM_OUT_b">
                      <pin_features>
-                        <pin_feature name="identifier" value="ACCEL_SCL"/>
                         <pin_feature name="slew_rate" value="fast"/>
                         <pin_feature name="open_drain" value="enable"/>
                         <pin_feature name="drive_strength" value="low"/>
@@ -1029,11 +1023,11 @@
                      </config_set>
                   </instance>
                   <instance name="BLUETOOTH" type="uart" type_id="uart_cd31a12aa8c79051fda42cc851a27c37" mode="interrupts" peripheral="UART4" enabled="true">
-                     <config_set name="uartConfig_t">
+                     <config_set name="uartConfig_t" quick_selection="QuickSelection5">
                         <struct name="uartConfig">
                            <setting name="clockSource" value="BusInterfaceClock"/>
                            <setting name="clockSourceFreq" value="GetFreq"/>
-                           <setting name="baudRate_Bps" value="38400"/>
+                           <setting name="baudRate_Bps" value="9600"/>
                            <setting name="parityMode" value="kUART_ParityDisabled"/>
                            <setting name="stopBitCount" value="kUART_OneStopBit"/>
                            <setting name="txFifoWatermark" value="0"/>
@@ -1056,9 +1050,10 @@
                            <setting name="enable_rx_tx_irq" value="true"/>
                            <struct name="interrupt_rx_tx">
                               <setting name="IRQn" value="UART4_RX_TX_IRQn"/>
-                              <setting name="enable_priority" value="true"/>
-                              <setting name="priority" value="13"/>
-                              <setting name="enable_custom_name" value="false"/>
+                              <setting name="enable_priority" value="false"/>
+                              <setting name="priority" value="0"/>
+                              <setting name="enable_custom_name" value="true"/>
+                              <setting name="handler_custom_name" value="BLUETOOTH_IRQHandler"/>
                            </struct>
                            <setting name="enable_err_irq" value="false"/>
                            <struct name="interrupt_err">
