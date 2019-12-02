@@ -81,3 +81,12 @@ I am currently using cannot be configured in **master mode** and communication b
 Should however receive this module soon so will start implementing it's functionality then. I can still however
 keep trying to get communication going between my phone and the current bluetooth device as reconfiguration of
 the new device shouldn't be too complicated.
+
+#### 02/12/2019  
+Finally got the BT working. It can receive characters from my phone. I have replaced the HC-06 with HC-05  
+and this should allow me to configure it as master so it can communicate with the second device. It should  
+also allow me to restrict access to the connection by specifying exact device the master can connect to. I think  
+that this could reduce the interference from other devices around that might be trying to connect.  
+For some reason I am having problems with PRINTF now working at all. I have tried to use semihosting as well as  
+UART to no avail. Might need to talk to somebody about this as apart from adding the BT I am not aware of any
+other change that could have caused this.
