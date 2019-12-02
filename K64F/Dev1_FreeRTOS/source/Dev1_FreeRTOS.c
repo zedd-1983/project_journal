@@ -108,14 +108,15 @@ void BLUETOOTH_IRQHandler() {
 	PRINTF("\n\rBluetooth Interrupt\n\r");
 #endif
 
-	uint8_t charReceived = 0;
+	static char charReceived = 0;
 
 	if(UART_GetStatusFlags(BLUETOOTH_PERIPHERAL) & kUART_RxDataRegFullFlag) {
 		charReceived = UART_ReadByte(BLUETOOTH_PERIPHERAL);
-		PRINTF("\n\r%c\n\r", charReceived);
-		//putchar(charReceived);
-		LED_BLUE_ON();
+		printf("\n\r%c\n\r", charReceived);
+		printf(&charReceived);
+		puts(&charReceived);
 	}
+}
 //UART_ClearStatusFlags(UART4, kUART_RxDataRegFullFlag);
 //UART_TransferReceiveNonBlocking(UART4, handle, xfer, receivedBytes)
 //	static char buffer[20];
@@ -135,7 +136,7 @@ void BLUETOOTH_IRQHandler() {
 //			count++;
 //	}
 
-}
+//}
 
 void UART0_RX_TX_IRQHandler() {
 
@@ -185,7 +186,7 @@ int main(void) {
     NVIC_EnableIRQ(UART0_RX_TX_IRQn);
 
     UART_EnableInterrupts(BLUETOOTH_PERIPHERAL, kUART_RxDataRegFullInterruptEnable);
-    NVIC_SetPriority(UART4_RX_TX_IRQn, 8);
+    NVIC_SetPriority(UART4_RX_TX_IRQn, 12); // was 8
     NVIC_ClearPendingIRQ(UART4_RX_TX_IRQn);
     NVIC_EnableIRQ(UART4_RX_TX_IRQn);
 

@@ -1038,11 +1038,11 @@
                      </config_set>
                   </instance>
                   <instance name="BLUETOOTH" type="uart" type_id="uart_cd31a12aa8c79051fda42cc851a27c37" mode="interrupts" peripheral="UART4" enabled="true">
-                     <config_set name="uartConfig_t" quick_selection="QuickSelection5">
+                     <config_set name="uartConfig_t">
                         <struct name="uartConfig">
                            <setting name="clockSource" value="BusInterfaceClock"/>
                            <setting name="clockSourceFreq" value="GetFreq"/>
-                           <setting name="baudRate_Bps" value="9600"/>
+                           <setting name="baudRate_Bps" value="38400"/>
                            <setting name="parityMode" value="kUART_ParityDisabled"/>
                            <setting name="stopBitCount" value="kUART_OneStopBit"/>
                            <setting name="txFifoWatermark" value="0"/>
