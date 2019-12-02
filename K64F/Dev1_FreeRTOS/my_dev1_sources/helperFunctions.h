@@ -8,19 +8,19 @@
 #ifndef HELPERFUNCTIONS_H_
 #define HELPERFUNCTIONS_H_
 
-// structures
+/// @brief structure containing variables for storing date
 struct userDate_t {
 	uint16_t year;
 	uint8_t month;
 	uint8_t day;
 };
 
+/// @brief structure containing variables for storing time
 struct userTime_t {
 	uint8_t hour;
 	uint8_t minute;
 };
 
-// functions
 uint8_t getMenuOption();
 void displayMenu();
 void printCurrentTime(RTC_Type *, rtc_datetime_t *);

@@ -11,9 +11,9 @@
 
 //#define NRF_LOG_USES_RTT  1
 
-//struct userDate_t date;
-//struct userTime_t time;
-
+/// @brief function to display user menu
+/// @param none
+/// @return none
 void displayMenu()
 {
 	PRINTF("\n\rMenu\n\r");
@@ -22,6 +22,10 @@ void displayMenu()
 	PRINTF("C\t- configure user time\n\n\r");
 }
 
+/// @brief function to get current time from the RTC structure
+/// @param base pointer to RTC base address
+/// @param datetime pointer to rtc_datetime_t structure
+/// @return none
 void printCurrentTime(RTC_Type * base, rtc_datetime_t* datetime)
 {
 	RTC_GetDatetime(base, datetime );
@@ -35,6 +39,9 @@ void printCurrentTime(RTC_Type * base, rtc_datetime_t* datetime)
 			);
 }
 
+/// @brief function to configure RTC alarm
+/// @param secIncrement sets alarm to number of seconds from function call
+/// @return none
 void configureAlarm(uint32_t secIncrement)
 {
 			// configure alarm
@@ -44,6 +51,10 @@ void configureAlarm(uint32_t secIncrement)
 			RTC->TAR = currSec;
 }
 
+/// @brief function to get current alarm time from the RTC structure
+/// @param base pointer to RTC base address
+/// @param datetime pointer to rtc_datetime_t structure
+/// @return none
 void displayAlarmTime(RTC_Type* base, rtc_datetime_t* datetime)
 {
 		RTC_GetAlarm(base, datetime);
@@ -58,6 +69,9 @@ void displayAlarmTime(RTC_Type* base, rtc_datetime_t* datetime)
 				);
 }
 
+/// @brief polling method to get user selected menu option
+/// @param none
+/// @return uint8_t
 uint8_t getMenuOption()
 {
 	char ch;
@@ -68,6 +82,9 @@ uint8_t getMenuOption()
 	return ch;
 }
 
+/// @brief function that converts date from user input to userDate_t structure
+/// @param stringDate user input
+/// @return struct userDate_t
 struct userDate_t getDate(char* stringDate)
 {
 	struct userDate_t date = {};
@@ -82,6 +99,9 @@ struct userDate_t getDate(char* stringDate)
 	return date;
 }
 
+/// @brief function that converts time from user input to userTime_t structure
+/// @param stringTime user input
+/// @return struct userTime_t
 struct userTime_t getTime(char* stringTime)
 {
 	struct userTime_t time;

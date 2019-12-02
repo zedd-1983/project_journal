@@ -78,12 +78,11 @@ void PORTA_IRQHandler()
 	portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 }
 
-/*
- * @brief - RTC interrupt that sets flag when an alarm interrupt occurs. Currently gets
- * 			set to 10s after moisture detection but in actual run would be set to occur
- * 			approx 23 hours 45 mins later to try to make the child/person more aware/awake
- * @param - none
-*/
+/// @brief RTC interrupt that sets flag when an alarm interrupt occurs. Currently gets
+/// @details set to 10s after moisture detection but in actual run would be set to occur
+/// approx 23 hours 45 mins later to try to make the child/person more aware/awake
+/// @param - none
+
 void RTC_1_COMMON_IRQHANDLER()
 {
 #ifdef INTERRUPT_MESSAGES
@@ -99,10 +98,11 @@ void RTC_1_COMMON_IRQHANDLER()
 	}
 }
 
-// Bluetooth handler (UART4)
-// RX - PTC14
-// TX - PTC15
-// Priority - 8
+
+/// @brief BlueTooth IRQ Handler (UART4) for managing interrupts from Bluetooth module
+/// @note  RX - PTC14, TX - PTC15, 38400,8,N,1 , priority 8
+/// @param none
+
 void BLUETOOTH_IRQHandler() {
 #ifdef INTERRUPT_MESSAGES
 	PRINTF("\n\rBluetooth Interrupt\n\r");
@@ -117,26 +117,6 @@ void BLUETOOTH_IRQHandler() {
 		puts(&charReceived);
 	}
 }
-//UART_ClearStatusFlags(UART4, kUART_RxDataRegFullFlag);
-//UART_TransferReceiveNonBlocking(UART4, handle, xfer, receivedBytes)
-//	static char buffer[20];
-//	static uint8_t count = 0;
-//	const uint8_t data[2] = {'A', 'T'};
-//
-//	UART_WriteBlocking(UART4, data, 3);
-//	//UART_WriteByte(UART4, 'A');
-//
-//	if(UART_GetStatusFlags(UART4) & kUART_RxDataRegFullFlag)
-//	{
-//		buffer[count] = UART_ReadByte(UART4);
-//		if (buffer[count] == '\r') {
-//			for(int i = 0; i < 20; i++ )
-//				PRINTF("%s", buffer);
-//		} else
-//			count++;
-//	}
-
-//}
 
 void UART0_RX_TX_IRQHandler() {
 
