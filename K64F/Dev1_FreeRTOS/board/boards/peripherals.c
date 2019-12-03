@@ -153,14 +153,14 @@ instance:
         - IRQn: 'UART4_RX_TX_IRQn'
         - enable_priority: 'false'
         - priority: '0'
-        - enable_custom_name: 'true'
-        - handler_custom_name: 'BLUETOOTH_IRQHandler'
+        - enable_custom_name: 'false'
       - enable_err_irq: 'false'
       - interrupt_err:
         - IRQn: 'UART4_ERR_IRQn'
         - enable_priority: 'false'
         - priority: '0'
         - enable_custom_name: 'false'
+    - quick_selection: 'QuickSelection1'
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/
 /* clang-format on */
 const uart_config_t BLUETOOTH_config = {

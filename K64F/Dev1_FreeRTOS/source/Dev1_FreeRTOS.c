@@ -170,10 +170,10 @@ int main(void) {
     NVIC_ClearPendingIRQ(UART0_RX_TX_IRQn);
     NVIC_EnableIRQ(UART0_RX_TX_IRQn);
 
-    UART_EnableInterrupts(BLUETOOTH_PERIPHERAL, kUART_RxDataRegFullInterruptEnable);
-    NVIC_SetPriority(UART4_RX_TX_IRQn, 12); // was 8
-    NVIC_ClearPendingIRQ(UART4_RX_TX_IRQn);
-    NVIC_EnableIRQ(UART4_RX_TX_IRQn);
+//    UART_EnableInterrupts(BLUETOOTH_PERIPHERAL, kUART_RxDataRegFullInterruptEnable);
+//    NVIC_SetPriority(UART4_RX_TX_IRQn, 12); // was 8
+//    NVIC_ClearPendingIRQ(UART4_RX_TX_IRQn);
+//    NVIC_EnableIRQ(UART4_RX_TX_IRQn);
 
     NVIC_SetPriority(BOARD_SW3_IRQ, 10);
     NVIC_ClearPendingIRQ(BOARD_SW3_IRQ);

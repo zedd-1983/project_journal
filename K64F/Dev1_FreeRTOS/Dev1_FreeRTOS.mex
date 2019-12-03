@@ -1052,7 +1052,7 @@
                            <setting name="enableRx" value="true"/>
                         </struct>
                      </config_set>
-                     <config_set name="interruptsCfg">
+                     <config_set name="interruptsCfg" quick_selection="QuickSelection1">
                         <set name="interrupts">
                            <selected>
                               <id>kUART_TxDataRegEmptyInterruptEnable</id>
@@ -1067,8 +1067,7 @@
                               <setting name="IRQn" value="UART4_RX_TX_IRQn"/>
                               <setting name="enable_priority" value="false"/>
                               <setting name="priority" value="0"/>
-                              <setting name="enable_custom_name" value="true"/>
-                              <setting name="handler_custom_name" value="BLUETOOTH_IRQHandler"/>
+                              <setting name="enable_custom_name" value="false"/>
                            </struct>
                            <setting name="enable_err_irq" value="false"/>
                            <struct name="interrupt_err">
@@ -1093,6 +1092,17 @@
                            <setting name="idleType" value="kUART_IdleTypeStartBit"/>
                            <setting name="enableTx" value="true"/>
                            <setting name="enableRx" value="true"/>
+                        </struct>
+                     </config_set>
+                  </instance>
+                  <instance name="GPIO_1" type="gpio" type_id="gpio_be9de87e5addb6b0f416d9acbab34797" mode="GPIO" peripheral="GPIOC" enabled="false">
+                     <config_set name="fsl_gpio" quick_selection="QS_GPIO_1">
+                        <setting name="enable_irq" value="false"/>
+                        <struct name="port_interrupt">
+                           <setting name="IRQn" value="PORTC_IRQn"/>
+                           <setting name="enable_priority" value="false"/>
+                           <setting name="priority" value="0"/>
+                           <setting name="enable_custom_name" value="false"/>
                         </struct>
                      </config_set>
                   </instance>
