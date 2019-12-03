@@ -4,15 +4,22 @@
  *  Created on: 5 Oct 2019
  *      Author: zedd
  */
-#include "board.h"
-#include "fsl_debug_console.h"
+
+// FreeRTOS
 #include "FreeRTOS.h"
 #include "semphr.h"
+
+// K64F
+#include "board.h"
+#include "fsl_debug_console.h"
 #include "pin_mux.h"
 #include "peripherals.h"
 #include "fsl_rtc.h"
+
+// My headers
 #include "helperFunctions.h"
 #include "timeKeeping.h"
+#include "bluetooth.h"
 #include "SEGGER_RTT.h"
 
 extern bool busyWait;
@@ -33,6 +40,12 @@ void mainTask(void* pvParameters)
 	for(;;)
 	{
 		printCurrentTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
+
+		// check BT for incoming character
+		if(kUART_RxDataRegFullFlag & UART_GetStatusFlags(BLUETOOTH_PERIPHERAL)) {
+			uint8_t btChar = UART_ReadByte(BLUETOOTH_PERIPHERAL);
+			xTaskCreate(btTask, "BT task", configMINIMAL_STACK_SIZE + 50, &btChar, 5, NULL);
+		}
 
 		if(xSemaphoreTake(moistureDetectionSemphr, 0))
 		{

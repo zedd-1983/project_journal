@@ -37,7 +37,6 @@ void userTimeConfig(void* pvParameters)
 
 			RTC_StopTimer(RTC);
 
-			// get the new time
 			PRINTF("\n\rEnter new date [min val 1970-01-01] in format YYYY-MM-DD: ");
 			SCANF("%s", stringDate);
 

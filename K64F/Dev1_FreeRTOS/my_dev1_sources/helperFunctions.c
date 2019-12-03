@@ -29,7 +29,7 @@ void displayMenu()
 void printCurrentTime(RTC_Type * base, rtc_datetime_t* datetime)
 {
 	RTC_GetDatetime(base, datetime );
-	PRINTF("\rDate: %04hd-%02hd-%02hd Time: %02hd-%02hd-%02hd",
+	PRINTF("\rDate: %04d-%02d-%02d Time: %02d:%02d:%02d",
 			datetime->year,
 			datetime->month,
 			datetime->day,
@@ -58,7 +58,6 @@ void configureAlarm(uint32_t secIncrement)
 void displayAlarmTime(RTC_Type* base, rtc_datetime_t* datetime)
 {
 		RTC_GetAlarm(base, datetime);
-		//SEGGER_RTT_SetTerminal(rttTerminalId);
 		PRINTF("\n\rAlarm will occur at: %04hd-%02hd-%02hd %02hd:%02hd:%02hd\n\r",
 				datetime->year,
 				datetime->month,
@@ -111,4 +110,10 @@ struct userTime_t getTime(char* stringTime)
 
 	return time;
 }
+
+
+
+
+
+
 

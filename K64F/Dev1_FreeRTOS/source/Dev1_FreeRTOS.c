@@ -25,6 +25,7 @@
 TaskHandle_t mainTaskHandle = NULL;
 TaskHandle_t terminalTaskHandle = NULL;
 TaskHandle_t userTimeConfigHandle = NULL;
+//TaskHandle_t btTaskHandle = NULL;
 SemaphoreHandle_t moistureDetectionSemphr = NULL;
 SemaphoreHandle_t alarmSemphr = NULL;
 SemaphoreHandle_t setAlarmSemphr = NULL;
@@ -32,6 +33,7 @@ SemaphoreHandle_t userTimeConfigSemphr = NULL;
 
 //static void terminalTask(void*);
 //void configureTime(void*);
+//void btTask(void*);
 
 // variables
 bool busyWait = false;
@@ -99,20 +101,20 @@ void RTC_1_COMMON_IRQHANDLER()
 /// @brief BlueTooth IRQ Handler (UART4) for managing interrupts from Bluetooth module
 /// @note rx - PTC14, tx - PTC15
 /// @note 38400,8,N,1 , priority 8
-void BLUETOOTH_IRQHandler() {
-#ifdef INTERRUPT_MESSAGES
-	PRINTF("\n\rBluetooth Interrupt\n\r");
-#endif
-
-	static char charReceived = 0;
-
-	if(UART_GetStatusFlags(BLUETOOTH_PERIPHERAL) & kUART_RxDataRegFullFlag) {
-		charReceived = UART_ReadByte(BLUETOOTH_PERIPHERAL);
-		printf("\n\r%c\n\r", charReceived);
-		printf(&charReceived);
-		puts(&charReceived);
-	}
-}
+//void BLUETOOTH_IRQHandler() {
+//#ifdef INTERRUPT_MESSAGES
+//	PRINTF("\n\rBluetooth Interrupt\n\r");
+//#endif
+//
+//	static char charReceived = 0;
+//
+//	if(UART_GetStatusFlags(BLUETOOTH_PERIPHERAL) & kUART_RxDataRegFullFlag) {
+//		charReceived = UART_ReadByte(BLUETOOTH_PERIPHERAL);
+//		printf("\n\r%c\n\r", charReceived);
+//		printf(&charReceived);
+//		puts(&charReceived);
+//	}
+//}
 
 /// @brief UART0 IRQ Handler
 /// @details interrupt handler for UART0 used to get user input from
@@ -187,6 +189,11 @@ int main(void) {
     	PRINTF("\r\nFailed to start \"Main Task\"\r\n");
     }
 
+//    if(xTaskCreate(btTask, "BlueTooth Task", configMINIMAL_STACK_SIZE + 50, NULL, 3, &btTaskHandle) == pdFALSE)
+//    {
+//    	PRINTF("\r\nFailed to start \"Bluetooth Task\"\r\n");
+//    }
+
     moistureDetectionSemphr = xSemaphoreCreateBinary();
     userTimeConfigSemphr = xSemaphoreCreateBinary();
 
@@ -194,3 +201,19 @@ int main(void) {
 
     return 0;
 }
+
+//void btTask(void* pvParameters)
+//{
+//	PRINTF("\n\rBT task\n\r");
+//	char charReceived = 'a';
+//
+//	for(;;)
+//	{
+//		if(kUART_RxDataRegFullFlag & UART_GetStatusFlags(BLUETOOTH_PERIPHERAL))
+//			charReceived = UART_ReadByte(BLUETOOTH_PERIPHERAL);
+//
+//		PRINTF("\n\r%c\n\r", charReceived);
+//
+//		vTaskDelay(pdMS_TO_TICKS(1000));
+//	}
+//}
