@@ -1,0 +1,4 @@
+<map id="userTimeConfig" name="userTimeConfig">
+<area shape="rect" id="node2" href="$helperFunctions_8c.html#ac285ec53171e96380442e5017b95bcb6" title="function that converts date from user input to userDate_t structure " alt="" coords="169,5,237,32"/>
+<area shape="rect" id="node3" href="$helperFunctions_8c.html#a0930fa846b9c2ce7a32c583bc27d9813" title="function that converts time from user input to userTime_t structure " alt="" coords="168,56,237,83"/>
+</map>

@@ -21,6 +21,11 @@ extern SemaphoreHandle_t userTimeConfigSemphr;
 extern TaskHandle_t userTimeConfigHandle;
 extern rtc_datetime_t RTC_1_dateTimeStruct;
 
+/// @brief FreeRTOS main task
+/// @details this task displays menu and if it receives semaphore from SW3 creates
+/// another task for configuration of date and time. If moisture is detected (SW2)
+/// semaphore is given from an interrupt to the main task to configure the alarm
+/// (currently set to 10s)
 void mainTask(void* pvParameters)
 {
 	displayMenu();

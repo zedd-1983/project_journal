@@ -15,14 +15,13 @@
 #include "fsl_debug_console.h"
 #include "fsl_uart.h"
 #include "SEGGER_RTT.h"
-/* TODO: insert other include files here. */
+
 #include "moistureDetection.h"
 #include "helperFunctions.h"
 #include "timeKeeping.h"
 #include "task.h"
 #include "semphr.h"
 
-/* TODO: insert other definitions and declarations here. */
 TaskHandle_t mainTaskHandle = NULL;
 TaskHandle_t terminalTaskHandle = NULL;
 TaskHandle_t userTimeConfigHandle = NULL;
@@ -32,22 +31,19 @@ SemaphoreHandle_t setAlarmSemphr = NULL;
 SemaphoreHandle_t userTimeConfigSemphr = NULL;
 
 //static void terminalTask(void*);
-void configureTime(void*);
+//void configureTime(void*);
 
 // variables
 bool busyWait = false;
 
 #define INTERRUPT_MESSAGES 1
 
-/* TODO: interrupts */
-/*
- * @brief -	this interrupt will simulate interrupt received from moisture detection
- * 			device. Eventually the switch will be replaced by this device. It should
- * 			pass a semaphore to moisture detection task that will request current
- * 			time from timekeeping task and assemble a message that will be transmitted
- * 			via BT to the other K64F
- * @param - none
-*/
+/// @brief moisture detection external interrupt (SW2)
+/// @details this interrupt simulates interrupt received from moisture detection
+/// device. Eventually the switch will be replaced by this device. It should
+/// pass a semaphore to moisture detection task that will request current
+/// time from timekeeping task and assemble a message that will be transmitted
+/// via BT to the other K64F
 void PORTC_IRQHandler()
 {
 #ifdef INTERRUPT_MESSAGES
@@ -62,6 +58,9 @@ void PORTC_IRQHandler()
 	portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 }
 
+/// @brief time configuration interrupt (SW3)
+/// @details external interrupt (SW3) that gives semaphore to main task to create
+/// userTimeConfig task
 void PORTA_IRQHandler()
 {
 #ifdef INTERRUPT_MESSAGES
@@ -70,7 +69,6 @@ void PORTA_IRQHandler()
 
 	static BaseType_t xHigherPriorityTaskWoken;
 
-	// clear pending bits
 	GPIO_PortClearInterruptFlags(BOARD_SET_AL_GPIO, 1 << BOARD_SET_AL_PIN);
 	PRINTF("\r\nTime configuration (in ISR)\r\n");
 	xHigherPriorityTaskWoken = pdFALSE;
@@ -78,11 +76,10 @@ void PORTA_IRQHandler()
 	portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 }
 
-/// @brief RTC interrupt that sets flag when an alarm interrupt occurs. Currently gets
-/// @details set to 10s after moisture detection but in actual run would be set to occur
-/// approx 23 hours 45 mins later to try to make the child/person more aware/awake
-/// @param - none
-
+/// @brief RTC interrupt that sets flag when an alarm interrupt occurs.
+/// @details Currently gets set to 10s after moisture detection but in actual run
+/// would be set to occur approx 23 hours 45 mins later to try to make the
+/// child/person more aware/awake
 void RTC_1_COMMON_IRQHANDLER()
 {
 #ifdef INTERRUPT_MESSAGES
@@ -100,9 +97,8 @@ void RTC_1_COMMON_IRQHANDLER()
 
 
 /// @brief BlueTooth IRQ Handler (UART4) for managing interrupts from Bluetooth module
-/// @note  RX - PTC14, TX - PTC15, 38400,8,N,1 , priority 8
-/// @param none
-
+/// @note rx - PTC14, tx - PTC15
+/// @note 38400,8,N,1 , priority 8
 void BLUETOOTH_IRQHandler() {
 #ifdef INTERRUPT_MESSAGES
 	PRINTF("\n\rBluetooth Interrupt\n\r");
@@ -118,6 +114,10 @@ void BLUETOOTH_IRQHandler() {
 	}
 }
 
+/// @brief UART0 IRQ Handler
+/// @details interrupt handler for UART0 used to get user input from
+/// the menu displayed by the main task
+/// @return void
 void UART0_RX_TX_IRQHandler() {
 
 	uint8_t charReceived;
@@ -141,7 +141,12 @@ void UART0_RX_TX_IRQHandler() {
 	}
 }
 
-
+/// @brief Main function
+/// @details K64F hardware is initialized through this function, IRQs are
+/// enabled in NVIC and FreeRTOS mainTask is started.
+/// A number of semaphores are created as well
+/// @param void
+/// @return int
 int main(void) {
 
 	// enable cycle counter for SYSTEMVIEW
@@ -154,8 +159,8 @@ int main(void) {
   	/* Init FSL debug console. */
     BOARD_InitDebugConsole();
 
-    PRINTF("Apprlication Start\n\r");
-    // enable interrupts in NVIC
+    PRINTF("Application Start\n\r");
+
     NVIC_SetPriority(BOARD_SW2_IRQ, 10);
     NVIC_ClearPendingIRQ(BOARD_SW2_IRQ);
     NVIC_EnableIRQ(BOARD_SW2_IRQ);
@@ -174,18 +179,6 @@ int main(void) {
     NVIC_ClearPendingIRQ(BOARD_SW3_IRQ);
     NVIC_EnableIRQ(BOARD_SW3_IRQ);
 
-//    char* message = "AT";
-//    uint8_t buffer[2];
-//    UART_WriteBlocking(UART4, (uint8_t*)message, 3);
-//    UART_ReadBlocking(UART4, buffer, 2);
-//
-//    for(int i = 0; i < 2; i++)
-//    	PRINTF("%c", buffer[i]);
-
-//    if(UART_GetStatuFlags(UART4) & kUART_RxDataRegFullFlag) {
-//    	ch = UART_ReadByte(UART4);
-//    }
-    // start recording
     SEGGER_SYSVIEW_Conf();
     SEGGER_SYSVIEW_Start();
 
@@ -194,11 +187,6 @@ int main(void) {
     	PRINTF("\r\nFailed to start \"Main Task\"\r\n");
     }
 
-//    if(xTaskCreate(terminalTask, "Terminal Task", configMINIMAL_STACK_SIZE + 50, NULL, 2, &terminalTaskHandle) == pdFALSE)
-//    {
-//    	PRINTF("\r\nFailed to start \"Terminal Task\"\r\n");
-//    }
-
     moistureDetectionSemphr = xSemaphoreCreateBinary();
     userTimeConfigSemphr = xSemaphoreCreateBinary();
 
@@ -206,26 +194,3 @@ int main(void) {
 
     return 0;
 }
-
-//void terminalTask(void* pvParameters)
-//{
-//	for(;;)
-//	{
-//		uint8_t character = '\0';
-//		if(SEGGER_RTT_HasKey())
-//		{
-//			character = SEGGER_RTT_GetKey();
-//			switch(character)
-//			{
-//				case 't':
-//				case 'T': printCurrentTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct); break;
-//				case 'a':
-//				case 'A': displayAlarmTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct); break;
-//				case 'c':
-//				case 'C': xTaskCreate(configureTime, "Time configuration task", configMINIMAL_STACK_SIZE + 50, NULL, 3, NULL);
-//			}
-//		}
-//	vTaskDelay(pdMS_TO_TICKS(100));
-//	}
-//}
-
