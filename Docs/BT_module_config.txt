@@ -1,0 +1,21 @@
+HC-05 (Master)
+
+ADDR: 98d3:36:8117b2
+UART: 38400, 0, 0 (baudrate, 1 stopbit, 0 parity bits)
+ROLE: 1 - master
+INQM: 1, 1, 48
+PSWD: 7777
+
+
+Bind to specific address AT+BIND=<address>
+Most recent connected device 2446:c8:cdb472
+
+--------------------------------------------------------------------
+
+HC-05 (Slave)
+
+ADDR: 98d3:32:204a12
+UART: 38400, 0, 0 (baudrate, 1 stopbit, 0 parity bits)
+ROLE: 0 - slave
+INQM: 1, 1, 48
+PSWD: 5555

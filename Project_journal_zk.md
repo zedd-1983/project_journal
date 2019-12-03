@@ -89,4 +89,12 @@ also allow me to restrict access to the connection by specifying exact device th
 that this could reduce the interference from other devices around that might be trying to connect.  
 For some reason I am having problems with PRINTF now working at all. I have tried to use semihosting as well as  
 UART to no avail. Might need to talk to somebody about this as apart from adding the BT I am not aware of any
-other change that could have caused this.
+other change that could have caused this.  
+
+#### 03/12/2019  
+I have been playing with the BT modules and configured one of them as master and another one as slave with matching  
+UART settings. As BT still doesn't work with my boards I cannot test their connectivity. The only other option is  
+to use two USB-to-TTL devices and connect the BTs to them. This might actually be an good option that could help  
+me to setup these correctly as prior to plugging them to K64Fs. This would ensure that the devices are correctly  
+configured and if there are any errors, they would be most likely in my source code. I also want to restrict   
+the communication to just these two devices by binding their addresses.
