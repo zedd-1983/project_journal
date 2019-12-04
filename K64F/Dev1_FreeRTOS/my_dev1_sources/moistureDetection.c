@@ -25,6 +25,7 @@
 extern bool busyWait;
 extern SemaphoreHandle_t moistureDetectionSemphr;
 extern SemaphoreHandle_t userTimeConfigSemphr;
+extern SemaphoreHandle_t btSemphr;
 extern TaskHandle_t userTimeConfigHandle;
 extern rtc_datetime_t RTC_1_dateTimeStruct;
 
@@ -42,10 +43,10 @@ void mainTask(void* pvParameters)
 		printCurrentTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
 
 		// check BT for incoming character
-		if(kUART_RxDataRegFullFlag & UART_GetStatusFlags(BLUETOOTH_PERIPHERAL)) {
-			uint8_t btChar = UART_ReadByte(BLUETOOTH_PERIPHERAL);
-			xTaskCreate(btTask, "BT task", configMINIMAL_STACK_SIZE + 50, &btChar, 5, NULL);
-		}
+//		if(kUART_RxDataRegFullFlag & UART_GetStatusFlags(BLUETOOTH_PERIPHERAL)) {
+//			uint8_t btChar = UART_ReadByte(BLUETOOTH_PERIPHERAL);
+//			xTaskCreate(btTask, "BT task", configMINIMAL_STACK_SIZE + 50, &btChar, 5, NULL);
+//		}
 
 		if(xSemaphoreTake(moistureDetectionSemphr, 0))
 		{
@@ -68,11 +69,18 @@ void mainTask(void* pvParameters)
 		    }
 		}
 		// trigger alarm, flag is set by an alarm interrupt in RTC_1_COMMON_IRQHANDLER()
-		if(busyWait)
-		{
-			busyWait = false;
-			PRINTF(RTT_CTRL_TEXT_BRIGHT_RED"\n\r************ ALARM **************\n\r"RTT_CTRL_RESET);
+		if(xSemaphoreTake(btSemphr, 0) == pdTRUE) {
+			xTaskCreate(btTask, "BT task", configMINIMAL_STACK_SIZE + 50, NULL, 5, NULL);
 		}
+
+
+
+//		if(busyWait)
+//		{
+//			busyWait = false;
+//
+//			PRINTF(RTT_CTRL_TEXT_BRIGHT_RED"\n\r************ ALARM **************\n\r"RTT_CTRL_RESET);
+//		}
 
 		vTaskDelay(pdMS_TO_TICKS(150));
 

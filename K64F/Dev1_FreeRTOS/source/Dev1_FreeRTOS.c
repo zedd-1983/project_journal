@@ -30,6 +30,7 @@ SemaphoreHandle_t moistureDetectionSemphr = NULL;
 SemaphoreHandle_t alarmSemphr = NULL;
 SemaphoreHandle_t setAlarmSemphr = NULL;
 SemaphoreHandle_t userTimeConfigSemphr = NULL;
+SemaphoreHandle_t btSemphr = NULL;
 
 //static void terminalTask(void*);
 //void configureTime(void*);
@@ -88,15 +89,17 @@ void RTC_1_COMMON_IRQHANDLER()
 	PRINTF("\n\rRTC interrupt\n\r");
 #endif
 
+	BaseType_t xHigherPriorityTaskWoken;
 	uint32_t status = RTC_GetStatusFlags(RTC_1_PERIPHERAL);
 
 	if(status & kRTC_AlarmFlag)
 	{
-		busyWait = true;
 		RTC_ClearStatusFlags(RTC_1_PERIPHERAL, kRTC_AlarmInterruptEnable);
+		xHigherPriorityTaskWoken = pdFALSE;
+		xSemaphoreGiveFromISR(btSemphr, &xHigherPriorityTaskWoken);
+		portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 	}
 }
-
 
 /// @brief BlueTooth IRQ Handler (UART4) for managing interrupts from Bluetooth module
 /// @note rx - PTC14, tx - PTC15
@@ -189,31 +192,11 @@ int main(void) {
     	PRINTF("\r\nFailed to start \"Main Task\"\r\n");
     }
 
-//    if(xTaskCreate(btTask, "BlueTooth Task", configMINIMAL_STACK_SIZE + 50, NULL, 3, &btTaskHandle) == pdFALSE)
-//    {
-//    	PRINTF("\r\nFailed to start \"Bluetooth Task\"\r\n");
-//    }
-
     moistureDetectionSemphr = xSemaphoreCreateBinary();
     userTimeConfigSemphr = xSemaphoreCreateBinary();
+    btSemphr = xSemaphoreCreateBinary();
 
     vTaskStartScheduler();
 
     return 0;
 }
-
-//void btTask(void* pvParameters)
-//{
-//	PRINTF("\n\rBT task\n\r");
-//	char charReceived = 'a';
-//
-//	for(;;)
-//	{
-//		if(kUART_RxDataRegFullFlag & UART_GetStatusFlags(BLUETOOTH_PERIPHERAL))
-//			charReceived = UART_ReadByte(BLUETOOTH_PERIPHERAL);
-//
-//		PRINTF("\n\r%c\n\r", charReceived);
-//
-//		vTaskDelay(pdMS_TO_TICKS(1000));
-//	}
-//}

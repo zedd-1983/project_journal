@@ -7,18 +7,19 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "fsl_debug_console.h"
+#include "fsl_uart.h"
 
 /// @brief FreeRTOS bluetooth task
 /// @param pvParameters a character is passed to this function that will print
 /// it out before deleting itself (eventually on this device this task will send
 /// notification to the other device to start an alarm)
 void btTask(void* pvParameters) {
-	uint8_t* receivedChar;
-	receivedChar = (uint8_t*)pvParameters;
+
+	uint8_t alarmFlag = 1;
 
 	for(;;)
 	{
-		PRINTF("\n\r%c\n\r", *receivedChar);
+		UART_WriteByte(UART4, alarmFlag);
 		vTaskDelete(NULL);
 	}
 }
