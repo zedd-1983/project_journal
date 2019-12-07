@@ -123,28 +123,24 @@ void RTC_1_COMMON_IRQHANDLER()
 /// @details interrupt handler for UART0 used to get user input from
 /// the menu displayed by the main task
 /// @return void
-void UART0_RX_TX_IRQHandler() {
-
-	uint8_t charReceived;
-
-	if(UART_GetStatusFlags(UART0) & kUART_RxDataRegFullFlag)
-	{
-		charReceived = UART_ReadByte(UART0);
-		PRINTF("\n\r%c\n\r");
-
-		switch(charReceived)
-		{
-			case 'T':
-			case 't': printCurrentTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct); break;
-			case 'A':
-			case 'a': displayAlarmTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct); break;
-			case 'C':
-			case 'c': PRINTF("\n\rConfigure user time\n\r"); break;
-			default:
-				PRINTF("\n\rInvalid option\n\r");
-		}
-	}
-}
+//void UART0_RX_TX_IRQHandler() {
+//
+//	uint8_t charReceived = '\0';
+//
+//	if(UART_GetStatusFlags(UART0) & kUART_RxDataRegFullFlag)
+//	{
+//		charReceived = UART_ReadByte(UART0);
+//
+//		if(charReceived != '\0') {
+//			if(charReceived == 't')
+//				printCurrentTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
+//			else if (charReceived == 'a')
+//				displayAlarmTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
+//			else
+//				charReceived = '\0';
+//		}
+//	}
+//}
 
 /// @brief Main function
 /// @details K64F hardware is initialized through this function, IRQs are
@@ -170,10 +166,10 @@ int main(void) {
     NVIC_ClearPendingIRQ(BOARD_SW2_IRQ);
     NVIC_EnableIRQ(BOARD_SW2_IRQ);
 
-    UART_EnableInterrupts(UART0, kUART_RxDataRegFullInterruptEnable);
-    NVIC_SetPriority(UART0_RX_TX_IRQn, 11);
-    NVIC_ClearPendingIRQ(UART0_RX_TX_IRQn);
-    NVIC_EnableIRQ(UART0_RX_TX_IRQn);
+//    UART_EnableInterrupts(UART0, kUART_RxDataRegFullInterruptEnable);
+//    NVIC_SetPriority(UART0_RX_TX_IRQn, 11);
+//    NVIC_ClearPendingIRQ(UART0_RX_TX_IRQn);
+//    NVIC_EnableIRQ(UART0_RX_TX_IRQn);
 
 //    UART_EnableInterrupts(BLUETOOTH_PERIPHERAL, kUART_RxDataRegFullInterruptEnable);
 //    NVIC_SetPriority(UART4_RX_TX_IRQn, 12); // was 8
