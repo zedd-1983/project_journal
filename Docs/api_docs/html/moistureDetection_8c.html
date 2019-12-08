@@ -59,7 +59,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f915005d028a0aab2e890bf5db40d0f8.html">K64F</a></li><li class="navelem"><a class="el" href="dir_a159efd73960f665810d009b9b904f50.html">Dev1_FreeRTOS</a></li><li class="navelem"><a class="el" href="dir_a62e12c1f2294269153b07cae89012b5.html">my_dev1_sources</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_8d86c6bc0bd452c81829404cbe3905f7.html">K64F</a></li><li class="navelem"><a class="el" href="dir_22535613c9ccf6fae87e59c184e38d65.html">Dev1_FreeRTOS</a></li><li class="navelem"><a class="el" href="dir_ef6844c2c753619639c8135476262f40.html">my_dev1_sources</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -70,15 +70,16 @@ $(function() {
 <div class="title">moistureDetection.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;board.h&quot;</code><br />
-<code>#include &quot;fsl_debug_console.h&quot;</code><br />
-<code>#include &quot;FreeRTOS.h&quot;</code><br />
+<div class="textblock"><code>#include &quot;FreeRTOS.h&quot;</code><br />
 <code>#include &quot;semphr.h&quot;</code><br />
+<code>#include &quot;board.h&quot;</code><br />
+<code>#include &quot;fsl_debug_console.h&quot;</code><br />
 <code>#include &quot;pin_mux.h&quot;</code><br />
 <code>#include &quot;peripherals.h&quot;</code><br />
 <code>#include &quot;fsl_rtc.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="helperFunctions_8h_source.html">helperFunctions.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="timeKeeping_8h_source.html">timeKeeping.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="bluetooth_8h_source.html">bluetooth.h</a>&quot;</code><br />
 <code>#include &quot;SEGGER_RTT.h&quot;</code><br />
 </div>
 <p><a href="moistureDetection_8c_source.html">Go to the source code of this file.</a></p>
@@ -97,6 +98,8 @@ Variables</h2></td></tr>
 <tr class="separator:ae689ac0244424aef0765bf8b7b459b7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a200a344532f3c716e483303ad3c2e6fa"><td class="memItemLeft" align="right" valign="top">SemaphoreHandle_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="moistureDetection_8c.html#a200a344532f3c716e483303ad3c2e6fa">userTimeConfigSemphr</a></td></tr>
 <tr class="separator:a200a344532f3c716e483303ad3c2e6fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e2fe13ea40233e59233147a599bf2d8"><td class="memItemLeft" align="right" valign="top">SemaphoreHandle_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="moistureDetection_8c.html#a5e2fe13ea40233e59233147a599bf2d8">btSemphr</a></td></tr>
+<tr class="separator:a5e2fe13ea40233e59233147a599bf2d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad98524447c537416c12313e0ef8e6772"><td class="memItemLeft" align="right" valign="top">TaskHandle_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="moistureDetection_8c.html#ad98524447c537416c12313e0ef8e6772">userTimeConfigHandle</a></td></tr>
 <tr class="separator:ad98524447c537416c12313e0ef8e6772"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3d0c7ef94499a73e26d8c6337758793c"><td class="memItemLeft" align="right" valign="top">rtc_datetime_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="moistureDetection_8c.html#a3d0c7ef94499a73e26d8c6337758793c">RTC_1_dateTimeStruct</a></td></tr>
@@ -122,7 +125,7 @@ Variables</h2></td></tr>
 <p>FreeRTOS main task. </p>
 <p>this task displays menu and if it receives semaphore from SW3 creates another task for configuration of date and time. If moisture is detected (SW2) semaphore is given from an interrupt to the main task to configure the alarm (currently set to 10s) </p>
 
-<p class="definition">Definition at line <a class="el" href="moistureDetection_8c_source.html#l00029">29</a> of file <a class="el" href="moistureDetection_8c_source.html">moistureDetection.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="moistureDetection_8c_source.html#l00037">37</a> of file <a class="el" href="moistureDetection_8c_source.html">moistureDetection.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -142,13 +145,29 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="moistureDetection_8c_ae30ce41ba67c626bf4971733516e382a_icgraph.png" border="0" usemap="#moistureDetection_8c_ae30ce41ba67c626bf4971733516e382a_icgraph" alt=""/></div>
 <map name="moistureDetection_8c_ae30ce41ba67c626bf4971733516e382a_icgraph" id="moistureDetection_8c_ae30ce41ba67c626bf4971733516e382a_icgraph">
-<area shape="rect" id="node2" href="Dev1__FreeRTOS_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="Main function. " alt="" coords="132,5,183,32"/>
+<area shape="rect" id="node2" href="Dev1__FreeRTOS_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="BlueTooth IRQ Handler (UART4) for managing interrupts from Bluetooth module. " alt="" coords="132,5,183,32"/>
 </map>
 </div>
 
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
+<a id="a5e2fe13ea40233e59233147a599bf2d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e2fe13ea40233e59233147a599bf2d8">&#9670;&nbsp;</a></span>btSemphr</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SemaphoreHandle_t btSemphr</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00034">34</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
+
+</div>
+</div>
 <a id="ad87c34c1a035728b77dba6f1deafd536"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad87c34c1a035728b77dba6f1deafd536">&#9670;&nbsp;</a></span>busyWait</h2>
 
@@ -161,7 +180,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00037">37</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00040">40</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
 
 </div>
 </div>
@@ -177,7 +196,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00028">28</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00030">30</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
 
 </div>
 </div>
@@ -223,7 +242,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00031">31</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00033">33</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
 
 </div>
 </div>

@@ -1,0 +1,6 @@
+<map id="main" name="main">
+<area shape="rect" id="node2" href="$Dev2__FreeRTOS_8c.html#a2ba70833db374fa2785fec513d8503c8" title="Main task. " alt="" coords="104,31,211,57"/>
+<area shape="rect" id="node5" href="$Dev2__FreeRTOS_8c.html#a9fa76e18285bfcebe9bb4ece69ccd9bf" title="Bluetooth status task. " alt="" coords="107,81,207,108"/>
+<area shape="rect" id="node3" href="$Dev2__FreeRTOS_8c.html#a65a62f2829f1c3ae1f8562b0648ccaa4" title="Vibration motor task. " alt="" coords="262,5,346,32"/>
+<area shape="rect" id="node4" href="$Dev2__FreeRTOS_8c.html#ab0c202752e6465961ce94a50aa2c4876" title="Buzzer task. " alt="" coords="259,56,349,83"/>
+</map>

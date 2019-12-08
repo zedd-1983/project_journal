@@ -1,5 +1,6 @@
 <map id="main" name="main">
 <area shape="rect" id="node2" href="$moistureDetection_8c.html#ae30ce41ba67c626bf4971733516e382a" title="FreeRTOS main task. " alt="" coords="104,107,183,133"/>
+<area shape="rect" id="node10" href="$Dev1__FreeRTOS_8c.html#a24c34e0b60aa6dd249fa701863feaa25" title="FreeRTOS bluetooth task. " alt="" coords="112,157,175,184"/>
 <area shape="rect" id="node3" href="$helperFunctions_8c.html#a59c2926dd9b0968badf463aaf4f91422" title="function to display user menu " alt="" coords="247,5,341,32"/>
 <area shape="rect" id="node4" href="$helperFunctions_8c.html#a0b06001138496d999b74df4a9b710792" title="function to get current time from the RTC structure " alt="" coords="235,56,353,83"/>
 <area shape="rect" id="node5" href="$helperFunctions_8c.html#ad1f66def208f596daf1a973304681630" title="function to configure RTC alarm " alt="" coords="239,107,349,133"/>
