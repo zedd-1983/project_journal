@@ -1,5 +1,5 @@
 <map id="getTime" name="getTime">
 <area shape="rect" id="node2" href="$timeKeeping_8h.html#adf05e6e7cefade010a247a0b958ce8b5" title="FreeRTOS task for user defined time configuration. " alt="" coords="123,5,237,32"/>
 <area shape="rect" id="node3" href="$moistureDetection_8h.html#a837ef94c8f9b1a6cd374bb02a52e5ac9" title="FreeRTOS main task. " alt="" coords="285,5,364,32"/>
-<area shape="rect" id="node4" href="$Dev1__FreeRTOS_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="BlueTooth IRQ Handler (UART4) for managing interrupts from Bluetooth module. " alt="" coords="412,5,463,32"/>
+<area shape="rect" id="node4" href="$Dev1__FreeRTOS_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="Main function. " alt="" coords="412,5,463,32"/>
 </map>
