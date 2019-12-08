@@ -34,8 +34,6 @@ SemaphoreHandle_t userTimeConfigSemphr = NULL;
 SemaphoreHandle_t btSemphr = NULL;
 uint32_t alarmType;
 
-//static void terminalTask(void*);
-//void configureTime(void*);
 void btTask(void*);
 
 // variables
@@ -165,7 +163,7 @@ void RTC_1_COMMON_IRQHANDLER()
 
 /// @brief Main function
 /// @details K64F hardware is initialized through this function, IRQs are
-/// enabled in NVIC and FreeRTOS mainTask is started.
+/// enabled in NVIC and FreeRTOS mainTask and btTask are started.
 /// A number of semaphores are created as well
 /// @param void
 /// @return int

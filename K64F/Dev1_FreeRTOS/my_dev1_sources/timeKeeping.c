@@ -43,48 +43,13 @@ void userTimeConfig(void* pvParameters)
 
 		for(;;)
 		{
-			//NVIC_DisableIRQ(UART0_RX_TX_IRQn);
-
 			RTC_StopTimer(RTC);
-
-//			PRINTF("\n\rYear: ");
-//			SCANF("%s", year);
-//			newYear = atoi(year);
-//
-//			PRINTF("\n\rMonth: ");
-//			SCANF("%s", month);
-//			newMonth = atoi(month);
-//
-//			PRINTF("\n\rDay: ");
-//			SCANF("%s", day);
-//			newDay = atoi(day);
-//
-//			PRINTF("\n\rHour: ");
-//			SCANF("%s", hour);
-//			newHour = atoi(hour);
-//
-//			PRINTF("\n\rMinute: ");
-//			SCANF("%s", minute);
-//			newMinute = atoi(minute);
 
 			PRINTF("\n\rEnter new date [min val 1970-01-01] in format YYYY-MM-DD: ");
 			SCANF("%s", stringDate);
 
 			// get date from the user input
 			struct userDate_t newDate = getDate(stringDate);
-
-//			newYear = 	((stringTimeDate[0] - 48) * 1000) +
-//						((stringTimeDate[1] - 48) * 100) +
-//						((stringTimeDate[2] - 48) * 10) +
-//						((stringTimeDate[3] - 48));
-//			newMonth =	((stringTimeDate[5] - 48) * 10) +
-//						((stringTimeDate[6] - 48));
-//			newDay =	((stringTimeDate[8] - 48) * 10) +
-//						((stringTimeDate[9] - 48));
-//			newHour =	((stringTimeDate[11] - 48) * 10) +
-//						((stringTimeDate[12] - 48));
-//			newMinute =	((stringTimeDate[14] - 48) * 10) +
-//						((stringTimeDate[15] - 48));
 
 			PRINTF("\n\rNew date: %s", stringDate);
 			newYear = newDate.year;
@@ -108,8 +73,7 @@ void userTimeConfig(void* pvParameters)
 
 			PRINTF("\n\rEnter new time in format HH-MM: ");
 			SCANF("%s", stringTime);
-//			PRINTF("\n");
-//
+
 			struct userTime_t newTime = getTime(stringTime);
 
 			newHour = newTime.hour;
@@ -142,7 +106,6 @@ void userTimeConfig(void* pvParameters)
 			PRINTF("\n\rMinute: %d", RTC_1_dateTimeStruct.minute);
 	#endif
 			RTC_StartTimer(RTC);
-			//NVIC_EnableIRQ(UART0_RX_TX_IRQn);
 			vTaskDelete(NULL);
 		}
 }

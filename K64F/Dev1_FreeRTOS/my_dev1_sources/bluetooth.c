@@ -12,12 +12,13 @@
 extern uint32_t alarmType;
 
 /// @brief FreeRTOS bluetooth task
-/// @param pvParameters a character is passed to this function that will print
-/// it out before deleting itself (eventually on this device this task will send
-/// notification to the other device to start an alarm)
+/// @details bluetooth task responsible for transmission of data to
+/// Dev2. Based on the alarm type received from moisture detection interrupt
+/// and rtc interrupt through task notifications sends appropriate flag to Dev2.
+/// If 1 - notifies Dev2 mainTask to create a motorTask and if 2 - to create a
+/// buzzerTask
 void btTask(void* pvParameters) {
 
-	//uint8_t alarmFlag = 1;
 	uint32_t receivedAlarmType;
 	uint8_t transmitValue;
 
@@ -38,6 +39,5 @@ void btTask(void* pvParameters) {
 		}
 
 		vTaskDelay(pdMS_TO_TICKS(150));
-		//vTaskDelete(NULL);
 	}
 }
