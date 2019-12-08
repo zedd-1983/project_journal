@@ -46,6 +46,20 @@ void BOARD_InitBootPins(void);
 #define BOARD_MD_LED_PIN 22U    /*!<@brief PORTB pin index: 22 */
                                 /* @} */
 
+/*! @name PORTB21 (number 67), D12[3]/LEDRGB_BLUE
+  @{ */
+#define BOARD_BLUE_LED_GPIO GPIOB /*!<@brief GPIO device name: GPIOB */
+#define BOARD_BLUE_LED_PORT PORTB /*!<@brief PORT device name: PORTB */
+#define BOARD_BLUE_LED_PIN 21U    /*!<@brief PORTB pin index: 21 */
+                                  /* @} */
+
+/*! @name PORTB2 (number 55), J4[2]
+  @{ */
+#define BOARD_MOISTURE_SENSOR_GPIO GPIOB /*!<@brief GPIO device name: GPIOB */
+#define BOARD_MOISTURE_SENSOR_PORT PORTB /*!<@brief PORT device name: PORTB */
+#define BOARD_MOISTURE_SENSOR_PIN 2U     /*!<@brief PORTB pin index: 2 */
+                                         /* @} */
+
 /*! @name PORTC14 (number 86), BT_TX
   @{ */
 #define BOARD_BT_TX_PORT PORTC /*!<@brief PORT device name: PORTC */
@@ -57,6 +71,20 @@ void BOARD_InitBootPins(void);
 #define BOARD_BT_RX_PORT PORTC /*!<@brief PORT device name: PORTC */
 #define BOARD_BT_RX_PIN 15U    /*!<@brief PORTC pin index: 15 */
                                /* @} */
+
+/*! @name PORTB9 (number 57), J1[6]
+  @{ */
+#define BOARD_WATER_GPIO GPIOB /*!<@brief GPIO device name: GPIOB */
+#define BOARD_WATER_PORT PORTB /*!<@brief PORT device name: PORTB */
+#define BOARD_WATER_PIN 9U     /*!<@brief PORTB pin index: 9 */
+                               /* @} */
+
+/*! @name PORTC16 (number 90), J1[2]
+  @{ */
+#define BOARD_BT_STATUS_GPIO GPIOC /*!<@brief GPIO device name: GPIOC */
+#define BOARD_BT_STATUS_PORT PORTC /*!<@brief PORT device name: PORTC */
+#define BOARD_BT_STATUS_PIN 16U    /*!<@brief PORTC pin index: 16 */
+                                   /* @} */
 
 /*!
  * @brief Configures pin routing and optionally pin electrical features.

@@ -14,9 +14,9 @@ mcu_data: ksdk2_0
 processor_version: 6.0.1
 board: FRDM-K64F
 pin_labels:
-- {pin_num: '90', pin_signal: PTC16/UART3_RX/ENET0_1588_TMR0/FB_CS5_b/FB_TSIZ1/FB_BE23_16_BLS15_8_b, label: 'J1[2]', identifier: TMR_1588_0}
+- {pin_num: '90', pin_signal: PTC16/UART3_RX/ENET0_1588_TMR0/FB_CS5_b/FB_TSIZ1/FB_BE23_16_BLS15_8_b, label: 'J1[2]', identifier: TMR_1588_0;BT_STATUS}
 - {pin_num: '91', pin_signal: PTC17/UART3_TX/ENET0_1588_TMR1/FB_CS4_b/FB_TSIZ0/FB_BE31_24_BLS7_0_b, label: 'J1[4]', identifier: TMR_1588_1}
-- {pin_num: '57', pin_signal: PTB9/SPI1_PCS1/UART3_CTS_b/FB_AD20, label: 'J1[6]'}
+- {pin_num: '57', pin_signal: PTB9/SPI1_PCS1/UART3_CTS_b/FB_AD20, label: 'J1[6]', identifier: WATER}
 - {pin_num: '35', pin_signal: PTA1/UART0_RX/FTM0_CH6/JTAG_TDI/EZP_DI, label: 'J1[8]'}
 - {pin_num: '69', pin_signal: PTB23/SPI2_SIN/SPI0_PCS5/FB_AD28, label: 'J1[10]'}
 - {pin_num: '36', pin_signal: PTA2/UART0_TX/FTM0_CH7/JTAG_TDO/TRACE_SWO/EZP_DO, label: 'J1[12]/J9[6]/TRACE_SWO'}
@@ -50,7 +50,7 @@ pin_labels:
 - {pin_num: '16', pin_signal: ADC1_DP1, label: 'J4[5]'}
 - {pin_num: '15', pin_signal: ADC0_DM1, label: 'J4[3]'}
 - {pin_num: '14', pin_signal: ADC0_DP1, label: 'J4[1]'}
-- {pin_num: '55', pin_signal: ADC0_SE12/PTB2/I2C0_SCL/UART0_RTS_b/ENET0_1588_TMR0/FTM0_FLT3, label: 'J4[2]', identifier: ADC0_SE12}
+- {pin_num: '55', pin_signal: ADC0_SE12/PTB2/I2C0_SCL/UART0_RTS_b/ENET0_1588_TMR0/FTM0_FLT3, label: 'J4[2]', identifier: ADC0_SE12;MOISTURE_SENSOR}
 - {pin_num: '56', pin_signal: ADC0_SE13/PTB3/I2C0_SDA/UART0_CTS_b/UART0_COL_b/ENET0_1588_TMR1/FTM0_FLT0, label: 'J4[4]'}
 - {pin_num: '58', pin_signal: ADC1_SE14/PTB10/SPI1_PCS0/UART3_RX/FB_AD19/FTM0_FLT1, label: 'J4[6]'}
 - {pin_num: '59', pin_signal: ADC1_SE15/PTB11/SPI1_SCK/UART3_TX/FB_AD18/FTM0_FLT2, label: 'J4[8]'}
@@ -86,7 +86,7 @@ pin_labels:
 - {pin_num: '37', pin_signal: PTA3/UART0_RTS_b/FTM0_CH0/JTAG_TMS/SWD_DIO, label: 'J9[2]/SWD_DIO'}
 - {pin_num: '34', pin_signal: PTA0/UART0_CTS_b/UART0_COL_b/FTM0_CH5/JTAG_TCLK/SWD_CLK/EZP_CLK, label: 'J9[4]/SWD_CLK'}
 - {pin_num: '68', pin_signal: PTB22/SPI2_SOUT/FB_AD29/CMP2_OUT, label: 'D12[1]/LEDRGB_RED', identifier: LED_RED;MD_LED}
-- {pin_num: '67', pin_signal: PTB21/SPI2_SCK/FB_AD30/CMP1_OUT, label: 'D12[3]/LEDRGB_BLUE', identifier: LED_BLUE}
+- {pin_num: '67', pin_signal: PTB21/SPI2_SCK/FB_AD30/CMP1_OUT, label: 'D12[3]/LEDRGB_BLUE', identifier: LED_BLUE;BLUE_LED}
 - {pin_num: '13', pin_signal: VREGIN, label: VREGIN_K64}
 - {pin_num: '29', pin_signal: EXTAL32, label: 'Y3[2]/EXTAL32_RTC', identifier: ETAL32K}
 - {pin_num: '28', pin_signal: XTAL32, label: 'Y3[1]/XTAL32_RTC', identifier: XTAL32K}
@@ -147,8 +147,15 @@ BOARD_InitPins:
   - {pin_num: '38', peripheral: GPIOA, signal: 'GPIO, 4', pin_signal: PTA4/LLWU_P3/FTM0_CH1/NMI_b/EZP_CS_b, identifier: SET_AL, direction: INPUT, gpio_interrupt: kPORT_InterruptFallingEdge,
     pull_select: down}
   - {pin_num: '68', peripheral: GPIOB, signal: 'GPIO, 22', pin_signal: PTB22/SPI2_SOUT/FB_AD29/CMP2_OUT, identifier: MD_LED, direction: OUTPUT, gpio_init_state: 'true'}
+  - {pin_num: '67', peripheral: GPIOB, signal: 'GPIO, 21', pin_signal: PTB21/SPI2_SCK/FB_AD30/CMP1_OUT, identifier: BLUE_LED, direction: OUTPUT, gpio_init_state: 'true'}
+  - {pin_num: '55', peripheral: GPIOB, signal: 'GPIO, 2', pin_signal: ADC0_SE12/PTB2/I2C0_SCL/UART0_RTS_b/ENET0_1588_TMR0/FTM0_FLT3, identifier: MOISTURE_SENSOR,
+    direction: INPUT, gpio_interrupt: kPORT_InterruptFallingEdge, pull_enable: enable}
   - {pin_num: '86', peripheral: UART4, signal: RX, pin_signal: PTC14/UART4_RX/FB_AD25}
   - {pin_num: '87', peripheral: UART4, signal: TX, pin_signal: PTC15/UART4_TX/FB_AD24}
+  - {pin_num: '57', peripheral: GPIOB, signal: 'GPIO, 9', pin_signal: PTB9/SPI1_PCS1/UART3_CTS_b/FB_AD20, direction: INPUT, gpio_interrupt: kPORT_InterruptLogicZero,
+    pull_select: up, pull_enable: enable}
+  - {pin_num: '90', peripheral: GPIOC, signal: 'GPIO, 16', pin_signal: PTC16/UART3_RX/ENET0_1588_TMR0/FB_CS5_b/FB_TSIZ1/FB_BE23_16_BLS15_8_b, identifier: BT_STATUS,
+    direction: INPUT, pull_enable: enable}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 /* clang-format on */
@@ -175,6 +182,27 @@ void BOARD_InitPins(void)
     /* Initialize GPIO functionality on pin PTA4 (pin 38)  */
     GPIO_PinInit(BOARD_SET_AL_GPIO, BOARD_SET_AL_PIN, &SET_AL_config);
 
+    gpio_pin_config_t MOISTURE_SENSOR_config = {
+        .pinDirection = kGPIO_DigitalInput,
+        .outputLogic = 0U
+    };
+    /* Initialize GPIO functionality on pin PTB2 (pin 55)  */
+    GPIO_PinInit(BOARD_MOISTURE_SENSOR_GPIO, BOARD_MOISTURE_SENSOR_PIN, &MOISTURE_SENSOR_config);
+
+    gpio_pin_config_t WATER_config = {
+        .pinDirection = kGPIO_DigitalInput,
+        .outputLogic = 0U
+    };
+    /* Initialize GPIO functionality on pin PTB9 (pin 57)  */
+    GPIO_PinInit(BOARD_WATER_GPIO, BOARD_WATER_PIN, &WATER_config);
+
+    gpio_pin_config_t BLUE_LED_config = {
+        .pinDirection = kGPIO_DigitalOutput,
+        .outputLogic = 1U
+    };
+    /* Initialize GPIO functionality on pin PTB21 (pin 67)  */
+    GPIO_PinInit(BOARD_BLUE_LED_GPIO, BOARD_BLUE_LED_PIN, &BLUE_LED_config);
+
     gpio_pin_config_t MD_LED_config = {
         .pinDirection = kGPIO_DigitalOutput,
         .outputLogic = 1U
@@ -188,6 +216,13 @@ void BOARD_InitPins(void)
     };
     /* Initialize GPIO functionality on pin PTC6 (pin 78)  */
     GPIO_PinInit(BOARD_MD_GPIO, BOARD_MD_PIN, &MD_config);
+
+    gpio_pin_config_t BT_STATUS_config = {
+        .pinDirection = kGPIO_DigitalInput,
+        .outputLogic = 0U
+    };
+    /* Initialize GPIO functionality on pin PTC16 (pin 90)  */
+    GPIO_PinInit(BOARD_BT_STATUS_GPIO, BOARD_BT_STATUS_PIN, &BT_STATUS_config);
 
     /* PORTA2 (pin 36) is configured as TRACE_SWO */
     PORT_SetPinMux(PORTA, 2U, kPORT_MuxAlt7);
@@ -221,14 +256,54 @@ void BOARD_InitPins(void)
                       * corresponding PE field is set. */
                      | PORT_PCR_PS(kPORT_PullDown));
 
+    /* PORTB2 (pin 55) is configured as PTB2 */
+    PORT_SetPinMux(BOARD_MOISTURE_SENSOR_PORT, BOARD_MOISTURE_SENSOR_PIN, kPORT_MuxAsGpio);
+
+    /* Interrupt configuration on PORTB2 (pin 55): Interrupt on falling edge */
+    PORT_SetPinInterruptConfig(BOARD_MOISTURE_SENSOR_PORT, BOARD_MOISTURE_SENSOR_PIN, kPORT_InterruptFallingEdge);
+
+    PORTB->PCR[2] = ((PORTB->PCR[2] &
+                      /* Mask bits to zero which are setting */
+                      (~(PORT_PCR_PE_MASK | PORT_PCR_ISF_MASK)))
+
+                     /* Pull Enable: Internal pullup or pulldown resistor is enabled on the corresponding pin. */
+                     | (uint32_t)(PORT_PCR_PE_MASK));
+
+    /* PORTB21 (pin 67) is configured as PTB21 */
+    PORT_SetPinMux(BOARD_BLUE_LED_PORT, BOARD_BLUE_LED_PIN, kPORT_MuxAsGpio);
+
     /* PORTB22 (pin 68) is configured as PTB22 */
     PORT_SetPinMux(BOARD_MD_LED_PORT, BOARD_MD_LED_PIN, kPORT_MuxAsGpio);
+
+    /* PORTB9 (pin 57) is configured as PTB9 */
+    PORT_SetPinMux(BOARD_WATER_PORT, BOARD_WATER_PIN, kPORT_MuxAsGpio);
+
+    /* Interrupt configuration on PORTB9 (pin 57): Interrupt when logic zero */
+    PORT_SetPinInterruptConfig(BOARD_WATER_PORT, BOARD_WATER_PIN, kPORT_InterruptLogicZero);
+
+    PORTB->PCR[9] = ((PORTB->PCR[9] &
+                      /* Mask bits to zero which are setting */
+                      (~(PORT_PCR_PS_MASK | PORT_PCR_PE_MASK | PORT_PCR_ISF_MASK)))
+
+                     /* Pull Select: Internal pullup resistor is enabled on the corresponding pin, if the
+                      * corresponding PE field is set. */
+                     | (uint32_t)(kPORT_PullUp));
 
     /* PORTC14 (pin 86) is configured as UART4_RX */
     PORT_SetPinMux(BOARD_BT_TX_PORT, BOARD_BT_TX_PIN, kPORT_MuxAlt3);
 
     /* PORTC15 (pin 87) is configured as UART4_TX */
     PORT_SetPinMux(BOARD_BT_RX_PORT, BOARD_BT_RX_PIN, kPORT_MuxAlt3);
+
+    /* PORTC16 (pin 90) is configured as PTC16 */
+    PORT_SetPinMux(BOARD_BT_STATUS_PORT, BOARD_BT_STATUS_PIN, kPORT_MuxAsGpio);
+
+    PORTC->PCR[16] = ((PORTC->PCR[16] &
+                       /* Mask bits to zero which are setting */
+                       (~(PORT_PCR_PE_MASK | PORT_PCR_ISF_MASK)))
+
+                      /* Pull Enable: Internal pullup or pulldown resistor is enabled on the corresponding pin. */
+                      | (uint32_t)(PORT_PCR_PE_MASK));
 
     /* PORTC6 (pin 78) is configured as PTC6 */
     PORT_SetPinMux(BOARD_MD_PORT, BOARD_MD_PIN, kPORT_MuxAsGpio);
@@ -333,8 +408,8 @@ void BOARD_InitButtonsPins(void)
 BOARD_InitLEDsPins:
 - options: {prefix: BOARD_, coreID: core0, enableClock: 'true'}
 - pin_list:
-  - {pin_num: '67', peripheral: GPIOB, signal: 'GPIO, 21', pin_signal: PTB21/SPI2_SCK/FB_AD30/CMP1_OUT, direction: OUTPUT, gpio_init_state: 'true', slew_rate: slow,
-    open_drain: disable, drive_strength: low, pull_select: down, pull_enable: disable, passive_filter: disable}
+  - {pin_num: '67', peripheral: GPIOB, signal: 'GPIO, 21', pin_signal: PTB21/SPI2_SCK/FB_AD30/CMP1_OUT, identifier: LED_BLUE, direction: OUTPUT, gpio_init_state: 'true',
+    slew_rate: slow, open_drain: disable, drive_strength: low, pull_select: down, pull_enable: disable, passive_filter: disable}
   - {pin_num: '68', peripheral: GPIOB, signal: 'GPIO, 22', pin_signal: PTB22/SPI2_SOUT/FB_AD29/CMP2_OUT, identifier: LED_RED, direction: OUTPUT, gpio_init_state: 'true',
     slew_rate: slow, open_drain: disable, drive_strength: low, pull_select: down, pull_enable: disable, passive_filter: disable}
   - {pin_num: '33', peripheral: GPIOE, signal: 'GPIO, 26', pin_signal: PTE26/ENET_1588_CLKIN/UART4_CTS_b/RTC_CLKOUT/USB_CLKIN, direction: OUTPUT, gpio_init_state: 'true',

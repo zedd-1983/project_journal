@@ -25,16 +25,18 @@
 TaskHandle_t mainTaskHandle = NULL;
 TaskHandle_t terminalTaskHandle = NULL;
 TaskHandle_t userTimeConfigHandle = NULL;
-//TaskHandle_t btTaskHandle = NULL;
+TaskHandle_t btTaskHandle = NULL;
+
 SemaphoreHandle_t moistureDetectionSemphr = NULL;
 SemaphoreHandle_t alarmSemphr = NULL;
 SemaphoreHandle_t setAlarmSemphr = NULL;
 SemaphoreHandle_t userTimeConfigSemphr = NULL;
 SemaphoreHandle_t btSemphr = NULL;
+uint32_t alarmType;
 
 //static void terminalTask(void*);
 //void configureTime(void*);
-//void btTask(void*);
+void btTask(void*);
 
 // variables
 bool busyWait = false;
@@ -54,9 +56,11 @@ void PORTC_IRQHandler()
 #endif
 
 	static BaseType_t xHigherPriorityTaskWoken;
+	alarmType = 2;
 
 	GPIO_PortClearInterruptFlags(BOARD_MD_GPIO, 1 << BOARD_MD_PIN);
 	xHigherPriorityTaskWoken = pdFALSE;
+	xTaskNotifyFromISR(btTaskHandle, alarmType, eSetValueWithOverwrite, &xHigherPriorityTaskWoken);
 	xSemaphoreGiveFromISR(moistureDetectionSemphr, &xHigherPriorityTaskWoken);
 	portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 }
@@ -79,6 +83,21 @@ void PORTA_IRQHandler()
 	portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 }
 
+//void PORTB_IRQHandler()
+//{
+//#ifdef INTERRUPT_MESSAGES
+//	PRINTF("\n\rMoisture sensor interrupt\n\r");
+//#endif
+//
+//	BaseType_t xHigherPriorityTaskWoken;
+//	GPIO_PortClearInterruptFlags(BOARD_WATER_GPIO, 1 << BOARD_WATER_PIN);
+//
+//	alarmType = 2;
+//	xHigherPriorityTaskWoken = pdFALSE;
+//	xTaskNotifyFromISR(btTaskHandle, alarmType, eSetValueWithOverwrite, &xHigherPriorityTaskWoken);
+//	portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+//}
+
 /// @brief RTC interrupt that sets flag when an alarm interrupt occurs.
 /// @details Currently gets set to 10s after moisture detection but in actual run
 /// would be set to occur approx 23 hours 45 mins later to try to make the
@@ -96,7 +115,9 @@ void RTC_1_COMMON_IRQHANDLER()
 	{
 		RTC_ClearStatusFlags(RTC_1_PERIPHERAL, kRTC_AlarmInterruptEnable);
 		xHigherPriorityTaskWoken = pdFALSE;
-		xSemaphoreGiveFromISR(btSemphr, &xHigherPriorityTaskWoken);
+		//xSemaphoreGiveFromISR(btSemphr, &xHigherPriorityTaskWoken);
+		alarmType = 1;
+		xTaskNotifyFromISR(btTaskHandle, alarmType, eSetValueWithOverwrite, &xHigherPriorityTaskWoken);
 		portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 	}
 }
@@ -162,9 +183,13 @@ int main(void) {
 
     PRINTF("Application Start\n\r");
 
-    NVIC_SetPriority(BOARD_SW2_IRQ, 10);
+    NVIC_SetPriority(BOARD_SW2_IRQ, 11);
     NVIC_ClearPendingIRQ(BOARD_SW2_IRQ);
     NVIC_EnableIRQ(BOARD_SW2_IRQ);
+
+//    NVIC_SetPriority(PORTB_IRQn, 10);
+//    NVIC_ClearPendingIRQ(PORTB_IRQn);
+//    NVIC_EnableIRQ(PORTB_IRQn);
 
 //    UART_EnableInterrupts(UART0, kUART_RxDataRegFullInterruptEnable);
 //    NVIC_SetPriority(UART0_RX_TX_IRQn, 11);
@@ -186,6 +211,11 @@ int main(void) {
     if(xTaskCreate(mainTask, "Main Task", configMINIMAL_STACK_SIZE + 50, NULL, 2, &mainTaskHandle) == pdFALSE)
     {
     	PRINTF("\r\nFailed to start \"Main Task\"\r\n");
+    }
+
+    if(xTaskCreate(btTask, "BT Task", configMINIMAL_STACK_SIZE + 20, NULL, 2, &btTaskHandle) == pdFALSE)
+    {
+    	PRINTF("\n\rBT Task creation failed\n\r");
     }
 
     moistureDetectionSemphr = xSemaphoreCreateBinary();

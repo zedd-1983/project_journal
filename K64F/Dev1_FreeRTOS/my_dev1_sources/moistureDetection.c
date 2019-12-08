@@ -42,6 +42,14 @@ void mainTask(void* pvParameters)
 	{
 		printCurrentTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
 
+		// check BT status
+		if(GPIO_PinRead(BOARD_BT_STATUS_GPIO, BOARD_BT_STATUS_PIN) == 1)
+			GPIO_PinWrite(BOARD_BLUE_LED_GPIO, BOARD_BLUE_LED_PIN, 0);
+		else
+			GPIO_PortToggle(BOARD_BLUE_LED_GPIO, 1 << BOARD_BLUE_LED_PIN);
+			//GPIO_PinWrite(BOARD_BLUE_LED_GPIO, BOARD_BLUE_LED_PIN, 1);
+
+
 		// check BT for incoming character
 //		if(kUART_RxDataRegFullFlag & UART_GetStatusFlags(BLUETOOTH_PERIPHERAL)) {
 //			uint8_t btChar = UART_ReadByte(BLUETOOTH_PERIPHERAL);
@@ -69,9 +77,9 @@ void mainTask(void* pvParameters)
 		    }
 		}
 		// trigger alarm, flag is set by an alarm interrupt in RTC_1_COMMON_IRQHANDLER()
-		if(xSemaphoreTake(btSemphr, 0) == pdTRUE) {
-			xTaskCreate(btTask, "BT task", configMINIMAL_STACK_SIZE + 50, NULL, 5, NULL);
-		}
+//		if(xSemaphoreTake(btSemphr, 0) == pdTRUE) {
+//			xTaskCreate(btTask, "BT task", configMINIMAL_STACK_SIZE + 50, NULL, 5, NULL);
+//		}
 
 
 
