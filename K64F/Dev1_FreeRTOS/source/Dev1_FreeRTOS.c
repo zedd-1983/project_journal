@@ -120,9 +120,9 @@ void RTC_1_COMMON_IRQHANDLER()
 	}
 }
 
-/// @brief BlueTooth IRQ Handler (UART4) for managing interrupts from Bluetooth module
-/// @note rx - PTC14, tx - PTC15
-/// @note 38400,8,N,1 , priority 8
+// @brief BlueTooth IRQ Handler (UART4) for managing interrupts from Bluetooth module
+// @note rx - PTC14, tx - PTC15
+// @note 38400,8,N,1 , priority 8
 //void BLUETOOTH_IRQHandler() {
 //#ifdef INTERRUPT_MESSAGES
 //	PRINTF("\n\rBluetooth Interrupt\n\r");
@@ -138,10 +138,10 @@ void RTC_1_COMMON_IRQHANDLER()
 //	}
 //}
 
-/// @brief UART0 IRQ Handler
-/// @details interrupt handler for UART0 used to get user input from
-/// the menu displayed by the main task
-/// @return void
+// @brief UART0 IRQ Handler
+// @details interrupt handler for UART0 used to get user input from
+// the menu displayed by the main task
+// @return void
 //void UART0_RX_TX_IRQHandler() {
 //
 //	uint8_t charReceived = '\0';
