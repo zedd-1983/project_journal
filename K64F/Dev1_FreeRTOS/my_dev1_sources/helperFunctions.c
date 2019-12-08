@@ -16,7 +16,7 @@
 /// @return none
 void displayMenu()
 {
-	PRINTF("\n\rMenu\n\r");
+	PRINTF("\n\rMenu [DISABLED]\n\r");
 	PRINTF("\n\rT\t- display time\n\r");
 	PRINTF("A\t- display alarm time\n\r");
 	PRINTF("C\t- configure user time\n\n\r");
@@ -58,7 +58,7 @@ void configureAlarm(uint32_t secIncrement)
 void displayAlarmTime(RTC_Type* base, rtc_datetime_t* datetime)
 {
 		RTC_GetAlarm(base, datetime);
-		PRINTF("\n\rAlarm will occur at: %04hd-%02hd-%02hd %02hd:%02hd:%02hd\n\r",
+		PRINTF("\n\rAlarm will occur at: %04d-%02d-%02d %02d:%02d:%02d\n\r",
 				datetime->year,
 				datetime->month,
 				datetime->day,

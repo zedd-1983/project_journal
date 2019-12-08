@@ -36,7 +36,7 @@ extern rtc_datetime_t RTC_1_dateTimeStruct;
 /// (currently set to 10s)
 void mainTask(void* pvParameters)
 {
-	displayMenu();
+	//displayMenu();
 
 	for(;;)
 	{
@@ -65,7 +65,7 @@ void mainTask(void* pvParameters)
 				vTaskDelay(pdMS_TO_TICKS(150));
 			}
 
-			configureAlarm(10);
+			configureAlarm(20);
 			displayAlarmTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
 
 		}	 // moistureDetectionSemphr

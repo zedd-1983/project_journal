@@ -103,7 +103,7 @@ void userTimeConfig(void* pvParameters)
 			PRINTF("\n\rMonth: %d", RTC_1_dateTimeStruct.month);
 			PRINTF("\n\rDay: %d", RTC_1_dateTimeStruct.day);
 			PRINTF("\n\rHour: %d", RTC_1_dateTimeStruct.hour);
-			PRINTF("\n\rMinute: %d", RTC_1_dateTimeStruct.minute);
+			PRINTF("\n\rMinute: %d\n\n\r", RTC_1_dateTimeStruct.minute);
 	#endif
 			RTC_StartTimer(RTC);
 			vTaskDelete(NULL);

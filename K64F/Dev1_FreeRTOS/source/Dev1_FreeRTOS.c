@@ -179,7 +179,7 @@ int main(void) {
   	/* Init FSL debug console. */
     BOARD_InitDebugConsole();
 
-    PRINTF("Application Start\n\r");
+    PRINTF("\n\n\rApplication Start\n\r");
 
     NVIC_SetPriority(BOARD_SW2_IRQ, 11);
     NVIC_ClearPendingIRQ(BOARD_SW2_IRQ);
