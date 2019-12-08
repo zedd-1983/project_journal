@@ -98,3 +98,13 @@ to use two USB-to-TTL devices and connect the BTs to them. This might actually b
 me to setup these correctly as prior to plugging them to K64Fs. This would ensure that the devices are correctly  
 configured and if there are any errors, they would be most likely in my source code. I also want to restrict   
 the communication to just these two devices by binding their addresses.
+
+#### 08/12/2019
+I have gotten the two BT modules communicating and am able to successfully transmit data from one device to another.
+Both devices have been configured as follows 38400, 8, N, 1 where one of them acts as a master and the other as
+a slave. I had to use two USB-to-TTL devices so I could monitor the connectivity and settings of both BT modules.
+I can notify DEV2 of moisture detection to start a buzzer alarm as well as rtc expiry alarm to start a
+vibration motor task. These need to be acknowledged to stop either of them running indefinitely.  
+I have also added my device 2 repository to github not only as a precaution for loosing my work but also to 
+show my development progress. It is likely that at times there will be no commits in one repository while many 
+in the other and vice versa so it will  be useful to show where my work is.
