@@ -6,14 +6,14 @@ the project is to finalize my project idea, discuss it with my supervisor and fe
 lecturers and write up a proposal to be submitted by Sunday 6th.
 
 
-##### 07/10/2019  
+#### 07/10/2019  
 During my last week I have setup the **MCUXpresso and FreeRTOS** and tested everything compiles
 and works. I have created and submitted the project proposal.
 //Plan for this week is to get SystemView working with K64F to monitor the FreeRTOS and to/
 start working on the moisture detection. This will likely be an external interrupt.
 
 
-##### 14/10/2019  
+#### 14/10/2019  
 I have order two K64F development boards off Brian today along with a **J-Link EDU** debugging
 probe that will help me to monitor the behaviour of the FreeRTOS using **SystemView**. Waiting
 for confirmation from Brian that the order is OK and expected delivery times. I have also 
@@ -22,7 +22,7 @@ the boards at all unfortunately but giving myself this week the get the external
 going and start working on the RTC for timekeeping. Will probably have to talk to Paul or 
 Niall about the design of the FreeRTOS system and it's tasks
 
-##### 25/10/2019   
+#### 25/10/2019   
 Last week I have been working on the development of the software for K64F. I still haven't 
 received any components but at the moment I am not dependent on them. So I got the external
 interrupt working that is suppose to happen when moisture is detected and at the moment
@@ -33,7 +33,7 @@ running into all sorts of errors when I was trying to compile it or include snip
 in my code. Got it working eventually but thinking of re-designing the RTOS as at the moment
 seems somewhat cumbersome.
 
-##### 1/11/2019   
+#### 1/11/2019   
 Since my last contribution to this journal a number of things have happened. I have managed to
 get the **RTC** working using the **Peripheral config tool** of MCUXpresso IDE. This worked fine
 and I did commit my changes to my branch back then. However, upon merging my branch to 
@@ -108,3 +108,26 @@ vibration motor task. These need to be acknowledged to stop either of them runni
 I have also added my device 2 repository to github not only as a precaution for loosing my work but also to 
 show my development progress. It is likely that at times there will be no commits in one repository while many 
 in the other and vice versa so it will  be useful to show where my work is.
+
+#### 12/12/2019
+I've merged the **bluetooth branch** to master and started working on implementing the keypad functionality.  
+I have created a new branch **keypad** for this.   
+<br>
+  
+
+| Keypad pin | Board pin | In/Out |
+|:----------:|:---------:|:------:|
+| D          | PTC0      | In     |
+| E          | PTC7      | In     |
+| F          | PTC5      | In     |
+| G          | PTC9      | Out    |
+| H          | PTC8      | Out    |
+| J          | PTC1      | Out    |
+| K          | PTB19     | Out    |
+
+Currently only some of the buttons on the keypad are working. The setup and the code is the same for each row and  
+column so I suspect that the keypad is broken and some buttons just don't connect the output to input hence the  
+keypress is not detected. Will have to use a battery and a multimeter to check what works.   
+I have created a separate task to work with the keypad and assigned the same priority to it as to the main task and to  
+the btTask. These are now switching in round-robin way. The keypad task seems to be called about 6 times a second so 
+should be fast enough to detect keypress. However, even holding the button down the keypress is not detected on some keys.
