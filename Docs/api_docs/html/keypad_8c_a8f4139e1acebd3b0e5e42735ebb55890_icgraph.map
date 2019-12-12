@@ -1,0 +1,4 @@
+<map id="scanKeypad" name="scanKeypad">
+<area shape="rect" id="node2" href="$keypad_8h.html#a174d387c1ec09eb6bff40b7be519c9f1" title="Task reading values from keypad. " alt="" coords="148,5,241,32"/>
+<area shape="rect" id="node3" href="$Dev1__FreeRTOS_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="Main function. " alt="" coords="289,5,340,32"/>
+</map>

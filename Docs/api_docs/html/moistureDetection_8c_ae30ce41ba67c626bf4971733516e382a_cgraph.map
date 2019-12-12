@@ -1,9 +1,7 @@
 <map id="mainTask" name="mainTask">
-<area shape="rect" id="node2" href="$helperFunctions_8c.html#a59c2926dd9b0968badf463aaf4f91422" title="function to display user menu " alt="" coords="148,5,243,32"/>
-<area shape="rect" id="node3" href="$helperFunctions_8c.html#a0b06001138496d999b74df4a9b710792" title="function to get current time from the RTC structure " alt="" coords="136,56,255,83"/>
-<area shape="rect" id="node4" href="$helperFunctions_8c.html#ad1f66def208f596daf1a973304681630" title="function to configure RTC alarm " alt="" coords="141,107,250,133"/>
-<area shape="rect" id="node5" href="$helperFunctions_8c.html#aa6696aeb75979be788e52121a54f3d52" title="function to get current alarm time from the RTC structure " alt="" coords="132,157,259,184"/>
-<area shape="rect" id="node6" href="$timeKeeping_8c.html#a471c947052edf8148d2da508d403b3d5" title="FreeRTOS task for user defined time configuration. " alt="" coords="138,208,253,235"/>
-<area shape="rect" id="node7" href="$helperFunctions_8c.html#ac285ec53171e96380442e5017b95bcb6" title="function that converts date from user input to userDate_t structure " alt="" coords="307,183,375,209"/>
-<area shape="rect" id="node8" href="$helperFunctions_8c.html#a0930fa846b9c2ce7a32c583bc27d9813" title="function that converts time from user input to userTime_t structure " alt="" coords="307,233,376,260"/>
+<area shape="rect" id="node2" href="$helperFunctions_8c.html#ad1f66def208f596daf1a973304681630" title="function to configure RTC alarm " alt="" coords="141,5,250,32"/>
+<area shape="rect" id="node3" href="$helperFunctions_8c.html#aa6696aeb75979be788e52121a54f3d52" title="function to get current alarm time from the RTC structure " alt="" coords="132,56,259,83"/>
+<area shape="rect" id="node4" href="$timeKeeping_8c.html#a471c947052edf8148d2da508d403b3d5" title="FreeRTOS task for user defined time configuration. " alt="" coords="138,107,253,133"/>
+<area shape="rect" id="node5" href="$helperFunctions_8c.html#ac285ec53171e96380442e5017b95bcb6" title="function that converts date from user input to userDate_t structure " alt="" coords="307,81,375,108"/>
+<area shape="rect" id="node6" href="$helperFunctions_8c.html#a0930fa846b9c2ce7a32c583bc27d9813" title="function that converts time from user input to userTime_t structure " alt="" coords="307,132,376,159"/>
 </map>

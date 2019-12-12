@@ -1,11 +1,11 @@
 <map id="main" name="main">
-<area shape="rect" id="node2" href="$moistureDetection_8c.html#ae30ce41ba67c626bf4971733516e382a" title="FreeRTOS main task. " alt="" coords="104,107,183,133"/>
-<area shape="rect" id="node10" href="$Dev1__FreeRTOS_8c.html#a24c34e0b60aa6dd249fa701863feaa25" title="FreeRTOS bluetooth task. " alt="" coords="112,157,175,184"/>
-<area shape="rect" id="node3" href="$helperFunctions_8c.html#a59c2926dd9b0968badf463aaf4f91422" title="function to display user menu " alt="" coords="247,5,341,32"/>
-<area shape="rect" id="node4" href="$helperFunctions_8c.html#a0b06001138496d999b74df4a9b710792" title="function to get current time from the RTC structure " alt="" coords="235,56,353,83"/>
-<area shape="rect" id="node5" href="$helperFunctions_8c.html#ad1f66def208f596daf1a973304681630" title="function to configure RTC alarm " alt="" coords="239,107,349,133"/>
-<area shape="rect" id="node6" href="$helperFunctions_8c.html#aa6696aeb75979be788e52121a54f3d52" title="function to get current alarm time from the RTC structure " alt="" coords="231,157,357,184"/>
-<area shape="rect" id="node7" href="$timeKeeping_8c.html#a471c947052edf8148d2da508d403b3d5" title="FreeRTOS task for user defined time configuration. " alt="" coords="237,208,351,235"/>
-<area shape="rect" id="node8" href="$helperFunctions_8c.html#ac285ec53171e96380442e5017b95bcb6" title="function that converts date from user input to userDate_t structure " alt="" coords="406,183,474,209"/>
-<area shape="rect" id="node9" href="$helperFunctions_8c.html#a0930fa846b9c2ce7a32c583bc27d9813" title="function that converts time from user input to userTime_t structure " alt="" coords="405,233,475,260"/>
+<area shape="rect" id="node2" href="$moistureDetection_8c.html#ae30ce41ba67c626bf4971733516e382a" title="FreeRTOS main task. " alt="" coords="111,56,190,83"/>
+<area shape="rect" id="node8" href="$Dev1__FreeRTOS_8c.html#a24c34e0b60aa6dd249fa701863feaa25" title="FreeRTOS bluetooth task. " alt="" coords="119,107,182,133"/>
+<area shape="rect" id="node9" href="$keypad_8c.html#a2ef2a9c92b10e34d69cbc0dee697bc21" title="Task reading values from keypad. " alt="" coords="104,157,197,184"/>
+<area shape="rect" id="node3" href="$helperFunctions_8c.html#ad1f66def208f596daf1a973304681630" title="function to configure RTC alarm " alt="" coords="254,5,363,32"/>
+<area shape="rect" id="node4" href="$helperFunctions_8c.html#aa6696aeb75979be788e52121a54f3d52" title="function to get current alarm time from the RTC structure " alt="" coords="245,56,372,83"/>
+<area shape="rect" id="node5" href="$timeKeeping_8c.html#a471c947052edf8148d2da508d403b3d5" title="FreeRTOS task for user defined time configuration. " alt="" coords="251,107,366,133"/>
+<area shape="rect" id="node6" href="$helperFunctions_8c.html#ac285ec53171e96380442e5017b95bcb6" title="function that converts date from user input to userDate_t structure " alt="" coords="421,81,489,108"/>
+<area shape="rect" id="node7" href="$helperFunctions_8c.html#a0930fa846b9c2ce7a32c583bc27d9813" title="function that converts time from user input to userTime_t structure " alt="" coords="420,132,489,159"/>
+<area shape="rect" id="node10" href="$keypad_8c.html#a8f4139e1acebd3b0e5e42735ebb55890" title="Function scans keypad for keys pressed. " alt="" coords="261,157,356,184"/>
 </map>
