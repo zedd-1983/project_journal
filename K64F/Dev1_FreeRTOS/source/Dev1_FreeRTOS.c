@@ -19,6 +19,7 @@
 #include "moistureDetection.h"
 #include "helperFunctions.h"
 #include "timeKeeping.h"
+#include "keypad.h"
 #include "task.h"
 #include "semphr.h"
 
@@ -26,6 +27,7 @@ TaskHandle_t mainTaskHandle = NULL;
 TaskHandle_t terminalTaskHandle = NULL;
 TaskHandle_t userTimeConfigHandle = NULL;
 TaskHandle_t btTaskHandle = NULL;
+TaskHandle_t keypadTaskHandle = NULL;
 
 SemaphoreHandle_t moistureDetectionSemphr = NULL;
 SemaphoreHandle_t alarmSemphr = NULL;
@@ -214,6 +216,11 @@ int main(void) {
     if(xTaskCreate(btTask, "BT Task", configMINIMAL_STACK_SIZE + 20, NULL, 2, &btTaskHandle) == pdFALSE)
     {
     	PRINTF("\n\rBT Task creation failed\n\r");
+    }
+
+    if(xTaskCreate(keypadTask, "Keypad Task", configMINIMAL_STACK_SIZE + 20, NULL, 2, &keypadTaskHandle) == pdFALSE)
+    {
+    	PRINTF("\n\rKeypad Task creation failed\n\r");
     }
 
     moistureDetectionSemphr = xSemaphoreCreateBinary();

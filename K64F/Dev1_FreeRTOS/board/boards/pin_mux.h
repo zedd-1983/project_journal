@@ -86,6 +86,55 @@ void BOARD_InitBootPins(void);
 #define BOARD_BT_STATUS_PIN 16U    /*!<@brief PORTC pin index: 16 */
                                    /* @} */
 
+/*! @name PORTB19 (number 65), J1[3]
+  @{ */
+#define BOARD_KEY_ROW1_GPIO GPIOB /*!<@brief GPIO device name: GPIOB */
+#define BOARD_KEY_ROW1_PORT PORTB /*!<@brief PORT device name: PORTB */
+#define BOARD_KEY_ROW1_PIN 19U    /*!<@brief PORTB pin index: 19 */
+                                  /* @} */
+
+/*! @name PORTC1 (number 71), J1[5]
+  @{ */
+#define BOARD_KEY_ROW2_GPIO GPIOC /*!<@brief GPIO device name: GPIOC */
+#define BOARD_KEY_ROW2_PORT PORTC /*!<@brief PORT device name: PORTC */
+#define BOARD_KEY_ROW2_PIN 1U     /*!<@brief PORTC pin index: 1 */
+                                  /* @} */
+
+/*! @name PORTC8 (number 80), J1[7]
+  @{ */
+#define BOARD_KEY_ROW3_GPIO GPIOC /*!<@brief GPIO device name: GPIOC */
+#define BOARD_KEY_ROW3_PORT PORTC /*!<@brief PORT device name: PORTC */
+#define BOARD_KEY_ROW3_PIN 8U     /*!<@brief PORTC pin index: 8 */
+                                  /* @} */
+
+/*! @name PORTC9 (number 81), J1[9]
+  @{ */
+#define BOARD_KEY_ROW4_GPIO GPIOC /*!<@brief GPIO device name: GPIOC */
+#define BOARD_KEY_ROW4_PORT PORTC /*!<@brief PORT device name: PORTC */
+#define BOARD_KEY_ROW4_PIN 9U     /*!<@brief PORTC pin index: 9 */
+                                  /* @} */
+
+/*! @name PORTC5 (number 77), J1[15]
+  @{ */
+#define BOARD_KEY_COL1_GPIO GPIOC /*!<@brief GPIO device name: GPIOC */
+#define BOARD_KEY_COL1_PORT PORTC /*!<@brief PORT device name: PORTC */
+#define BOARD_KEY_COL1_PIN 5U     /*!<@brief PORTC pin index: 5 */
+                                  /* @} */
+
+/*! @name PORTC7 (number 79), J1[13]
+  @{ */
+#define BOARD_KEY_COL2_GPIO GPIOC /*!<@brief GPIO device name: GPIOC */
+#define BOARD_KEY_COL2_PORT PORTC /*!<@brief PORT device name: PORTC */
+#define BOARD_KEY_COL2_PIN 7U     /*!<@brief PORTC pin index: 7 */
+                                  /* @} */
+
+/*! @name PORTC0 (number 70), J1[11]
+  @{ */
+#define BOARD_KEY_COL3_GPIO GPIOC /*!<@brief GPIO device name: GPIOC */
+#define BOARD_KEY_COL3_PORT PORTC /*!<@brief PORT device name: PORTC */
+#define BOARD_KEY_COL3_PIN 0U     /*!<@brief PORTC pin index: 0 */
+                                  /* @} */
+
 /*!
  * @brief Configures pin routing and optionally pin electrical features.
  *
