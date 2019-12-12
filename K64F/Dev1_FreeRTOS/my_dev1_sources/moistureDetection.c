@@ -40,7 +40,7 @@ void mainTask(void* pvParameters)
 
 	for(;;)
 	{
-		printCurrentTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
+		//printCurrentTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
 
 		// check BT status
 		if(GPIO_PinRead(BOARD_BT_STATUS_GPIO, BOARD_BT_STATUS_PIN) == 1)
