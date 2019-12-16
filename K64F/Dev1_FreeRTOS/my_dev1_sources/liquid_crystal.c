@@ -5,6 +5,8 @@
  *      Author: zedd
  */
 
+#include "FreeRTOS.h"
+#include "task.h"
 #include "liquid_crystal.h"
 #include "board.h"
 
@@ -17,14 +19,13 @@ void lcdTask(void* pvParameters)
 
 	lcd_init();
 
-
 	for(;;)
 	{
 		while(test[l] != '\0')
 		{
 			lcd_data(test[l]);
 			l++;
-			for(int i = 0; i < 1000000; i++);
+			vTaskDelay(pdMS_TO_TICKS(1000));
 		}
 		l = 0;
 	}
@@ -32,32 +33,38 @@ void lcdTask(void* pvParameters)
 
 void lcd_command(unsigned char command)
 {
-	GPIO_PortSet(BOARD_LCD_D4_GPIO, command << D4);
+	GPIO_PortSet(BOARD_LCD_D7_GPIO, command << D7);
 	GPIO_PinWrite(BOARD_LCD_RS_GPIO, RS, 0);
 	GPIO_PinWrite(BOARD_LCD_RW_GPIO, RW, 0);
 	GPIO_PinWrite(BOARD_LCD_EN_GPIO, EN, 1);
-	for(int i = 0; i < 1000000; i++);
+	vTaskDelay(pdMS_TO_TICKS(10));
+//	for(int i = 0; i < 1000000; i++);
 	GPIO_PinWrite(BOARD_LCD_EN_GPIO, EN, 0);
 }
 
 void lcd_data(unsigned char data)
 {
-	GPIO_PortSet(BOARD_LCD_D4_GPIO, data << D4);
+	GPIO_PortSet(BOARD_LCD_D7_GPIO, data << D7);
 	GPIO_PinWrite(BOARD_LCD_RS_GPIO, RS, 1);
 	GPIO_PinWrite(BOARD_LCD_RW_GPIO, RW, 0);
 	GPIO_PinWrite(BOARD_LCD_EN_GPIO, EN, 1);
-	for(int i = 0; i < 1000000; i++);
+	vTaskDelay(pdMS_TO_TICKS(10));
+	//for(int i = 0; i < 1000000; i++);
 	GPIO_PinWrite(BOARD_LCD_EN_GPIO, EN, 0);
 }
 
 void lcd_init()
 {
 	lcd_command(0x28);
-	for(int i = 0; i < 1000000; i++);
+	vTaskDelay(pdMS_TO_TICKS(10));
+	//for(int i = 0; i < 1000000; i++);
 	lcd_command(0x0f);
-	for(int i = 0; i < 1000000; i++);
+	vTaskDelay(pdMS_TO_TICKS(10));
+	//for(int i = 0; i < 1000000; i++);
 	lcd_command(0x01);
-	for(int i = 0; i < 1000000; i++);
+	vTaskDelay(pdMS_TO_TICKS(10));
+	//for(int i = 0; i < 1000000; i++);
 	lcd_command(0x81);
-	for(int i = 0; i < 1000000; i++);
+	vTaskDelay(pdMS_TO_TICKS(10));
+	//for(int i = 0; i < 1000000; i++);
 }
