@@ -20,6 +20,7 @@
 #include "helperFunctions.h"
 #include "timeKeeping.h"
 #include "keypad.h"
+#include "liquid_crystal.h"
 #include "task.h"
 #include "semphr.h"
 
@@ -221,6 +222,11 @@ int main(void) {
     if(xTaskCreate(keypadTask, "Keypad Task", configMINIMAL_STACK_SIZE + 20, NULL, 2, &keypadTaskHandle) == pdFALSE)
     {
     	PRINTF("\n\rKeypad Task creation failed\n\r");
+    }
+
+    if(xTaskCreate(lcdTask, "LCD Task", configMINIMAL_STACK_SIZE + 20, NULL, 4, NULL) == pdFALSE)
+    {
+    	PRINTF("\n\rLCD Task creation failed\n\r");
     }
 
     moistureDetectionSemphr = xSemaphoreCreateBinary();

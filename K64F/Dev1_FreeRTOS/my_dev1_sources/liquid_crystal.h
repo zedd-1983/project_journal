@@ -25,6 +25,9 @@
 #define	TOP_LEFT 			0x80	///< cursor in first row, first position
 #define BOTTOM_LEFT 		0xC0	///< cursor in second row, first position
 
+void lcd_data(unsigned char);
+void lcd_command(unsigned char);
+void lcd_init();
 void lcdTask(void*);
 
 #endif /* LIQUID_CRYSTAL_H_ */
