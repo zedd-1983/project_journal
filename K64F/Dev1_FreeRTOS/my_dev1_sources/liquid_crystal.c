@@ -5,4 +5,14 @@
  *      Author: zedd
  */
 
+#include "liquid_crystal.h"
 
+/// @brief Task that looks after displaying text on an LCD display
+/// @param pvParameters (void*)
+void lcdTask(void* pvParameters)
+{
+	for(;;)
+	{
+
+	}
+}

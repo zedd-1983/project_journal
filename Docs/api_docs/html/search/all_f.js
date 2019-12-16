@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['userdate_5ft',['userDate_t',['../structuserDate__t.html',1,'']]],
-  ['usertime_5ft',['userTime_t',['../structuserTime__t.html',1,'']]],
-  ['usertimeconfig',['userTimeConfig',['../timeKeeping_8c.html#a471c947052edf8148d2da508d403b3d5',1,'userTimeConfig(void *pvParameters):&#160;timeKeeping.c'],['../timeKeeping_8h.html#adf05e6e7cefade010a247a0b958ce8b5',1,'userTimeConfig(void *):&#160;timeKeeping.c']]],
-  ['usertimeconfighandle',['userTimeConfigHandle',['../Dev1__FreeRTOS_8c.html#ad98524447c537416c12313e0ef8e6772',1,'userTimeConfigHandle():&#160;Dev1_FreeRTOS.c'],['../moistureDetection_8c.html#ad98524447c537416c12313e0ef8e6772',1,'userTimeConfigHandle():&#160;Dev1_FreeRTOS.c']]],
-  ['usertimeconfigsemphr',['userTimeConfigSemphr',['../Dev1__FreeRTOS_8c.html#a200a344532f3c716e483303ad3c2e6fa',1,'userTimeConfigSemphr():&#160;Dev1_FreeRTOS.c'],['../moistureDetection_8c.html#a200a344532f3c716e483303ad3c2e6fa',1,'userTimeConfigSemphr():&#160;Dev1_FreeRTOS.c']]]
+  ['scankeypad',['scanKeypad',['../keypad_8c.html#a8f4139e1acebd3b0e5e42735ebb55890',1,'scanKeypad():&#160;keypad.c'],['../keypad_8h.html#a8f4139e1acebd3b0e5e42735ebb55890',1,'scanKeypad():&#160;keypad.c']]],
+  ['semihost_5fhardfault_2ec',['semihost_hardfault.c',['../project__journal_2K64F_2Dev1__FreeRTOS_2source_2semihost__hardfault_8c.html',1,'(Global Namespace)'],['../Dev2__repo_2Dev2__FreeRTOS_2source_2semihost__hardfault_8c.html',1,'(Global Namespace)']]],
+  ['setalarmsemphr',['setAlarmSemphr',['../Dev1__FreeRTOS_8c.html#af4cdabff10d22c39046406e30ad7f68e',1,'setAlarmSemphr():&#160;Dev1_FreeRTOS.c'],['../timeKeeping_8c.html#af4cdabff10d22c39046406e30ad7f68e',1,'setAlarmSemphr():&#160;Dev1_FreeRTOS.c']]],
+  ['show_5fmessages',['SHOW_MESSAGES',['../timeKeeping_8c.html#add97ad4a5fa4bd72f0e0cee6aa5b2d68',1,'timeKeeping.c']]]
 ];

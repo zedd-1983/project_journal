@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['moisturedetection_2ec',['moistureDetection.c',['../moistureDetection_8c.html',1,'']]],
-  ['moisturedetection_2eh',['moistureDetection.h',['../moistureDetection_8h.html',1,'']]]
+  ['liquid_5fcrystal_2ec',['liquid_crystal.c',['../liquid__crystal_8c.html',1,'']]],
+  ['liquid_5fcrystal_2eh',['liquid_crystal.h',['../liquid__crystal_8h.html',1,'']]]
 ];
