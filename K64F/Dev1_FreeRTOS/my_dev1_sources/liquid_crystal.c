@@ -44,7 +44,7 @@ void lcd_command(unsigned char command)
 
 void lcd_data(unsigned char data)
 {
-	GPIO_PortSet(BOARD_LCD_D7_GPIO, data << D7);
+	GPIO_PortSet(GPIOD, data << D7);
 	GPIO_PinWrite(BOARD_LCD_RS_GPIO, RS, 1);
 	GPIO_PinWrite(BOARD_LCD_RW_GPIO, RW, 0);
 	GPIO_PinWrite(BOARD_LCD_EN_GPIO, EN, 1);
