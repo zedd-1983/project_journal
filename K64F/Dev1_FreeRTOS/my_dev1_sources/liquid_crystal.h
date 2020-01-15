@@ -21,6 +21,7 @@
 
 #define MODULE_TYPE 		0x28	///< 16x2, 7x5 matrix display, 4-bit mode
 #define DISP_ON_CURS_OFF 	0x0C	///< Display ON, Cursor OFF
+#define DISP_ON_CURS_BLNK	0x0F	///< Display ON, Cursor Blinking
 #define DISPLAY_CLEAN 		0x01	///< wipe display
 #define	TOP_LEFT 			0x80	///< cursor in first row, first position
 #define BOTTOM_LEFT 		0xC0	///< cursor in second row, first position
@@ -28,6 +29,7 @@
 void lcd_data(unsigned char);
 void lcd_command(unsigned char);
 void lcd_init();
+void lcd_reset();
 void lcdTask(void*);
 
 #endif /* LIQUID_CRYSTAL_H_ */
