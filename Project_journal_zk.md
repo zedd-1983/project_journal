@@ -159,4 +159,12 @@ In this case I have enabled FlexTimer Driver to generate a PWM signal for the bu
 from switching the RTOS task on and off. This was quite straight forward again using the MCUXpresso Config Tool. Currently the   
 frequency is configured to 2000 Hz. I have realized that while trying to get the LCD working on Dev1 I have disabled certain   
 functionality so had no chance to test the Dev2 while connected to Dev1. Instead, I have tried and succeeded in sending commands  
-from my phone via Bluetooth to Dev2 with an appropriate results.
+from my phone via Bluetooth to Dev2 with an appropriate results.  
+
+#### 15/01/2020 
+Still trying to get the lcd going. Following yet another website, trying to convert code written for different micro-controller  
+to one that would work on mine. At some point I even had a cursor on my LCD but that was about everything. Might need to talk to  
+somebody experienced about this.  
+Still thinking which way to approach the project further. The BT I am using is unfortunately only one-to-one communication and I  
+think that using a phone as additional connected device would be nice and effective, however this might mean reworking the project  
+using different BT modules or entirely different technology. Not very keen on that.
