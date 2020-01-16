@@ -169,7 +169,7 @@ BOARD_InitPins:
   - {pin_num: '57', peripheral: GPIOB, signal: 'GPIO, 9', pin_signal: PTB9/SPI1_PCS1/UART3_CTS_b/FB_AD20, identifier: LCD_RS, direction: OUTPUT, pull_select: down,
     pull_enable: disable}
   - {pin_num: '35', peripheral: GPIOA, signal: 'GPIO, 1', pin_signal: PTA1/UART0_RX/FTM0_CH6/JTAG_TDI/EZP_DI, identifier: LCD_RW, direction: OUTPUT, pull_enable: disable}
-  - {pin_num: '69', peripheral: GPIOB, signal: 'GPIO, 23', pin_signal: PTB23/SPI2_SIN/SPI0_PCS5/FB_AD28, direction: OUTPUT}
+  - {pin_num: '69', peripheral: GPIOB, signal: 'GPIO, 23', pin_signal: PTB23/SPI2_SIN/SPI0_PCS5/FB_AD28, direction: OUTPUT, gpio_init_state: 'true', drive_strength: high}
   - {pin_num: '93', peripheral: GPIOD, signal: 'GPIO, 0', pin_signal: PTD0/LLWU_P12/SPI0_PCS0/UART2_RTS_b/FTM3_CH0/FB_ALE/FB_CS1_b/FB_TS_b, direction: OUTPUT}
   - {pin_num: '94', peripheral: GPIOD, signal: 'GPIO, 1', pin_signal: ADC0_SE5b/PTD1/SPI0_SCK/UART2_CTS_b/FTM3_CH1/FB_CS0_b, direction: OUTPUT}
   - {pin_num: '95', peripheral: GPIOD, signal: 'GPIO, 2', pin_signal: PTD2/LLWU_P13/SPI0_SOUT/UART2_RX/FTM3_CH2/FB_AD4/I2C0_SCL, identifier: LCD_D6, direction: OUTPUT}
@@ -246,7 +246,7 @@ void BOARD_InitPins(void)
 
     gpio_pin_config_t LCD_EN_config = {
         .pinDirection = kGPIO_DigitalOutput,
-        .outputLogic = 0U
+        .outputLogic = 1U
     };
     /* Initialize GPIO functionality on pin PTB23 (pin 69)  */
     GPIO_PinInit(BOARD_LCD_EN_GPIO, BOARD_LCD_EN_PIN, &LCD_EN_config);
@@ -401,6 +401,14 @@ void BOARD_InitPins(void)
 
     /* PORTB23 (pin 69) is configured as PTB23 */
     PORT_SetPinMux(BOARD_LCD_EN_PORT, BOARD_LCD_EN_PIN, kPORT_MuxAsGpio);
+
+    PORTB->PCR[23] = ((PORTB->PCR[23] &
+                       /* Mask bits to zero which are setting */
+                       (~(PORT_PCR_DSE_MASK | PORT_PCR_ISF_MASK)))
+
+                      /* Drive Strength Enable: High drive strength is configured on the corresponding pin, if
+                       * pin is configured as a digital output. */
+                      | PORT_PCR_DSE(kPORT_HighDriveStrength));
 
     /* PORTB9 (pin 57) is configured as PTB9 */
     PORT_SetPinMux(BOARD_LCD_RS_PORT, BOARD_LCD_RS_PIN, kPORT_MuxAsGpio);

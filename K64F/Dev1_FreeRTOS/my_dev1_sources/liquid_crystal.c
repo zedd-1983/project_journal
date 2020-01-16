@@ -28,29 +28,65 @@ void lcdTask(void* pvParameters)
 		{
 			lcd_data(test[l]);
 			l++;
-			vTaskDelay(pdMS_TO_TICKS(1000));
 		}
 		l = 0;
+		vTaskDelay(pdMS_TO_TICKS(1000));
 	}
 }
 
 void lcd_command(unsigned char command)
 {
-	GPIO_PortSet(BOARD_LCD_D7_GPIO, ((command >> D4) & 0x0f) | 0x80);
-	GPIO_PortSet(BOARD_LCD_D7_GPIO, ((command >> D4) & 0x0f));
-	GPIO_PortSet(BOARD_LCD_D7_GPIO, (command & 0x0f) | 0x80);
-	GPIO_PortSet(BOARD_LCD_D7_GPIO, (command & 0x0f));
+	GPIO_PinWrite(BOARD_LCD_RS_GPIO, BOARD_LCD_RS_PIN, 0);
+//	GPIO_PortSet(BOARD_LCD_D4_GPIO, ((command >> 4) & 0x0f) | 0x80);
+	GPIO_PortSet(BOARD_LCD_D4_GPIO, ((command >> 4) & 0xff));
+	GPIO_PinWrite(BOARD_LCD_EN_GPIO, BOARD_LCD_EN_PIN, 1);
+	GPIO_PinWrite(BOARD_LCD_EN_GPIO, BOARD_LCD_EN_PIN, 0);
 
+//	GPIO_PortSet(BOARD_LCD_D4_GPIO, ((command >> 4) & 0x0f));
+	GPIO_PortSet(BOARD_LCD_D4_GPIO, ((command >> 4) & 0xff));
+	GPIO_PinWrite(BOARD_LCD_EN_GPIO, BOARD_LCD_EN_PIN, 1);
+	GPIO_PinWrite(BOARD_LCD_EN_GPIO, BOARD_LCD_EN_PIN, 0);
+
+//	GPIO_PortSet(BOARD_LCD_D4_GPIO, (command & 0x0f) | 0x80);
+	GPIO_PortSet(BOARD_LCD_D4_GPIO, (command & 0xff));
+	GPIO_PinWrite(BOARD_LCD_EN_GPIO, BOARD_LCD_EN_PIN, 1);
+	GPIO_PinWrite(BOARD_LCD_EN_GPIO, BOARD_LCD_EN_PIN, 0);
+
+//	GPIO_PortSet(BOARD_LCD_D4_GPIO, (command & 0x0f));
+	GPIO_PortSet(BOARD_LCD_D4_GPIO, (command & 0xff));
+	GPIO_PinWrite(BOARD_LCD_EN_GPIO, BOARD_LCD_EN_PIN, 1);
+	GPIO_PinWrite(BOARD_LCD_EN_GPIO, BOARD_LCD_EN_PIN, 0);
+
+	GPIO_PinWrite(BOARD_LCD_EN_GPIO, BOARD_LCD_EN_PIN, 1);
 	vTaskDelay(pdMS_TO_TICKS(20));
 }
 
 void lcd_data(unsigned char data)
 {
-	GPIO_PortSet(GPIOD, (((data >> D4) & 0x0f) | 0x80 | 0x20));	// set port to data value and EN pin high and RS pin high
-	GPIO_PortSet(GPIOD, (((data >> D4) & 0x0f) | 0x20));		// set port to data value and EN pin low (assuming this is the high/low transition needed)
-	GPIO_PortSet(GPIOD, ((data & 0x0f) | 0x80 | 0x20));			// set port to data value and EN pin high and RS pin high
-	GPIO_PortSet(GPIOD, ((data & 0x0f) | 0x20));				// set port to data value and EN pin low (transition again)
+	GPIO_PinWrite(BOARD_LCD_RS_GPIO, BOARD_LCD_RS_PIN, 1);	// select data register
+//	GPIO_PortSet(GPIOD, (((data >> D4) & 0x0f) | 0x80 | 0x20));	// set port to data value and EN pin high and RS pin high
 
+	GPIO_PortSet(GPIOD, (data >> 4) & 0xff);	// set port to data value and EN pin high and RS pin high
+	GPIO_PinWrite(BOARD_LCD_EN_GPIO, BOARD_LCD_EN_PIN, 1);
+	GPIO_PinWrite(BOARD_LCD_EN_GPIO, BOARD_LCD_EN_PIN, 0);
+
+//	GPIO_PortSet(GPIOD, (((data >> D4) & 0x0f) | 0x20));		// set port to data value and EN pin low (assuming this is the high/low transition needed)
+	GPIO_PortSet(GPIOD, (data >> 4) & 0xff);		// set port to data value and EN pin low (assuming this is the high/low transition needed
+	GPIO_PinWrite(BOARD_LCD_EN_GPIO, BOARD_LCD_EN_PIN, 1);
+	GPIO_PinWrite(BOARD_LCD_EN_GPIO, BOARD_LCD_EN_PIN, 0);
+
+//	GPIO_PortSet(GPIOD, ((data & 0x0f) | 0x80 | 0x20));			// set port to data value and EN pin high and RS pin high
+	GPIO_PortSet(GPIOD, data & 0xff);			// set port to data value and EN pin high and RS pin high
+	GPIO_PinWrite(BOARD_LCD_EN_GPIO, BOARD_LCD_EN_PIN, 1);
+	GPIO_PinWrite(BOARD_LCD_EN_GPIO, BOARD_LCD_EN_PIN, 0);
+
+//	GPIO_PortSet(GPIOD, ((data & 0x0f) | 0x20));				// set port to data value and EN pin low (transition again)
+	GPIO_PortSet(GPIOD, data & 0xff);				// set port to data value and EN pin low (transition again)
+	GPIO_PinWrite(BOARD_LCD_EN_GPIO, BOARD_LCD_EN_PIN, 1);
+	GPIO_PinWrite(BOARD_LCD_EN_GPIO, BOARD_LCD_EN_PIN, 0);
+
+	GPIO_PinWrite(BOARD_LCD_RS_GPIO, BOARD_LCD_RS_PIN, 0);
+	GPIO_PinWrite(BOARD_LCD_EN_GPIO, BOARD_LCD_EN_PIN, 1);
 	vTaskDelay(pdMS_TO_TICKS(20));
 }
 
