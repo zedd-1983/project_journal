@@ -189,6 +189,13 @@ void BOARD_InitBootPins(void);
 #define BOARD_BT2_RX_PIN 17U    /*!<@brief PORTC pin index: 17 */
                                 /* @} */
 
+/*! @name PORTE26 (number 33), J2[1]/D12[4]/LEDRGB_GREEN
+  @{ */
+#define BOARD_GREEN_LED_GPIO GPIOE /*!<@brief GPIO device name: GPIOE */
+#define BOARD_GREEN_LED_PORT PORTE /*!<@brief PORT device name: PORTE */
+#define BOARD_GREEN_LED_PIN 26U    /*!<@brief PORTE pin index: 26 */
+                                   /* @} */
+
 /*!
  * @brief Configures pin routing and optionally pin electrical features.
  *
