@@ -45,7 +45,7 @@ pin_labels:
 - {pin_num: '20', pin_signal: ADC1_DP0/ADC0_DP3, label: 'J2[11]'}
 - {pin_num: '33', pin_signal: PTE26/ENET_1588_CLKIN/UART4_CTS_b/RTC_CLKOUT/USB_CLKIN, label: 'J2[1]/D12[4]/LEDRGB_GREEN', identifier: LED_GREEN;GREEN_LED}
 - {pin_num: '27', pin_signal: DAC0_OUT/CMP1_IN3/ADC0_SE23, label: 'J4[11]', identifier: DAC0_OUT}
-- {pin_num: '66', pin_signal: PTB20/SPI2_PCS0/FB_AD31/CMP0_OUT, label: 'J6[3]/J4[9]/RF_WIFI_CE', identifier: RF_WIFI_CE}
+- {pin_num: '66', pin_signal: PTB20/SPI2_PCS0/FB_AD31/CMP0_OUT, label: 'J6[3]/J4[9]/RF_WIFI_CE', identifier: RF_WIFI_CE;BT2_STATUS}
 - {pin_num: '17', pin_signal: ADC1_DM1, label: 'J4[7]'}
 - {pin_num: '16', pin_signal: ADC1_DP1, label: 'J4[5]'}
 - {pin_num: '15', pin_signal: ADC0_DM1, label: 'J4[3]'}
@@ -152,6 +152,7 @@ BOARD_InitPins:
     direction: INPUT, gpio_interrupt: kPORT_InterruptFallingEdge, pull_enable: enable}
   - {pin_num: '86', peripheral: UART4, signal: RX, pin_signal: PTC14/UART4_RX/FB_AD25}
   - {pin_num: '87', peripheral: UART4, signal: TX, pin_signal: PTC15/UART4_TX/FB_AD24}
+  - {pin_num: '64', peripheral: GPIOB, signal: 'GPIO, 18', pin_signal: PTB18/CAN0_TX/FTM2_CH0/I2S0_TX_BCLK/FB_AD15/FTM2_QD_PHA, direction: INPUT, pull_enable: enable}
   - {pin_num: '65', peripheral: GPIOB, signal: 'GPIO, 19', pin_signal: PTB19/CAN0_RX/FTM2_CH1/I2S0_TX_FS/FB_OE_b/FTM2_QD_PHB, direction: OUTPUT, gpio_init_state: 'false'}
   - {pin_num: '71', peripheral: GPIOC, signal: 'GPIO, 1', pin_signal: ADC0_SE15/PTC1/LLWU_P6/SPI0_PCS3/UART1_RTS_b/FTM0_CH0/FB_AD13/I2S0_TXD0, direction: OUTPUT,
     gpio_init_state: 'false'}
@@ -172,11 +173,11 @@ BOARD_InitPins:
   - {pin_num: '94', peripheral: GPIOD, signal: 'GPIO, 1', pin_signal: ADC0_SE5b/PTD1/SPI0_SCK/UART2_CTS_b/FTM3_CH1/FB_CS0_b, direction: OUTPUT}
   - {pin_num: '95', peripheral: GPIOD, signal: 'GPIO, 2', pin_signal: PTD2/LLWU_P13/SPI0_SOUT/UART2_RX/FTM3_CH2/FB_AD4/I2C0_SCL, identifier: LCD_D6, direction: OUTPUT}
   - {pin_num: '96', peripheral: GPIOD, signal: 'GPIO, 3', pin_signal: PTD3/SPI0_SIN/UART2_TX/FTM3_CH3/FB_AD3/I2C0_SDA, identifier: LCD_D7, direction: OUTPUT}
-  - {pin_num: '64', peripheral: GPIOB, signal: 'GPIO, 18', pin_signal: PTB18/CAN0_TX/FTM2_CH0/I2S0_TX_BCLK/FB_AD15/FTM2_QD_PHA, direction: INPUT, pull_enable: enable}
   - {pin_num: '90', peripheral: UART3, signal: RX, pin_signal: PTC16/UART3_RX/ENET0_1588_TMR0/FB_CS5_b/FB_TSIZ1/FB_BE23_16_BLS15_8_b, identifier: BT2_TX}
   - {pin_num: '91', peripheral: UART3, signal: TX, pin_signal: PTC17/UART3_TX/ENET0_1588_TMR1/FB_CS4_b/FB_TSIZ0/FB_BE31_24_BLS7_0_b, identifier: BT2_RX}
   - {pin_num: '33', peripheral: GPIOE, signal: 'GPIO, 26', pin_signal: PTE26/ENET_1588_CLKIN/UART4_CTS_b/RTC_CLKOUT/USB_CLKIN, identifier: GREEN_LED, direction: OUTPUT,
     gpio_init_state: 'true'}
+  - {pin_num: '66', peripheral: GPIOB, signal: 'GPIO, 20', pin_signal: PTB20/SPI2_PCS0/FB_AD31/CMP0_OUT, identifier: BT2_STATUS, direction: INPUT, pull_enable: enable}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 /* clang-format on */
@@ -241,6 +242,13 @@ void BOARD_InitPins(void)
     };
     /* Initialize GPIO functionality on pin PTB19 (pin 65)  */
     GPIO_PinInit(BOARD_KEY_ROW1_GPIO, BOARD_KEY_ROW1_PIN, &KEY_ROW1_config);
+
+    gpio_pin_config_t BT2_STATUS_config = {
+        .pinDirection = kGPIO_DigitalInput,
+        .outputLogic = 0U
+    };
+    /* Initialize GPIO functionality on pin PTB20 (pin 66)  */
+    GPIO_PinInit(BOARD_BT2_STATUS_GPIO, BOARD_BT2_STATUS_PIN, &BT2_STATUS_config);
 
     gpio_pin_config_t BLUE_LED_config = {
         .pinDirection = kGPIO_DigitalOutput,
@@ -414,6 +422,16 @@ void BOARD_InitPins(void)
 
                      /* Pull Enable: Internal pullup or pulldown resistor is enabled on the corresponding pin. */
                      | (uint32_t)(PORT_PCR_PE_MASK));
+
+    /* PORTB20 (pin 66) is configured as PTB20 */
+    PORT_SetPinMux(BOARD_BT2_STATUS_PORT, BOARD_BT2_STATUS_PIN, kPORT_MuxAsGpio);
+
+    PORTB->PCR[20] = ((PORTB->PCR[20] &
+                       /* Mask bits to zero which are setting */
+                       (~(PORT_PCR_PE_MASK | PORT_PCR_ISF_MASK)))
+
+                      /* Pull Enable: Internal pullup or pulldown resistor is enabled on the corresponding pin. */
+                      | (uint32_t)(PORT_PCR_PE_MASK));
 
     /* PORTB21 (pin 67) is configured as PTB21 */
     PORT_SetPinMux(BOARD_BLUE_LED_PORT, BOARD_BLUE_LED_PIN, kPORT_MuxAsGpio);

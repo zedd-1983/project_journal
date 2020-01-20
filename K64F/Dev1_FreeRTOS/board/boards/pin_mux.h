@@ -72,6 +72,13 @@ void BOARD_InitBootPins(void);
 #define BOARD_BT_RX_PIN 15U    /*!<@brief PORTC pin index: 15 */
                                /* @} */
 
+/*! @name PORTB18 (number 64), J1[1]
+  @{ */
+#define BOARD_BT1_STATUS_GPIO GPIOB /*!<@brief GPIO device name: GPIOB */
+#define BOARD_BT1_STATUS_PORT PORTB /*!<@brief PORT device name: PORTB */
+#define BOARD_BT1_STATUS_PIN 18U    /*!<@brief PORTB pin index: 18 */
+                                    /* @} */
+
 /*! @name PORTB19 (number 65), J1[3]
   @{ */
 #define BOARD_KEY_ROW1_GPIO GPIOB /*!<@brief GPIO device name: GPIOB */
@@ -170,13 +177,6 @@ void BOARD_InitBootPins(void);
 #define BOARD_LCD_D7_PIN 3U     /*!<@brief PORTD pin index: 3 */
                                 /* @} */
 
-/*! @name PORTB18 (number 64), J1[1]
-  @{ */
-#define BOARD_BT1_STATUS_GPIO GPIOB /*!<@brief GPIO device name: GPIOB */
-#define BOARD_BT1_STATUS_PORT PORTB /*!<@brief PORT device name: PORTB */
-#define BOARD_BT1_STATUS_PIN 18U    /*!<@brief PORTB pin index: 18 */
-                                    /* @} */
-
 /*! @name PORTC16 (number 90), J1[2]
   @{ */
 #define BOARD_BT2_TX_PORT PORTC /*!<@brief PORT device name: PORTC */
@@ -195,6 +195,13 @@ void BOARD_InitBootPins(void);
 #define BOARD_GREEN_LED_PORT PORTE /*!<@brief PORT device name: PORTE */
 #define BOARD_GREEN_LED_PIN 26U    /*!<@brief PORTE pin index: 26 */
                                    /* @} */
+
+/*! @name PORTB20 (number 66), J6[3]/J4[9]/RF_WIFI_CE
+  @{ */
+#define BOARD_BT2_STATUS_GPIO GPIOB /*!<@brief GPIO device name: GPIOB */
+#define BOARD_BT2_STATUS_PORT PORTB /*!<@brief PORT device name: PORTB */
+#define BOARD_BT2_STATUS_PIN 20U    /*!<@brief PORTB pin index: 20 */
+                                    /* @} */
 
 /*!
  * @brief Configures pin routing and optionally pin electrical features.

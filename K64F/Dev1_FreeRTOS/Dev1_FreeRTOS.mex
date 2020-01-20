@@ -55,7 +55,7 @@
                <pin_label pin_num="20" pin_signal="ADC1_DP0/ADC0_DP3" label="J2[11]"/>
                <pin_label pin_num="33" pin_signal="PTE26/ENET_1588_CLKIN/UART4_CTS_b/RTC_CLKOUT/USB_CLKIN" label="J2[1]/D12[4]/LEDRGB_GREEN" identifier="LED_GREEN;GREEN_LED"/>
                <pin_label pin_num="27" pin_signal="DAC0_OUT/CMP1_IN3/ADC0_SE23" label="J4[11]" identifier="DAC0_OUT"/>
-               <pin_label pin_num="66" pin_signal="PTB20/SPI2_PCS0/FB_AD31/CMP0_OUT" label="J6[3]/J4[9]/RF_WIFI_CE" identifier="RF_WIFI_CE"/>
+               <pin_label pin_num="66" pin_signal="PTB20/SPI2_PCS0/FB_AD31/CMP0_OUT" label="J6[3]/J4[9]/RF_WIFI_CE" identifier="RF_WIFI_CE;BT2_STATUS"/>
                <pin_label pin_num="17" pin_signal="ADC1_DM1" label="J4[7]"/>
                <pin_label pin_num="16" pin_signal="ADC1_DP1" label="J4[5]"/>
                <pin_label pin_num="15" pin_signal="ADC0_DM1" label="J4[3]"/>
@@ -230,6 +230,12 @@
                   </pin>
                   <pin peripheral="UART4" signal="RX" pin_num="86" pin_signal="PTC14/UART4_RX/FB_AD25"/>
                   <pin peripheral="UART4" signal="TX" pin_num="87" pin_signal="PTC15/UART4_TX/FB_AD24"/>
+                  <pin peripheral="GPIOB" signal="GPIO, 18" pin_num="64" pin_signal="PTB18/CAN0_TX/FTM2_CH0/I2S0_TX_BCLK/FB_AD15/FTM2_QD_PHA">
+                     <pin_features>
+                        <pin_feature name="direction" value="INPUT"/>
+                        <pin_feature name="pull_enable" value="enable"/>
+                     </pin_features>
+                  </pin>
                   <pin peripheral="GPIOB" signal="GPIO, 19" pin_num="65" pin_signal="PTB19/CAN0_RX/FTM2_CH1/I2S0_TX_FS/FB_OE_b/FTM2_QD_PHB">
                      <pin_features>
                         <pin_feature name="direction" value="OUTPUT"/>
@@ -321,12 +327,6 @@
                         <pin_feature name="direction" value="OUTPUT"/>
                      </pin_features>
                   </pin>
-                  <pin peripheral="GPIOB" signal="GPIO, 18" pin_num="64" pin_signal="PTB18/CAN0_TX/FTM2_CH0/I2S0_TX_BCLK/FB_AD15/FTM2_QD_PHA">
-                     <pin_features>
-                        <pin_feature name="direction" value="INPUT"/>
-                        <pin_feature name="pull_enable" value="enable"/>
-                     </pin_features>
-                  </pin>
                   <pin peripheral="UART3" signal="RX" pin_num="90" pin_signal="PTC16/UART3_RX/ENET0_1588_TMR0/FB_CS5_b/FB_TSIZ1/FB_BE23_16_BLS15_8_b">
                      <pin_features>
                         <pin_feature name="identifier" value="BT2_TX"/>
@@ -342,6 +342,13 @@
                         <pin_feature name="identifier" value="GREEN_LED"/>
                         <pin_feature name="direction" value="OUTPUT"/>
                         <pin_feature name="gpio_init_state" value="true"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="GPIOB" signal="GPIO, 20" pin_num="66" pin_signal="PTB20/SPI2_PCS0/FB_AD31/CMP0_OUT">
+                     <pin_features>
+                        <pin_feature name="identifier" value="BT2_STATUS"/>
+                        <pin_feature name="direction" value="INPUT"/>
+                        <pin_feature name="pull_enable" value="enable"/>
                      </pin_features>
                   </pin>
                </pins>
