@@ -72,13 +72,6 @@ void BOARD_InitBootPins(void);
 #define BOARD_BT_RX_PIN 15U    /*!<@brief PORTC pin index: 15 */
                                /* @} */
 
-/*! @name PORTC16 (number 90), J1[2]
-  @{ */
-#define BOARD_BT_STATUS_GPIO GPIOC /*!<@brief GPIO device name: GPIOC */
-#define BOARD_BT_STATUS_PORT PORTC /*!<@brief PORT device name: PORTC */
-#define BOARD_BT_STATUS_PIN 16U    /*!<@brief PORTC pin index: 16 */
-                                   /* @} */
-
 /*! @name PORTB19 (number 65), J1[3]
   @{ */
 #define BOARD_KEY_ROW1_GPIO GPIOB /*!<@brief GPIO device name: GPIOB */
@@ -183,6 +176,18 @@ void BOARD_InitBootPins(void);
 #define BOARD_BT1_STATUS_PORT PORTB /*!<@brief PORT device name: PORTB */
 #define BOARD_BT1_STATUS_PIN 18U    /*!<@brief PORTB pin index: 18 */
                                     /* @} */
+
+/*! @name PORTC16 (number 90), J1[2]
+  @{ */
+#define BOARD_BT2_TX_PORT PORTC /*!<@brief PORT device name: PORTC */
+#define BOARD_BT2_TX_PIN 16U    /*!<@brief PORTC pin index: 16 */
+                                /* @} */
+
+/*! @name PORTC17 (number 91), J1[4]
+  @{ */
+#define BOARD_BT2_RX_PORT PORTC /*!<@brief PORT device name: PORTC */
+#define BOARD_BT2_RX_PIN 17U    /*!<@brief PORTC pin index: 17 */
+                                /* @} */
 
 /*!
  * @brief Configures pin routing and optionally pin electrical features.

@@ -14,8 +14,8 @@ mcu_data: ksdk2_0
 processor_version: 6.0.1
 board: FRDM-K64F
 pin_labels:
-- {pin_num: '90', pin_signal: PTC16/UART3_RX/ENET0_1588_TMR0/FB_CS5_b/FB_TSIZ1/FB_BE23_16_BLS15_8_b, label: 'J1[2]', identifier: TMR_1588_0;BT_STATUS}
-- {pin_num: '91', pin_signal: PTC17/UART3_TX/ENET0_1588_TMR1/FB_CS4_b/FB_TSIZ0/FB_BE31_24_BLS7_0_b, label: 'J1[4]', identifier: TMR_1588_1}
+- {pin_num: '90', pin_signal: PTC16/UART3_RX/ENET0_1588_TMR0/FB_CS5_b/FB_TSIZ1/FB_BE23_16_BLS15_8_b, label: 'J1[2]', identifier: TMR_1588_0;BT_STATUS;BT2_RX;BT2_TX}
+- {pin_num: '91', pin_signal: PTC17/UART3_TX/ENET0_1588_TMR1/FB_CS4_b/FB_TSIZ0/FB_BE31_24_BLS7_0_b, label: 'J1[4]', identifier: TMR_1588_1;BT2_TX;BT2_RX}
 - {pin_num: '57', pin_signal: PTB9/SPI1_PCS1/UART3_CTS_b/FB_AD20, label: 'J1[6]', identifier: WATER;LCD_RS}
 - {pin_num: '35', pin_signal: PTA1/UART0_RX/FTM0_CH6/JTAG_TDI/EZP_DI, label: 'J1[8]', identifier: LCD_RS;LCD_RW}
 - {pin_num: '69', pin_signal: PTB23/SPI2_SIN/SPI0_PCS5/FB_AD28, label: 'J1[10]', identifier: LCD_EN}
@@ -152,8 +152,6 @@ BOARD_InitPins:
     direction: INPUT, gpio_interrupt: kPORT_InterruptFallingEdge, pull_enable: enable}
   - {pin_num: '86', peripheral: UART4, signal: RX, pin_signal: PTC14/UART4_RX/FB_AD25}
   - {pin_num: '87', peripheral: UART4, signal: TX, pin_signal: PTC15/UART4_TX/FB_AD24}
-  - {pin_num: '90', peripheral: GPIOC, signal: 'GPIO, 16', pin_signal: PTC16/UART3_RX/ENET0_1588_TMR0/FB_CS5_b/FB_TSIZ1/FB_BE23_16_BLS15_8_b, identifier: BT_STATUS,
-    direction: INPUT, pull_enable: enable}
   - {pin_num: '65', peripheral: GPIOB, signal: 'GPIO, 19', pin_signal: PTB19/CAN0_RX/FTM2_CH1/I2S0_TX_FS/FB_OE_b/FTM2_QD_PHB, direction: OUTPUT, gpio_init_state: 'false'}
   - {pin_num: '71', peripheral: GPIOC, signal: 'GPIO, 1', pin_signal: ADC0_SE15/PTC1/LLWU_P6/SPI0_PCS3/UART1_RTS_b/FTM0_CH0/FB_AD13/I2S0_TXD0, direction: OUTPUT,
     gpio_init_state: 'false'}
@@ -175,6 +173,8 @@ BOARD_InitPins:
   - {pin_num: '95', peripheral: GPIOD, signal: 'GPIO, 2', pin_signal: PTD2/LLWU_P13/SPI0_SOUT/UART2_RX/FTM3_CH2/FB_AD4/I2C0_SCL, identifier: LCD_D6, direction: OUTPUT}
   - {pin_num: '96', peripheral: GPIOD, signal: 'GPIO, 3', pin_signal: PTD3/SPI0_SIN/UART2_TX/FTM3_CH3/FB_AD3/I2C0_SDA, identifier: LCD_D7, direction: OUTPUT}
   - {pin_num: '64', peripheral: GPIOB, signal: 'GPIO, 18', pin_signal: PTB18/CAN0_TX/FTM2_CH0/I2S0_TX_BCLK/FB_AD15/FTM2_QD_PHA, direction: INPUT, pull_enable: enable}
+  - {pin_num: '90', peripheral: UART3, signal: RX, pin_signal: PTC16/UART3_RX/ENET0_1588_TMR0/FB_CS5_b/FB_TSIZ1/FB_BE23_16_BLS15_8_b, identifier: BT2_TX}
+  - {pin_num: '91', peripheral: UART3, signal: TX, pin_signal: PTC17/UART3_TX/ENET0_1588_TMR1/FB_CS4_b/FB_TSIZ0/FB_BE31_24_BLS7_0_b, identifier: BT2_RX}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 /* clang-format on */
@@ -307,13 +307,6 @@ void BOARD_InitPins(void)
     };
     /* Initialize GPIO functionality on pin PTC9 (pin 81)  */
     GPIO_PinInit(BOARD_KEY_ROW4_GPIO, BOARD_KEY_ROW4_PIN, &KEY_ROW4_config);
-
-    gpio_pin_config_t BT_STATUS_config = {
-        .pinDirection = kGPIO_DigitalInput,
-        .outputLogic = 0U
-    };
-    /* Initialize GPIO functionality on pin PTC16 (pin 90)  */
-    GPIO_PinInit(BOARD_BT_STATUS_GPIO, BOARD_BT_STATUS_PIN, &BT_STATUS_config);
 
     gpio_pin_config_t LCD_D4_config = {
         .pinDirection = kGPIO_DigitalOutput,
@@ -462,15 +455,11 @@ void BOARD_InitPins(void)
     /* PORTC15 (pin 87) is configured as UART4_TX */
     PORT_SetPinMux(BOARD_BT_RX_PORT, BOARD_BT_RX_PIN, kPORT_MuxAlt3);
 
-    /* PORTC16 (pin 90) is configured as PTC16 */
-    PORT_SetPinMux(BOARD_BT_STATUS_PORT, BOARD_BT_STATUS_PIN, kPORT_MuxAsGpio);
+    /* PORTC16 (pin 90) is configured as UART3_RX */
+    PORT_SetPinMux(BOARD_BT2_TX_PORT, BOARD_BT2_TX_PIN, kPORT_MuxAlt3);
 
-    PORTC->PCR[16] = ((PORTC->PCR[16] &
-                       /* Mask bits to zero which are setting */
-                       (~(PORT_PCR_PE_MASK | PORT_PCR_ISF_MASK)))
-
-                      /* Pull Enable: Internal pullup or pulldown resistor is enabled on the corresponding pin. */
-                      | (uint32_t)(PORT_PCR_PE_MASK));
+    /* PORTC17 (pin 91) is configured as UART3_TX */
+    PORT_SetPinMux(BOARD_BT2_RX_PORT, BOARD_BT2_RX_PIN, kPORT_MuxAlt3);
 
     /* PORTC5 (pin 77) is configured as PTC5 */
     PORT_SetPinMux(BOARD_KEY_COL1_PORT, BOARD_KEY_COL1_PIN, kPORT_MuxAsGpio);
