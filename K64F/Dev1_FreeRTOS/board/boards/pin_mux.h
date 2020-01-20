@@ -72,13 +72,6 @@ void BOARD_InitBootPins(void);
 #define BOARD_BT_RX_PIN 15U    /*!<@brief PORTC pin index: 15 */
                                /* @} */
 
-/*! @name PORTB9 (number 57), J1[6]
-  @{ */
-#define BOARD_WATER_GPIO GPIOB /*!<@brief GPIO device name: GPIOB */
-#define BOARD_WATER_PORT PORTB /*!<@brief PORT device name: PORTB */
-#define BOARD_WATER_PIN 9U     /*!<@brief PORTB pin index: 9 */
-                               /* @} */
-
 /*! @name PORTC16 (number 90), J1[2]
   @{ */
 #define BOARD_BT_STATUS_GPIO GPIOC /*!<@brief GPIO device name: GPIOC */
@@ -134,6 +127,62 @@ void BOARD_InitBootPins(void);
 #define BOARD_KEY_COL3_PORT PORTC /*!<@brief PORT device name: PORTC */
 #define BOARD_KEY_COL3_PIN 0U     /*!<@brief PORTC pin index: 0 */
                                   /* @} */
+
+/*! @name PORTB9 (number 57), J1[6]
+  @{ */
+#define BOARD_LCD_RS_GPIO GPIOB /*!<@brief GPIO device name: GPIOB */
+#define BOARD_LCD_RS_PORT PORTB /*!<@brief PORT device name: PORTB */
+#define BOARD_LCD_RS_PIN 9U     /*!<@brief PORTB pin index: 9 */
+                                /* @} */
+
+/*! @name PORTA1 (number 35), J1[8]
+  @{ */
+#define BOARD_LCD_RW_GPIO GPIOA /*!<@brief GPIO device name: GPIOA */
+#define BOARD_LCD_RW_PORT PORTA /*!<@brief PORT device name: PORTA */
+#define BOARD_LCD_RW_PIN 1U     /*!<@brief PORTA pin index: 1 */
+                                /* @} */
+
+/*! @name PORTB23 (number 69), J1[10]
+  @{ */
+#define BOARD_LCD_EN_GPIO GPIOB /*!<@brief GPIO device name: GPIOB */
+#define BOARD_LCD_EN_PORT PORTB /*!<@brief PORT device name: PORTB */
+#define BOARD_LCD_EN_PIN 23U    /*!<@brief PORTB pin index: 23 */
+                                /* @} */
+
+/*! @name PORTD0 (number 93), J2[6]
+  @{ */
+#define BOARD_LCD_D4_GPIO GPIOD /*!<@brief GPIO device name: GPIOD */
+#define BOARD_LCD_D4_PORT PORTD /*!<@brief PORT device name: PORTD */
+#define BOARD_LCD_D4_PIN 0U     /*!<@brief PORTD pin index: 0 */
+                                /* @} */
+
+/*! @name PORTD1 (number 94), J2[12]
+  @{ */
+#define BOARD_LCD_D5_GPIO GPIOD /*!<@brief GPIO device name: GPIOD */
+#define BOARD_LCD_D5_PORT PORTD /*!<@brief PORT device name: PORTD */
+#define BOARD_LCD_D5_PIN 1U     /*!<@brief PORTD pin index: 1 */
+                                /* @} */
+
+/*! @name PORTD2 (number 95), J2[8]
+  @{ */
+#define BOARD_LCD_D6_GPIO GPIOD /*!<@brief GPIO device name: GPIOD */
+#define BOARD_LCD_D6_PORT PORTD /*!<@brief PORT device name: PORTD */
+#define BOARD_LCD_D6_PIN 2U     /*!<@brief PORTD pin index: 2 */
+                                /* @} */
+
+/*! @name PORTD3 (number 96), J2[10]
+  @{ */
+#define BOARD_LCD_D7_GPIO GPIOD /*!<@brief GPIO device name: GPIOD */
+#define BOARD_LCD_D7_PORT PORTD /*!<@brief PORT device name: PORTD */
+#define BOARD_LCD_D7_PIN 3U     /*!<@brief PORTD pin index: 3 */
+                                /* @} */
+
+/*! @name PORTB18 (number 64), J1[1]
+  @{ */
+#define BOARD_BT1_STATUS_GPIO GPIOB /*!<@brief GPIO device name: GPIOB */
+#define BOARD_BT1_STATUS_PORT PORTB /*!<@brief PORT device name: PORTB */
+#define BOARD_BT1_STATUS_PIN 18U    /*!<@brief PORTB pin index: 18 */
+                                    /* @} */
 
 /*!
  * @brief Configures pin routing and optionally pin electrical features.
