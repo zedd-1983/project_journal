@@ -168,3 +168,9 @@ somebody experienced about this.
 Still thinking which way to approach the project further. The BT I am using is unfortunately only one-to-one communication and I  
 think that using a phone as additional connected device would be nice and effective, however this might mean reworking the project  
 using different BT modules or entirely different technology. Not very keen on that.
+
+#### 20/01/2020  
+Thought of solving the third device communicate via bluetooth by addind second BT module to the master K64F.   
+This second module would allow me to communicate with the phone and could be used to transmit data to it such as  
+time and date of occurences of the "incidents" and as well as notification to the carer about the "incident" happening.  
+
