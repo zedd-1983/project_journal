@@ -22,11 +22,13 @@
 #include "keypad.h"
 #include "task.h"
 #include "semphr.h"
+#include "queue.h"
 
 TaskHandle_t mainTaskHandle = NULL;
 TaskHandle_t terminalTaskHandle = NULL;
 TaskHandle_t userTimeConfigHandle = NULL;
 TaskHandle_t btTaskHandle = NULL;
+TaskHandle_t phoneBTTaskHandle = NULL;
 TaskHandle_t keypadTaskHandle = NULL;
 
 SemaphoreHandle_t moistureDetectionSemphr = NULL;
@@ -34,9 +36,13 @@ SemaphoreHandle_t alarmSemphr = NULL;
 SemaphoreHandle_t setAlarmSemphr = NULL;
 SemaphoreHandle_t userTimeConfigSemphr = NULL;
 SemaphoreHandle_t btSemphr = NULL;
+
+QueueHandle_t phoneBTReceiveQ = NULL;
+
 uint32_t alarmType;
 
 void btTask(void*);
+void phoneBTTask(void*);
 
 // variables
 bool busyWait = false;
@@ -208,6 +214,8 @@ int main(void) {
     SEGGER_SYSVIEW_Conf();
     SEGGER_SYSVIEW_Start();
 
+    phoneBTReceiveQ = xQueueCreate(5, sizeof(uint8_t));
+
     if(xTaskCreate(mainTask, "Main Task", configMINIMAL_STACK_SIZE + 50, NULL, 2, &mainTaskHandle) == pdFALSE)
     {
     	PRINTF("\r\nFailed to start \"Main Task\"\r\n");
@@ -218,10 +226,15 @@ int main(void) {
     	PRINTF("\n\rBT Task creation failed\n\r");
     }
 
-    if(xTaskCreate(keypadTask, "Keypad Task", configMINIMAL_STACK_SIZE + 20, NULL, 2, &keypadTaskHandle) == pdFALSE)
+    if(xTaskCreate(phoneBTTask, "Phone Bluetooth Task", configMINIMAL_STACK_SIZE + 20, NULL, 2, &phoneBTTaskHandle) == pdFALSE)
     {
-    	PRINTF("\n\rKeypad Task creation failed\n\r");
+    	PRINTF("\n\rPhone BT Task creation failed\n\r");
     }
+
+//    if(xTaskCreate(keypadTask, "Keypad Task", configMINIMAL_STACK_SIZE + 20, NULL, 2, &keypadTaskHandle) == pdFALSE)
+//    {
+//    	PRINTF("\n\rKeypad Task creation failed\n\r");
+//    }
 
     moistureDetectionSemphr = xSemaphoreCreateBinary();
     userTimeConfigSemphr = xSemaphoreCreateBinary();

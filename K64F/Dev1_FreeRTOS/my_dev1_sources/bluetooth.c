@@ -8,8 +8,10 @@
 #include "task.h"
 #include "fsl_debug_console.h"
 #include "fsl_uart.h"
+#include "queue.h"
 
 extern uint32_t alarmType;
+extern QueueHandle_t phoneBTReceiveQ;
 
 /// @brief FreeRTOS bluetooth task
 /// @details bluetooth task responsible for transmission of data to
@@ -21,6 +23,7 @@ void btTask(void* pvParameters) {
 
 	uint32_t receivedAlarmType;
 	uint8_t transmitValue;
+	uint8_t queueBuffer;
 
 	for(;;)
 	{
@@ -37,6 +40,14 @@ void btTask(void* pvParameters) {
 			transmitValue = 2;
 			UART_WriteByte(UART4, transmitValue);
 		}
+
+		if(xQueueReceive(phoneBTReceiveQ, &queueBuffer, pdMS_TO_TICKS(0))) {
+			if(queueBuffer == 'a') {
+				PRINTF("\n\rACKNOWLEDGED in bluetooth task, transmitting to Dev2");
+				UART_WriteByte(UART4, queueBuffer);
+			}
+		}
+
 
 		vTaskDelay(pdMS_TO_TICKS(150));
 	}
