@@ -38,6 +38,10 @@ extern "C" {
 #define UART_1_PERIPHERAL UART0
 /* Definition of the clock source frequency */
 #define UART_1_CLOCK_SOURCE CLOCK_GetFreq(UART0_CLK_SRC)
+/* Definition of peripheral ID */
+#define PHONE_BT_PERIPHERAL UART3
+/* Definition of the clock source frequency */
+#define PHONE_BT_CLOCK_SOURCE CLOCK_GetFreq(UART3_CLK_SRC)
 
 /***********************************************************************************************************************
  * Global variables
@@ -47,6 +51,7 @@ extern const rtc_config_t RTC_1_config;
 extern rtc_datetime_t RTC_1_dateTimeStruct;
 extern const uart_config_t BLUETOOTH_config;
 extern const uart_config_t UART_1_config;
+extern const uart_config_t PHONE_BT_config;
 
 /***********************************************************************************************************************
  * Initialization functions

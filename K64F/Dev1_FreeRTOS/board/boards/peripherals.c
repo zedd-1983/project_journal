@@ -206,6 +206,48 @@ void UART_1_init(void) {
 }
 
 /***********************************************************************************************************************
+ * PHONE_BT initialization code
+ **********************************************************************************************************************/
+/* clang-format off */
+/* TEXT BELOW IS USED AS SETTING FOR TOOLS *************************************
+instance:
+- name: 'PHONE_BT'
+- type: 'uart'
+- mode: 'polling'
+- type_id: 'uart_cd31a12aa8c79051fda42cc851a27c37'
+- functional_group: 'BOARD_InitPeripherals'
+- peripheral: 'UART3'
+- config_sets:
+  - uartConfig_t:
+    - uartConfig:
+      - clockSource: 'BusInterfaceClock'
+      - clockSourceFreq: 'GetFreq'
+      - baudRate_Bps: '38400'
+      - parityMode: 'kUART_ParityDisabled'
+      - stopBitCount: 'kUART_OneStopBit'
+      - txFifoWatermark: '0'
+      - rxFifoWatermark: '1'
+      - idleType: 'kUART_IdleTypeStartBit'
+      - enableTx: 'true'
+      - enableRx: 'true'
+ * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/
+/* clang-format on */
+const uart_config_t PHONE_BT_config = {
+  .baudRate_Bps = 38400,
+  .parityMode = kUART_ParityDisabled,
+  .stopBitCount = kUART_OneStopBit,
+  .txFifoWatermark = 0,
+  .rxFifoWatermark = 1,
+  .idleType = kUART_IdleTypeStartBit,
+  .enableTx = true,
+  .enableRx = true
+};
+
+void PHONE_BT_init(void) {
+  UART_Init(PHONE_BT_PERIPHERAL, &PHONE_BT_config, PHONE_BT_CLOCK_SOURCE);
+}
+
+/***********************************************************************************************************************
  * Initialization functions
  **********************************************************************************************************************/
 void BOARD_InitPeripherals(void)
@@ -214,6 +256,7 @@ void BOARD_InitPeripherals(void)
   RTC_1_init();
   BLUETOOTH_init();
   UART_1_init();
+  PHONE_BT_init();
 }
 
 /***********************************************************************************************************************
