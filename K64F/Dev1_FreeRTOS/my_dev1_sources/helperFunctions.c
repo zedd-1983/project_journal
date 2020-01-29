@@ -111,7 +111,14 @@ struct userTime_t getTime(char* stringTime)
 	return time;
 }
 
+char* getSystemTime(RTC_Type* base, rtc_datetime_t* datetime)
+{
+	char hr[2];
 
+	itoa(datetime->hour, hr, 2);
+
+	return hr;
+}
 
 
 

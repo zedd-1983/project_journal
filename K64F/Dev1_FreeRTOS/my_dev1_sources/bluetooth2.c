@@ -18,7 +18,7 @@ extern QueueHandle_t phoneBTReceiveQ;
 
 void phoneBTTask(void *pvParameters)
 {
-	// task for handling communication between the master device and the phone
+	uint8_t charReceived = '\0';
 
 ///	TODO:	check if connected and receiving characters
 /// TODO:	send data via queue to bluetooth task
@@ -30,16 +30,8 @@ void phoneBTTask(void *pvParameters)
 			GPIO_PortToggle(BOARD_GREEN_LED_GPIO, 1 << BOARD_GREEN_LED_PIN);
 
 		if(kUART_RxDataRegFullFlag & UART_GetStatusFlags(UART3)) {
-			uint8_t charReceived = UART_ReadByte(UART3);
-
-			if(charReceived != '\0') {
-				PRINTF("\n\rReceived: %c", charReceived);
-
-				xQueueSend(phoneBTReceiveQ, &charReceived, pdMS_TO_TICKS(0));
-			}
-
-
-			//charReceived = '\0';
+			charReceived = UART_ReadByte(UART3);
+			xQueueSend(phoneBTReceiveQ, (void*)&charReceived, pdMS_TO_TICKS(0));
 		}
 		vTaskDelay(pdMS_TO_TICKS(100));
 	}
