@@ -13,8 +13,10 @@
 #include "fsl_uart.h"
 #include "fsl_debug_console.h"
 #include "queue.h"
+#include "bluetooth2.h"
 
 extern QueueHandle_t phoneBTReceiveQ;
+extern QueueHandle_t dataForThePhoneQ;
 
 void phoneBTTask(void *pvParameters)
 {
@@ -31,7 +33,17 @@ void phoneBTTask(void *pvParameters)
 
 		if(kUART_RxDataRegFullFlag & UART_GetStatusFlags(UART3)) {
 			charReceived = UART_ReadByte(UART3);
-			xQueueSend(phoneBTReceiveQ, (void*)&charReceived, pdMS_TO_TICKS(0));
+			switch(charReceived) {
+				case DEV2_ALARM_STOP: xQueueSend(phoneBTReceiveQ, (void*)&charReceived, pdMS_TO_TICKS(0)); break;
+				case SYSTEM_TIME_REQUEST:
+
+			}
+			if(charReceived == DEV2_ALARM_STOP || charReceived == SYSTEM_TIME_REQUEST) { // coming from the phone
+//				int num = 12345;
+//				char snum[6];
+//				itoa(num, snum, 10);
+//				PRINTF("%s", snum);
+			}
 		}
 		vTaskDelay(pdMS_TO_TICKS(100));
 	}
@@ -45,4 +57,11 @@ void phoneBTTask(void *pvParameters)
 ///			recorded
 /// TODO: 	allow for setting time and date through the phone application rather than through LCD and
 /// 		keypad (maybe)
+}
+
+void sendDataToPhone(char* data) {
+
+
+
+
 }

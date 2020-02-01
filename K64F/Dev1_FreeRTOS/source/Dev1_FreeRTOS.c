@@ -38,6 +38,7 @@ SemaphoreHandle_t userTimeConfigSemphr = NULL;
 SemaphoreHandle_t btSemphr = NULL;
 
 QueueHandle_t phoneBTReceiveQ = NULL;
+QueueHandle_t dataForThePhoneQ = NULL;
 
 uint32_t alarmType;
 
@@ -215,6 +216,7 @@ int main(void) {
     SEGGER_SYSVIEW_Start();
 
     phoneBTReceiveQ = xQueueCreate(5, sizeof(uint8_t));
+    dataForThePhoneQ = xQueueCreate(5, sizeof(uint8_t[12]));
 
     if(xTaskCreate(mainTask, "Main Task", configMINIMAL_STACK_SIZE + 50, NULL, 2, &mainTaskHandle) == pdFALSE)
     {
