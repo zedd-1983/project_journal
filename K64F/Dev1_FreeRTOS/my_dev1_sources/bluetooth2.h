@@ -15,6 +15,6 @@
 #define REQUEST_RECORDS 		0x65	// 'e'
 
 void phoneBTTask(void*);
-void sendDataToPhone(char*, int);
+void sendDataToPhone(char*);
 
 #endif /* BLUETOOTH2_H_ */

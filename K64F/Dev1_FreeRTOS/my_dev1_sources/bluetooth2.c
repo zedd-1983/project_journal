@@ -38,22 +38,16 @@ void phoneBTTask(void *pvParameters)
 			charReceived = UART_ReadByte(UART3);
 			switch(charReceived) {
 				case DEV2_ALARM_STOP: 		xQueueSend(phoneBTReceiveQ, (void*)&charReceived, pdMS_TO_TICKS(0)); break;
-				case SYSTEM_DATE_REQUEST: 	PRINTF("Date: %s", getSystemDate(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct), 9);
-											sendDataToPhone(getSystemDate(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct), 9);
+				case SYSTEM_TIME_REQUEST: 	PRINTF("\n\rTime: %s", getSystemTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct));
+											sendDataToPhone(getSystemTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct));
 											break;
-				case SYSTEM_TIME_REQUEST: 	PRINTF("Time: %s", getSystemTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct), 7); break;
-											sendDataToPhone(getSystemTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct), 7);
+				case SYSTEM_DATE_REQUEST: 	PRINTF("\n\rDate: %s", getSystemDate(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct));
+											sendDataToPhone(getSystemDate(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct));
 											break;
 				case SYSTEM_TIME_CHANGE:	PRINTF("System time change\n\r"); break;
 				case REQUEST_RECORDS:		PRINTF("Request records\n\r"); break;
 				default:					PRINTF("Invalid request\n\r"); charReceived = '\0'; break;
 			}
-			//if(charReceived == DEV2_ALARM_STOP || charReceived == SYSTEM_TIME_REQUEST) { // coming from the phone
-//				int num = 12345;
-//				char snum[6];
-//				itoa(num, snum, 10);
-//				PRINTF("%s", snum);
-			//}
 		}
 		vTaskDelay(pdMS_TO_TICKS(100));
 	}
@@ -69,20 +63,17 @@ void phoneBTTask(void *pvParameters)
 /// 		keypad (maybe)
 }
 
-void sendDataToPhone(char* data, int arraySize) {
+/// @brief This function sends data to phone via UART3 and Bluetooth module
+/// @param data string representation of data
+
+void sendDataToPhone(char* data)
+{
 	int i = 0;
-	char dataArray[arraySize];
-
-	strcpy(dataArray, data);
-
-	while(dataArray[i] != '\0')
+	while(data[i] != '\0')
 	{
-		UART_WriteByte(UART3, dataArray[i]);
-		i++;
+		if (kUART_TxDataRegEmptyFlag & UART_GetStatusFlags(UART3)) {
+			UART_WriteByte(UART3, data[i]);
+			i++;
+		}
 	}
-
-//	for(int i = 0; i < sizeof(data); i++)
-//	{
-//		UART_WriteByte(UART3, data[i]);
-//	}
 }
