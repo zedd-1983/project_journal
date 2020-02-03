@@ -14,6 +14,8 @@
 #include "fsl_debug_console.h"
 #include "queue.h"
 #include "bluetooth2.h"
+#include "peripherals.h"
+#include "helperFunctions.h"
 
 extern QueueHandle_t phoneBTReceiveQ;
 extern QueueHandle_t dataForThePhoneQ;
@@ -31,19 +33,27 @@ void phoneBTTask(void *pvParameters)
 		else
 			GPIO_PortToggle(BOARD_GREEN_LED_GPIO, 1 << BOARD_GREEN_LED_PIN);
 
+		// handle requests from Bluetooth 2
 		if(kUART_RxDataRegFullFlag & UART_GetStatusFlags(UART3)) {
 			charReceived = UART_ReadByte(UART3);
 			switch(charReceived) {
-				case DEV2_ALARM_STOP: xQueueSend(phoneBTReceiveQ, (void*)&charReceived, pdMS_TO_TICKS(0)); break;
-				case SYSTEM_TIME_REQUEST:
-
+				case DEV2_ALARM_STOP: 		xQueueSend(phoneBTReceiveQ, (void*)&charReceived, pdMS_TO_TICKS(0)); break;
+				case SYSTEM_DATE_REQUEST: 	PRINTF("Date: %s", getSystemDate(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct), 9);
+											sendDataToPhone(getSystemDate(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct), 9);
+											break;
+				case SYSTEM_TIME_REQUEST: 	PRINTF("Time: %s", getSystemTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct), 7); break;
+											sendDataToPhone(getSystemTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct), 7);
+											break;
+				case SYSTEM_TIME_CHANGE:	PRINTF("System time change\n\r"); break;
+				case REQUEST_RECORDS:		PRINTF("Request records\n\r"); break;
+				default:					PRINTF("Invalid request\n\r"); charReceived = '\0'; break;
 			}
-			if(charReceived == DEV2_ALARM_STOP || charReceived == SYSTEM_TIME_REQUEST) { // coming from the phone
+			//if(charReceived == DEV2_ALARM_STOP || charReceived == SYSTEM_TIME_REQUEST) { // coming from the phone
 //				int num = 12345;
 //				char snum[6];
 //				itoa(num, snum, 10);
 //				PRINTF("%s", snum);
-			}
+			//}
 		}
 		vTaskDelay(pdMS_TO_TICKS(100));
 	}
@@ -59,9 +69,20 @@ void phoneBTTask(void *pvParameters)
 /// 		keypad (maybe)
 }
 
-void sendDataToPhone(char* data) {
+void sendDataToPhone(char* data, int arraySize) {
+	int i = 0;
+	char dataArray[arraySize];
 
+	strcpy(dataArray, data);
 
+	while(dataArray[i] != '\0')
+	{
+		UART_WriteByte(UART3, dataArray[i]);
+		i++;
+	}
 
-
+//	for(int i = 0; i < sizeof(data); i++)
+//	{
+//		UART_WriteByte(UART3, data[i]);
+//	}
 }

@@ -111,16 +111,49 @@ struct userTime_t getTime(char* stringTime)
 	return time;
 }
 
-char* getSystemTime(RTC_Type* base, rtc_datetime_t* datetime)
+/// @brief Function gets system date from rtc_datetime_t structure
+/// and converts it to a string (char*)
+/// @param base pointer to RTC base address
+/// @param datetime pointer to RTC datetime structure
+/// @return char*
+char* getSystemDate(RTC_Type* base, rtc_datetime_t* datetime)
 {
-	char hr[2];
+	unsigned long dateAsNum;
+	char* dateAsString = (char*) malloc(sizeof(char) * 9);
 
-	itoa(datetime->hour, hr, 2);
+	RTC_GetDatetime(base, datetime);
 
-	return hr;
+	dateAsNum = (datetime->year * 10000) + (datetime->month * 100) +
+			(datetime->day);
+	itoa(dateAsNum, dateAsString, 10);
+
+//	PRINTF("\n\rdatetime as num: %d", dateTimeAsNum);
+//	PRINTF("\n\rdatetime as string: %s", dateTimeAsString);
+
+	return dateAsString;
 }
 
+/// @brief Function gets system time from rtc_datetime_t structure
+/// and converts it to a string (char*)
+/// @param base pointer to RTC base address
+/// @param datetime pointer to RTC datetime structure
+/// @return char*
+char* getSystemTime(RTC_Type* base, rtc_datetime_t* datetime)
+{
+	unsigned long timeAsNum;
+	char* timeAsString = (char*) malloc(sizeof(char) * 7);
 
+	RTC_GetDatetime(base, datetime);
+
+	timeAsNum = (datetime->hour * 10000) + (datetime->minute * 100) +
+			(datetime->day);
+	itoa(timeAsNum, timeAsString, 10);
+
+	PRINTF("\n\rTime as num: %d", timeAsNum);
+	PRINTF("\n\rTime as string: %s", timeAsString);
+
+	return timeAsString;
+}
 
 
 
