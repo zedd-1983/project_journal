@@ -23,6 +23,7 @@ extern QueueHandle_t dataForThePhoneQ;
 void phoneBTTask(void *pvParameters)
 {
 	uint8_t charReceived = '\0';
+	char* data = "";
 
 ///	TODO:	check if connected and receiving characters
 /// TODO:	send data via queue to bluetooth task
@@ -32,6 +33,15 @@ void phoneBTTask(void *pvParameters)
 			GPIO_PinWrite(BOARD_GREEN_LED_GPIO, BOARD_GREEN_LED_PIN, 0);
 		else
 			GPIO_PortToggle(BOARD_GREEN_LED_GPIO, 1 << BOARD_GREEN_LED_PIN);
+
+//		int i = 0;
+//		if(kUART_RxDataRegFullFlag & UART_GetStatusFlags(UART3)) {
+//			data[i] = UART_ReadByte(UART3);
+//			i++;
+//		}
+//
+//		for(int i = 0; i < strlen(data); i++)
+//			PRINTF("%c", data[i]);
 
 		// handle requests from Bluetooth 2
 		if(kUART_RxDataRegFullFlag & UART_GetStatusFlags(UART3)) {
@@ -48,6 +58,7 @@ void phoneBTTask(void *pvParameters)
 				case REQUEST_RECORDS:		PRINTF("Request records\n\r"); break;
 				default:					PRINTF("Invalid request\n\r"); charReceived = '\0'; break;
 			}
+			UART_ClearStatusFlags(UART3,  kUART_RxDataRegFullFlag << 0);
 		}
 		vTaskDelay(pdMS_TO_TICKS(100));
 	}
@@ -65,7 +76,6 @@ void phoneBTTask(void *pvParameters)
 
 /// @brief This function sends data to phone via UART3 and Bluetooth module
 /// @param data string representation of data
-
 void sendDataToPhone(char* data)
 {
 	int i = 0;
