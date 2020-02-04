@@ -9,6 +9,10 @@
 #include "SEGGER_RTT.h"
 #include "helperFunctions.h"
 
+extern uint8_t eventCount;
+//extern struct eventData_t;
+//extern struct eventData_t events[10];
+
 //#define NRF_LOG_USES_RTT  1
 
 /// @brief function to display user menu

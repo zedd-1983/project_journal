@@ -19,14 +19,11 @@
 
 extern QueueHandle_t phoneBTReceiveQ;
 extern QueueHandle_t dataForThePhoneQ;
-extern static uint8_t eventCount;
-extern struct eventData_t;
-extern eventData_t events[10];
 
 void phoneBTTask(void *pvParameters)
 {
 	uint8_t charReceived = '\0';
-	char* data = "";
+//	char* data = "";
 
 ///	TODO:	check if connected and receiving characters
 /// TODO:	send data via queue to bluetooth task

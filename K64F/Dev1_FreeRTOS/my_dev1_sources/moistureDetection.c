@@ -21,6 +21,7 @@
 #include "timeKeeping.h"
 #include "bluetooth.h"
 #include "SEGGER_RTT.h"
+#include "moistureDetection.h"
 
 extern bool busyWait;
 extern SemaphoreHandle_t moistureDetectionSemphr;
@@ -30,13 +31,7 @@ extern TaskHandle_t userTimeConfigHandle;
 extern rtc_datetime_t RTC_1_dateTimeStruct;
 static uint8_t eventCount = 0;
 
-struct eventData_t {
-	char* eventTime;
-	char* eventDate;
-	char wasAcknowledged;
-};
-
-struct eventData_t events[10] = {};
+#define SPACER "   "
 
 /// @brief FreeRTOS main task
 /// @details this task displays menu and if it receives semaphore from SW3 creates
@@ -46,7 +41,10 @@ struct eventData_t events[10] = {};
 void mainTask(void* pvParameters)
 {
 	//displayMenu();
+	struct eventData_t events[10] = {};
+	const char* recordsAsStrings[10] = {};
 
+	//struct eventData_t *p_event[] = &events;
 	for(;;)
 	{
 		//printCurrentTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
@@ -73,24 +71,31 @@ void mainTask(void* pvParameters)
 				vTaskDelay(pdMS_TO_TICKS(150));
 			}
 
-			// store the event time
+			// store the event time in a struct array
 			events[eventCount].eventTime = getSystemTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
 			events[eventCount].eventDate = getSystemDate(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
-			events[eventCount].wasAcknowledged = 'n';
-			eventCount++;
+			events[eventCount].wasAcknowledged = "no";
+			recordsAsStrings[eventCount] = convertRecordToString(events[eventCount]);
 
 			for(int i = 0; i < eventCount; i++) {
-				PRINTF("\n\rEvent no[%d]: %s \t%s \t%c",
-						i+1,
-						events[i].eventDate,
-						events[i].eventTime,
-						events[i].wasAcknowledged);
+				PRINTF("\n\rPrinting strings");
+				PRINTF("\n\r%s", recordsAsStrings[i]);
 			}
 
+			eventCount++;
+
+			// struct array set to 10 events only, this is a precaution
+			if(eventCount > 9)
+				eventCount = 0;
+
+			// print available records
+//			printRecords(events);
+
+
+//			convertRecordToString(events);
 
 			configureAlarm(20);
 			displayAlarmTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
-
 		}	 // moistureDetectionSemphr
 
 		if(xSemaphoreTake(userTimeConfigSemphr, 0) == pdTRUE) {
@@ -116,4 +121,37 @@ void mainTask(void* pvParameters)
 		vTaskDelay(pdMS_TO_TICKS(150));
 
 	}	// end of for(;;)
+}
+
+/// @brief This function prints recorded event data
+/// @param *p_event pointer to an array of structures holding the event data
+void printRecords(struct eventData_t *p_event)
+{
+	for(int i = 0; i < eventCount; i++) {
+		PRINTF("\n\rEvent no %d: %s \t%s \t%s",
+				i+1,
+				p_event->eventDate,
+				p_event->eventTime,
+				p_event->wasAcknowledged
+				);
+				p_event++;
+	}
+}
+
+/// @brief Function converts given structure to a String and returns
+/// @param event structure to convert
+/// @return char* recordAsString
+const char* convertRecordToString(struct eventData_t event)
+{
+	char recordAsStrings[30];
+
+	strcpy(recordAsStrings, event.eventDate);
+	strcat(recordAsStrings, SPACER);
+	strcat(recordAsStrings, event.eventTime);
+	strcat(recordAsStrings, SPACER);
+	strcat(recordAsStrings, event.wasAcknowledged);
+
+	PRINTF("\n\r%s", recordAsStrings);
+
+	return recordAsStrings;
 }
