@@ -223,12 +223,12 @@ int main(void) {
     	PRINTF("\r\nFailed to start \"Main Task\"\r\n");
     }
 
-    if(xTaskCreate(btTask, "BT Task", configMINIMAL_STACK_SIZE + 20, NULL, 2, &btTaskHandle) == pdFALSE)
+    if(xTaskCreate(btTask, "BT Task", configMINIMAL_STACK_SIZE + 50, NULL, 2, &btTaskHandle) == pdFALSE)
     {
     	PRINTF("\n\rBT Task creation failed\n\r");
     }
 
-    if(xTaskCreate(phoneBTTask, "Phone Bluetooth Task", configMINIMAL_STACK_SIZE + 20, NULL, 2, &phoneBTTaskHandle) == pdFALSE)
+    if(xTaskCreate(phoneBTTask, "Phone Bluetooth Task", configMINIMAL_STACK_SIZE + 50, NULL, 2, &phoneBTTaskHandle) == pdFALSE)
     {
     	PRINTF("\n\rPhone BT Task creation failed\n\r");
     }

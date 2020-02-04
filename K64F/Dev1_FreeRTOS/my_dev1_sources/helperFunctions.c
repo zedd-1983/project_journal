@@ -127,8 +127,8 @@ char* getSystemDate(RTC_Type* base, rtc_datetime_t* datetime)
 			(datetime->day);
 	itoa(dateAsNum, dateAsString, 10);
 
-	PRINTF("\n\rDate as num: %d", dateAsNum);
-	PRINTF("\n\rDate as string: %s", dateAsString);
+//	PRINTF("\n\rDate as num: %d", dateAsNum);
+//	PRINTF("\n\rDate as string: %s", dateAsString);
 
 	return dateAsString;
 }
@@ -145,11 +145,11 @@ char* getSystemTime(RTC_Type* base, rtc_datetime_t* datetime)
 
 	RTC_GetDatetime(base, datetime);
 
-	timeAsNum = (datetime->hour * 10000) + (datetime->minute * 100);
+	timeAsNum = (datetime->hour * 10000) + (datetime->minute * 100) + (datetime->second);
 	itoa(timeAsNum, timeAsString, 10);
 
-	PRINTF("\n\rTime as num: %d", timeAsNum);
-	PRINTF("\n\rTime as string: %s", timeAsString);
+//	PRINTF("\n\rTime as num: %d", timeAsNum);
+//	PRINTF("\n\rTime as string: %s", timeAsString);
 
 	return timeAsString;
 }

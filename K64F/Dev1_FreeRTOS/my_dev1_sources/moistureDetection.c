@@ -28,6 +28,15 @@ extern SemaphoreHandle_t userTimeConfigSemphr;
 extern SemaphoreHandle_t btSemphr;
 extern TaskHandle_t userTimeConfigHandle;
 extern rtc_datetime_t RTC_1_dateTimeStruct;
+static uint8_t eventCount = 0;
+
+struct eventData_t {
+	char* eventTime;
+	char* eventDate;
+	char wasAcknowledged;
+};
+
+struct eventData_t events[10] = {};
 
 /// @brief FreeRTOS main task
 /// @details this task displays menu and if it receives semaphore from SW3 creates
@@ -63,6 +72,21 @@ void mainTask(void* pvParameters)
 				GPIO_PortToggle(BOARD_MD_LED_GPIO, 1 << BOARD_MD_LED_PIN);
 				vTaskDelay(pdMS_TO_TICKS(150));
 			}
+
+			// store the event time
+			events[eventCount].eventTime = getSystemTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
+			events[eventCount].eventDate = getSystemDate(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
+			events[eventCount].wasAcknowledged = 'n';
+			eventCount++;
+
+			for(int i = 0; i < eventCount; i++) {
+				PRINTF("\n\rEvent no[%d]: %s \t%s \t%c",
+						i+1,
+						events[i].eventDate,
+						events[i].eventTime,
+						events[i].wasAcknowledged);
+			}
+
 
 			configureAlarm(20);
 			displayAlarmTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);

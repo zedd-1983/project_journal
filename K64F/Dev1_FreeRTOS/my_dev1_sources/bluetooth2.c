@@ -19,6 +19,9 @@
 
 extern QueueHandle_t phoneBTReceiveQ;
 extern QueueHandle_t dataForThePhoneQ;
+extern static uint8_t eventCount;
+extern struct eventData_t;
+extern eventData_t events[10];
 
 void phoneBTTask(void *pvParameters)
 {
@@ -29,39 +32,32 @@ void phoneBTTask(void *pvParameters)
 /// TODO:	send data via queue to bluetooth task
 	for(;;)
 	{
+		// status indicator
 		if(GPIO_PinRead(BOARD_BT2_STATUS_GPIO, BOARD_BT2_STATUS_PIN) == 1)
 			GPIO_PinWrite(BOARD_GREEN_LED_GPIO, BOARD_GREEN_LED_PIN, 0);
 		else
 			GPIO_PortToggle(BOARD_GREEN_LED_GPIO, 1 << BOARD_GREEN_LED_PIN);
-
-//		int i = 0;
-//		if(kUART_RxDataRegFullFlag & UART_GetStatusFlags(UART3)) {
-//			data[i] = UART_ReadByte(UART3);
-//			i++;
-//		}
-//
-//		for(int i = 0; i < strlen(data); i++)
-//			PRINTF("%c", data[i]);
 
 		// handle requests from Bluetooth 2
 		if(kUART_RxDataRegFullFlag & UART_GetStatusFlags(UART3)) {
 			charReceived = UART_ReadByte(UART3);
 			switch(charReceived) {
 				case DEV2_ALARM_STOP: 		xQueueSend(phoneBTReceiveQ, (void*)&charReceived, pdMS_TO_TICKS(0)); break;
-				case SYSTEM_TIME_REQUEST: 	PRINTF("\n\rTime: %s", getSystemTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct));
+				case SYSTEM_TIME_REQUEST: 	//PRINTF("\n\rTime: %s", getSystemTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct));
 											sendDataToPhone(getSystemTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct));
 											break;
-				case SYSTEM_DATE_REQUEST: 	PRINTF("\n\rDate: %s", getSystemDate(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct));
+				case SYSTEM_DATE_REQUEST: 	//PRINTF("\n\rDate: %s", getSystemDate(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct));
 											sendDataToPhone(getSystemDate(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct));
 											break;
 				case SYSTEM_TIME_CHANGE:	PRINTF("System time change\n\r"); break;
 				case REQUEST_RECORDS:		PRINTF("Request records\n\r"); break;
 				default:					PRINTF("Invalid request\n\r"); charReceived = '\0'; break;
 			}
-			UART_ClearStatusFlags(UART3,  kUART_RxDataRegFullFlag << 0);
+			charReceived = '\0';
+			UART_ClearStatusFlags(UART3,  kUART_RxDataRegFullFlag);
 		}
 		vTaskDelay(pdMS_TO_TICKS(100));
-	}
+	} // for loop
 
 
 /// TODO: 	if event happens, this task needs to be notified (an LED goes ON)
