@@ -40,6 +40,7 @@ SemaphoreHandle_t recordsRequestSemphr = NULL;
 
 QueueHandle_t phoneBTReceiveQ = NULL;
 QueueHandle_t dataForThePhoneQ = NULL;
+QueueHandle_t recordsForThePhoneQ = NULL;
 
 uint32_t alarmType;
 
@@ -218,6 +219,7 @@ int main(void) {
 
     phoneBTReceiveQ = xQueueCreate(5, sizeof(uint8_t));
     dataForThePhoneQ = xQueueCreate(5, sizeof(uint8_t[12]));
+    recordsForThePhoneQ = xQueueCreate(2, (sizeof(uint8_t[30]) * 10));
 
     if(xTaskCreate(mainTask, "Main Task", configMINIMAL_STACK_SIZE + 50, NULL, 2, &mainTaskHandle) == pdFALSE)
     {
@@ -243,7 +245,6 @@ int main(void) {
     userTimeConfigSemphr = xSemaphoreCreateBinary();
     btSemphr = xSemaphoreCreateBinary();
     recordsRequestSemphr = xSemaphoreCreateBinary();
-
 
     vTaskStartScheduler();
 

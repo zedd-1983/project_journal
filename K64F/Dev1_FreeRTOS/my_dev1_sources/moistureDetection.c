@@ -29,8 +29,10 @@ extern SemaphoreHandle_t userTimeConfigSemphr;
 extern SemaphoreHandle_t btSemphr;
 extern SemaphoreHandle_t recordsRequestSemphr;
 extern TaskHandle_t userTimeConfigHandle;
+extern QueueHandle_t recordsForThePhoneQ;
 extern rtc_datetime_t RTC_1_dateTimeStruct;
 static uint8_t eventCount = 0;
+
 
 #define SPACER "   "
 
@@ -103,7 +105,8 @@ void mainTask(void* pvParameters)
 				PRINTF("\n\r%s", recordsAsStrings[i]);
 			}
 
-			// send data over queue to the bt2 task
+			// send records to the BT2 task
+			xQueueSend(recordsForThePhoneQ, (void*)&recordsAsStrings, 0);
 
 		}
 
