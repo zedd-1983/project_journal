@@ -143,7 +143,7 @@ void printRecords(struct eventData_t *p_event)
 /// @return char* recordAsString
 const char* convertRecordToString(struct eventData_t event)
 {
-	char recordAsStrings[30];
+	char* recordAsStrings = (char*) malloc(sizeof(char) * 30);
 
 	strcpy(recordAsStrings, event.eventDate);
 	strcat(recordAsStrings, SPACER);
