@@ -19,11 +19,13 @@
 
 extern QueueHandle_t phoneBTReceiveQ;
 extern QueueHandle_t dataForThePhoneQ;
+extern TaskHandle_t mainTaskHandle;
+
+extern SemaphoreHandle_t recordsRequestSemphr;
 
 void phoneBTTask(void *pvParameters)
 {
 	uint8_t charReceived = '\0';
-//	char* data = "";
 
 ///	TODO:	check if connected and receiving characters
 /// TODO:	send data via queue to bluetooth task
@@ -47,7 +49,9 @@ void phoneBTTask(void *pvParameters)
 											sendDataToPhone(getSystemDate(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct));
 											break;
 				case SYSTEM_TIME_CHANGE:	PRINTF("System time change\n\r"); break;
-				case REQUEST_RECORDS:		PRINTF("Request records\n\r"); break;
+				case REQUEST_RECORDS:		//PRINTF("Request records\n\r");
+											xSemaphoreGive(recordsRequestSemphr);
+											break;
 				default:					PRINTF("Invalid request\n\r"); charReceived = '\0'; break;
 			}
 			charReceived = '\0';
@@ -69,6 +73,7 @@ void phoneBTTask(void *pvParameters)
 
 /// @brief This function sends data to phone via UART3 and Bluetooth module
 /// @param data string representation of data
+/// @return void
 void sendDataToPhone(char* data)
 {
 	int i = 0;

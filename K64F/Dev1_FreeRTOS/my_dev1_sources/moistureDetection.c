@@ -27,6 +27,7 @@ extern bool busyWait;
 extern SemaphoreHandle_t moistureDetectionSemphr;
 extern SemaphoreHandle_t userTimeConfigSemphr;
 extern SemaphoreHandle_t btSemphr;
+extern SemaphoreHandle_t recordsRequestSemphr;
 extern TaskHandle_t userTimeConfigHandle;
 extern rtc_datetime_t RTC_1_dateTimeStruct;
 static uint8_t eventCount = 0;
@@ -44,7 +45,6 @@ void mainTask(void* pvParameters)
 	struct eventData_t events[10] = {};
 	const char* recordsAsStrings[10] = {};
 
-	//struct eventData_t *p_event[] = &events;
 	for(;;)
 	{
 		//printCurrentTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
@@ -77,22 +77,11 @@ void mainTask(void* pvParameters)
 			events[eventCount].wasAcknowledged = "no";
 			recordsAsStrings[eventCount] = convertRecordToString(events[eventCount]);
 
-			for(int i = 0; i < eventCount; i++) {
-				PRINTF("\n\rPrinting strings");
-				PRINTF("\n\r%s", recordsAsStrings[i]);
-			}
-
 			eventCount++;
 
 			// struct array set to 10 events only, this is a precaution
 			if(eventCount > 9)
 				eventCount = 0;
-
-			// print available records
-//			printRecords(events);
-
-
-//			convertRecordToString(events);
 
 			configureAlarm(20);
 			displayAlarmTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
@@ -104,6 +93,20 @@ void mainTask(void* pvParameters)
 		    	PRINTF("\r\nFailed to start \"UserTimeConfig Task\"\r\n");
 		    }
 		}
+
+		// print available records when a request is received from the phone
+		// will send data over a Queue to BT2 task to be transmitted back to the phone
+		if(xSemaphoreTake(recordsRequestSemphr, 0) == pdTRUE)
+		{
+			for(int i = 0; i <= eventCount; i++) {
+				PRINTF("\n\rPrinting strings");
+				PRINTF("\n\r%s", recordsAsStrings[i]);
+			}
+
+			// send data over queue to the bt2 task
+
+		}
+
 		// trigger alarm, flag is set by an alarm interrupt in RTC_1_COMMON_IRQHANDLER()
 //		if(xSemaphoreTake(btSemphr, 0) == pdTRUE) {
 //			xTaskCreate(btTask, "BT task", configMINIMAL_STACK_SIZE + 50, NULL, 5, NULL);
@@ -125,6 +128,7 @@ void mainTask(void* pvParameters)
 
 /// @brief This function prints recorded event data
 /// @param *p_event pointer to an array of structures holding the event data
+/// @return void
 void printRecords(struct eventData_t *p_event)
 {
 	for(int i = 0; i < eventCount; i++) {
@@ -151,7 +155,7 @@ const char* convertRecordToString(struct eventData_t event)
 	strcat(recordAsStrings, SPACER);
 	strcat(recordAsStrings, event.wasAcknowledged);
 
-	PRINTF("\n\r%s", recordAsStrings);
+//	PRINTF("\n\r%s", recordAsStrings);
 
 	return recordAsStrings;
 }

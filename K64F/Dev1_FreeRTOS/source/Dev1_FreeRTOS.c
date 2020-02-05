@@ -36,6 +36,7 @@ SemaphoreHandle_t alarmSemphr = NULL;
 SemaphoreHandle_t setAlarmSemphr = NULL;
 SemaphoreHandle_t userTimeConfigSemphr = NULL;
 SemaphoreHandle_t btSemphr = NULL;
+SemaphoreHandle_t recordsRequestSemphr = NULL;
 
 QueueHandle_t phoneBTReceiveQ = NULL;
 QueueHandle_t dataForThePhoneQ = NULL;
@@ -241,6 +242,8 @@ int main(void) {
     moistureDetectionSemphr = xSemaphoreCreateBinary();
     userTimeConfigSemphr = xSemaphoreCreateBinary();
     btSemphr = xSemaphoreCreateBinary();
+    recordsRequestSemphr = xSemaphoreCreateBinary();
+
 
     vTaskStartScheduler();
 
