@@ -28,7 +28,7 @@ void phoneBTTask(void *pvParameters)
 {
 	uint8_t charReceived = '\0';
 	//char** recordsForPhoneBuffer = (char**) malloc(sizeof(char) * 300);
-	char* recordsForPhoneBuffer[10];
+	char* recordsForPhoneBuffer[10] = {""};
 	//char** recordsForPhoneBuffer;
 
 ///	TODO:	check if connected and receiving characters
@@ -53,16 +53,28 @@ void phoneBTTask(void *pvParameters)
 											sendDataToPhone(getSystemDate(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct));
 											break;
 				case SYSTEM_TIME_CHANGE:	PRINTF("System time change\n\r"); break;
-				case REQUEST_RECORDS:		//PRINTF("Request records\n\r");
+				case REQUEST_RECORDS:		PRINTF("\033[33mRequesting records...\033[0m\n\r");
 											xSemaphoreGive(recordsRequestSemphr);
 											if(xQueueReceive(recordsForThePhoneQ, &recordsForPhoneBuffer, pdMS_TO_TICKS(0)))
 											{
-												PRINTF("In bt2\n\r");
-												for(int i = 0; i < 10; i++)
-													PRINTF("%s", recordsForPhoneBuffer[i]);
+												PRINTF("\033[32mData received!!!\033[0m\n\r");
 
-												for(int i = 0; i < 10; i++)
+												PRINTF("Printing data received!!!\n\r");
+												int i = 0;
+												while(recordsForPhoneBuffer[i] != NULL)
+												{
+													PRINTF("\n\r%s", recordsForPhoneBuffer[i]);
+													i++;
+												}
+
+												i = 0;
+												PRINTF("\n\r\033[32mSending data to Phone!!!\033[0m\n\r");
+												while(recordsForPhoneBuffer[i] != NULL)
+												{
 													sendDataToPhone(recordsForPhoneBuffer[i]);
+													i++;
+												}
+												PRINTF("\n\r\033[32mData send!!!\033[0m\n\r");
 											}
 											break;
 				default:					PRINTF("Invalid request\n\r"); charReceived = '\0'; break;

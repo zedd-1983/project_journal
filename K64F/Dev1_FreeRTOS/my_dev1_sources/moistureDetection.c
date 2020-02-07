@@ -45,7 +45,7 @@ void mainTask(void* pvParameters)
 {
 	//displayMenu();
 	struct eventData_t events[10] = {};
-	const char* recordsAsStrings[10] = {};
+	const char* recordsAsStrings[10] = {""};
 
 	for(;;)
 	{
@@ -100,8 +100,8 @@ void mainTask(void* pvParameters)
 		// will send data over a Queue to BT2 task to be transmitted back to the phone
 		if(xSemaphoreTake(recordsRequestSemphr, 0) == pdTRUE)
 		{
+			PRINTF("\n\rPrinting strings");
 			for(int i = 0; i <= eventCount; i++) {
-				PRINTF("\n\rPrinting strings");
 				PRINTF("\n\r%s", recordsAsStrings[i]);
 			}
 
