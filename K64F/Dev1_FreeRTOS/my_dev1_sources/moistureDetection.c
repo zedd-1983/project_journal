@@ -106,7 +106,7 @@ void mainTask(void* pvParameters)
 			}
 
 			// send records to the BT2 task
-			xQueueSend(recordsForThePhoneQ, (void*)&recordsAsStrings, 0);
+			xQueueSend(recordsForThePhoneQ, &recordsAsStrings, 0);
 
 		}
 
@@ -150,6 +150,7 @@ void printRecords(struct eventData_t *p_event)
 /// @return char* recordAsString
 const char* convertRecordToString(struct eventData_t event)
 {
+	// alocate memory for a string
 	char* recordAsStrings = (char*) malloc(sizeof(char) * 30);
 
 	strcpy(recordAsStrings, event.eventDate);

@@ -19,6 +19,7 @@
 
 extern QueueHandle_t phoneBTReceiveQ;
 extern QueueHandle_t dataForThePhoneQ;
+extern QueueHandle_t recordsForThePhoneQ;
 extern TaskHandle_t mainTaskHandle;
 
 extern SemaphoreHandle_t recordsRequestSemphr;
@@ -26,7 +27,9 @@ extern SemaphoreHandle_t recordsRequestSemphr;
 void phoneBTTask(void *pvParameters)
 {
 	uint8_t charReceived = '\0';
-	char* recordsForPhoneBuffer;
+	//char** recordsForPhoneBuffer = (char**) malloc(sizeof(char) * 300);
+	char* recordsForPhoneBuffer[10];
+	//char** recordsForPhoneBuffer;
 
 ///	TODO:	check if connected and receiving characters
 /// TODO:	send data via queue to bluetooth task
@@ -52,9 +55,14 @@ void phoneBTTask(void *pvParameters)
 				case SYSTEM_TIME_CHANGE:	PRINTF("System time change\n\r"); break;
 				case REQUEST_RECORDS:		//PRINTF("Request records\n\r");
 											xSemaphoreGive(recordsRequestSemphr);
-											if(xQueueReceive, &recordsForPhoneBuffer, pdMS_TO_TICKS(0))
+											if(xQueueReceive(recordsForThePhoneQ, &recordsForPhoneBuffer, pdMS_TO_TICKS(0)))
 											{
-												sendDataToPhone(recordsForPhoneBuffer);
+												PRINTF("In bt2\n\r");
+												for(int i = 0; i < 10; i++)
+													PRINTF("%s", recordsForPhoneBuffer[i]);
+
+												for(int i = 0; i < 10; i++)
+													sendDataToPhone(recordsForPhoneBuffer[i]);
 											}
 											break;
 				default:					PRINTF("Invalid request\n\r"); charReceived = '\0'; break;
