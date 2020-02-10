@@ -221,7 +221,7 @@ int main(void) {
     dataForThePhoneQ = xQueueCreate(5, sizeof(uint8_t[12]));
     recordsForThePhoneQ = xQueueCreate(2, (sizeof(uint8_t[30]) * 10));
 
-    if(xTaskCreate(mainTask, "Main Task", configMINIMAL_STACK_SIZE + 50, NULL, 2, &mainTaskHandle) == pdFALSE)
+    if(xTaskCreate(mainTask, "Main Task", configMINIMAL_STACK_SIZE + 1000, NULL, 2, &mainTaskHandle) == pdFALSE)
     {
     	PRINTF("\r\nFailed to start \"Main Task\"\r\n");
     }
