@@ -64,7 +64,8 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">helperFunctions.c File Reference</div>  </div>
 </div><!--header-->
@@ -99,6 +100,17 @@ Functions</h2></td></tr>
 <tr class="memitem:a0930fa846b9c2ce7a32c583bc27d9813"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structuserTime__t.html">userTime_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="helperFunctions_8c.html#a0930fa846b9c2ce7a32c583bc27d9813">getTime</a> (char *stringTime)</td></tr>
 <tr class="memdesc:a0930fa846b9c2ce7a32c583bc27d9813"><td class="mdescLeft">&#160;</td><td class="mdescRight">function that converts time from user input to <a class="el" href="structuserTime__t.html" title="structure containing variables for storing time ">userTime_t</a> structure  <a href="#a0930fa846b9c2ce7a32c583bc27d9813">More...</a><br /></td></tr>
 <tr class="separator:a0930fa846b9c2ce7a32c583bc27d9813"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc331eab0cf0ef96cde2b9db622ecad7"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="helperFunctions_8c.html#acc331eab0cf0ef96cde2b9db622ecad7">getSystemDate</a> (RTC_Type *base, rtc_datetime_t *datetime)</td></tr>
+<tr class="memdesc:acc331eab0cf0ef96cde2b9db622ecad7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function gets system date from rtc_datetime_t structure and converts it to a string (char*)  <a href="#acc331eab0cf0ef96cde2b9db622ecad7">More...</a><br /></td></tr>
+<tr class="separator:acc331eab0cf0ef96cde2b9db622ecad7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9e06cf9e2f6f76118282e2d59ccd96b"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="helperFunctions_8c.html#af9e06cf9e2f6f76118282e2d59ccd96b">getSystemTime</a> (RTC_Type *base, rtc_datetime_t *datetime)</td></tr>
+<tr class="memdesc:af9e06cf9e2f6f76118282e2d59ccd96b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function gets system time from rtc_datetime_t structure and converts it to a string (char*)  <a href="#af9e06cf9e2f6f76118282e2d59ccd96b">More...</a><br /></td></tr>
+<tr class="separator:af9e06cf9e2f6f76118282e2d59ccd96b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:aaa7733b0a10413d02dce66686f2a1e34"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="helperFunctions_8c.html#aaa7733b0a10413d02dce66686f2a1e34">eventCount</a></td></tr>
+<tr class="separator:aaa7733b0a10413d02dce66686f2a1e34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="ad1f66def208f596daf1a973304681630"></a>
@@ -126,7 +138,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>none </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="helperFunctions_8c_source.html#l00045">45</a> of file <a class="el" href="helperFunctions_8c_source.html">helperFunctions.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helperFunctions_8c_source.html#l00049">49</a> of file <a class="el" href="helperFunctions_8c_source.html">helperFunctions.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -175,7 +187,7 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>none </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="helperFunctions_8c_source.html#l00058">58</a> of file <a class="el" href="helperFunctions_8c_source.html">helperFunctions.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helperFunctions_8c_source.html#l00062">62</a> of file <a class="el" href="helperFunctions_8c_source.html">helperFunctions.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -212,7 +224,7 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>none </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="helperFunctions_8c_source.html#l00017">17</a> of file <a class="el" href="helperFunctions_8c_source.html">helperFunctions.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helperFunctions_8c_source.html#l00021">21</a> of file <a class="el" href="helperFunctions_8c_source.html">helperFunctions.c</a>.</p>
 
 </div>
 </div>
@@ -241,7 +253,7 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>struct <a class="el" href="structuserDate__t.html" title="structure containing variables for storing date ">userDate_t</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="helperFunctions_8c_source.html#l00087">87</a> of file <a class="el" href="helperFunctions_8c_source.html">helperFunctions.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helperFunctions_8c_source.html#l00091">91</a> of file <a class="el" href="helperFunctions_8c_source.html">helperFunctions.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -279,7 +291,107 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>uint8_t </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="helperFunctions_8c_source.html#l00074">74</a> of file <a class="el" href="helperFunctions_8c_source.html">helperFunctions.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helperFunctions_8c_source.html#l00078">78</a> of file <a class="el" href="helperFunctions_8c_source.html">helperFunctions.c</a>.</p>
+
+</div>
+</div>
+<a id="acc331eab0cf0ef96cde2b9db622ecad7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc331eab0cf0ef96cde2b9db622ecad7">&#9670;&nbsp;</a></span>getSystemDate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* getSystemDate </td>
+          <td>(</td>
+          <td class="paramtype">RTC_Type *&#160;</td>
+          <td class="paramname"><em>base</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">rtc_datetime_t *&#160;</td>
+          <td class="paramname"><em>datetime</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function gets system date from rtc_datetime_t structure and converts it to a string (char*) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">base</td><td>pointer to RTC base address </td></tr>
+    <tr><td class="paramname">datetime</td><td>pointer to RTC datetime structure </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>char* </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="helperFunctions_8c_source.html#l00123">123</a> of file <a class="el" href="helperFunctions_8c_source.html">helperFunctions.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="helperFunctions_8c_acc331eab0cf0ef96cde2b9db622ecad7_icgraph.png" border="0" usemap="#helperFunctions_8c_acc331eab0cf0ef96cde2b9db622ecad7_icgraph" alt=""/></div>
+<map name="helperFunctions_8c_acc331eab0cf0ef96cde2b9db622ecad7_icgraph" id="helperFunctions_8c_acc331eab0cf0ef96cde2b9db622ecad7_icgraph">
+<area shape="rect" id="node2" href="bluetooth2_8h.html#af723d0fc3bd6baecee78dfcf8096fcb3" title="phoneBTTask" alt="" coords="167,5,269,32"/>
+<area shape="rect" id="node3" href="moistureDetection_8h.html#a837ef94c8f9b1a6cd374bb02a52e5ac9" title="FreeRTOS main task. " alt="" coords="179,56,257,83"/>
+<area shape="rect" id="node4" href="Dev1__FreeRTOS_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="Main function. " alt="" coords="317,56,368,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="af9e06cf9e2f6f76118282e2d59ccd96b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9e06cf9e2f6f76118282e2d59ccd96b">&#9670;&nbsp;</a></span>getSystemTime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* getSystemTime </td>
+          <td>(</td>
+          <td class="paramtype">RTC_Type *&#160;</td>
+          <td class="paramname"><em>base</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">rtc_datetime_t *&#160;</td>
+          <td class="paramname"><em>datetime</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function gets system time from rtc_datetime_t structure and converts it to a string (char*) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">base</td><td>pointer to RTC base address </td></tr>
+    <tr><td class="paramname">datetime</td><td>pointer to RTC datetime structure </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>char* </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="helperFunctions_8c_source.html#l00145">145</a> of file <a class="el" href="helperFunctions_8c_source.html">helperFunctions.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="helperFunctions_8c_af9e06cf9e2f6f76118282e2d59ccd96b_icgraph.png" border="0" usemap="#helperFunctions_8c_af9e06cf9e2f6f76118282e2d59ccd96b_icgraph" alt=""/></div>
+<map name="helperFunctions_8c_af9e06cf9e2f6f76118282e2d59ccd96b_icgraph" id="helperFunctions_8c_af9e06cf9e2f6f76118282e2d59ccd96b_icgraph">
+<area shape="rect" id="node2" href="bluetooth2_8h.html#af723d0fc3bd6baecee78dfcf8096fcb3" title="phoneBTTask" alt="" coords="168,5,271,32"/>
+<area shape="rect" id="node3" href="moistureDetection_8h.html#a837ef94c8f9b1a6cd374bb02a52e5ac9" title="FreeRTOS main task. " alt="" coords="180,56,259,83"/>
+<area shape="rect" id="node4" href="Dev1__FreeRTOS_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="Main function. " alt="" coords="319,56,369,83"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -308,7 +420,7 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>struct <a class="el" href="structuserTime__t.html" title="structure containing variables for storing time ">userTime_t</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="helperFunctions_8c_source.html#l00104">104</a> of file <a class="el" href="helperFunctions_8c_source.html">helperFunctions.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helperFunctions_8c_source.html#l00108">108</a> of file <a class="el" href="helperFunctions_8c_source.html">helperFunctions.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -358,7 +470,22 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>none </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="helperFunctions_8c_source.html#l00029">29</a> of file <a class="el" href="helperFunctions_8c_source.html">helperFunctions.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helperFunctions_8c_source.html#l00033">33</a> of file <a class="el" href="helperFunctions_8c_source.html">helperFunctions.c</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="aaa7733b0a10413d02dce66686f2a1e34"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa7733b0a10413d02dce66686f2a1e34">&#9670;&nbsp;</a></span>eventCount</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t eventCount</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>

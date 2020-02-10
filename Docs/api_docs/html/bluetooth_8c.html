@@ -74,6 +74,9 @@ $(function() {
 <code>#include &quot;task.h&quot;</code><br />
 <code>#include &quot;fsl_debug_console.h&quot;</code><br />
 <code>#include &quot;fsl_uart.h&quot;</code><br />
+<code>#include &quot;peripherals.h&quot;</code><br />
+<code>#include &quot;queue.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="helperFunctions_8h_source.html">helperFunctions.h</a>&quot;</code><br />
 </div>
 <p><a href="bluetooth_8c_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -87,6 +90,10 @@ Functions</h2></td></tr>
 Variables</h2></td></tr>
 <tr class="memitem:a6182d8ff612f4cbbad993102a01e26a9"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bluetooth_8c.html#a6182d8ff612f4cbbad993102a01e26a9">alarmType</a></td></tr>
 <tr class="separator:a6182d8ff612f4cbbad993102a01e26a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66945d0a29dced10324c866ffe0fc9e8"><td class="memItemLeft" align="right" valign="top">QueueHandle_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bluetooth_8c.html#a66945d0a29dced10324c866ffe0fc9e8">phoneBTReceiveQ</a></td></tr>
+<tr class="separator:a66945d0a29dced10324c866ffe0fc9e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d0c7ef94499a73e26d8c6337758793c"><td class="memItemLeft" align="right" valign="top">rtc_datetime_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bluetooth_8c.html#a3d0c7ef94499a73e26d8c6337758793c">RTC_1_dateTimeStruct</a></td></tr>
+<tr class="separator:a3d0c7ef94499a73e26d8c6337758793c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="abfb4d37ca7299a49213bf7d8ad649dde"></a>
@@ -108,7 +115,7 @@ Variables</h2></td></tr>
 <p>FreeRTOS bluetooth task. </p>
 <p>bluetooth task responsible for transmission of data to Dev2. Based on the alarm type received from moisture detection interrupt and rtc interrupt through task notifications sends appropriate flag to Dev2. If 1 - notifies Dev2 mainTask to create a motorTask and if 2 - to create a buzzerTask </p>
 
-<p class="definition">Definition at line <a class="el" href="bluetooth_8c_source.html#l00020">20</a> of file <a class="el" href="bluetooth_8c_source.html">bluetooth.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bluetooth_8c_source.html#l00025">25</a> of file <a class="el" href="bluetooth_8c_source.html">bluetooth.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -133,7 +140,37 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00037">37</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00045">45</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
+
+</div>
+</div>
+<a id="a66945d0a29dced10324c866ffe0fc9e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66945d0a29dced10324c866ffe0fc9e8">&#9670;&nbsp;</a></span>phoneBTReceiveQ</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QueueHandle_t phoneBTReceiveQ</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00041">41</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
+
+</div>
+</div>
+<a id="a3d0c7ef94499a73e26d8c6337758793c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d0c7ef94499a73e26d8c6337758793c">&#9670;&nbsp;</a></span>RTC_1_dateTimeStruct</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">rtc_datetime_t RTC_1_dateTimeStruct</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>

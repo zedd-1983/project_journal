@@ -90,6 +90,7 @@ $(function() {
 <code>#include &quot;<a class="el" href="keypad_8h_source.html">keypad.h</a>&quot;</code><br />
 <code>#include &quot;task.h&quot;</code><br />
 <code>#include &quot;semphr.h&quot;</code><br />
+<code>#include &quot;queue.h&quot;</code><br />
 </div>
 <p><a href="Dev1__FreeRTOS_8c_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -103,6 +104,8 @@ Functions</h2></td></tr>
 <tr class="memitem:a24c34e0b60aa6dd249fa701863feaa25"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Dev1__FreeRTOS_8c.html#a24c34e0b60aa6dd249fa701863feaa25">btTask</a> (void *)</td></tr>
 <tr class="memdesc:a24c34e0b60aa6dd249fa701863feaa25"><td class="mdescLeft">&#160;</td><td class="mdescRight">FreeRTOS bluetooth task.  <a href="#a24c34e0b60aa6dd249fa701863feaa25">More...</a><br /></td></tr>
 <tr class="separator:a24c34e0b60aa6dd249fa701863feaa25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af723d0fc3bd6baecee78dfcf8096fcb3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Dev1__FreeRTOS_8c.html#af723d0fc3bd6baecee78dfcf8096fcb3">phoneBTTask</a> (void *)</td></tr>
+<tr class="separator:af723d0fc3bd6baecee78dfcf8096fcb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a411ceda148850d2cbe7b9c702e3f3436"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Dev1__FreeRTOS_8c.html#a411ceda148850d2cbe7b9c702e3f3436">PORTC_IRQHandler</a> ()</td></tr>
 <tr class="memdesc:a411ceda148850d2cbe7b9c702e3f3436"><td class="mdescLeft">&#160;</td><td class="mdescRight">moisture detection external interrupt (SW2)  <a href="#a411ceda148850d2cbe7b9c702e3f3436">More...</a><br /></td></tr>
 <tr class="separator:a411ceda148850d2cbe7b9c702e3f3436"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -126,6 +129,8 @@ Variables</h2></td></tr>
 <tr class="separator:ad98524447c537416c12313e0ef8e6772"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af72695477afda52baec8f42e9005ee27"><td class="memItemLeft" align="right" valign="top">TaskHandle_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Dev1__FreeRTOS_8c.html#af72695477afda52baec8f42e9005ee27">btTaskHandle</a> = NULL</td></tr>
 <tr class="separator:af72695477afda52baec8f42e9005ee27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab91f975a369058a8c38e98ce0d5797f0"><td class="memItemLeft" align="right" valign="top">TaskHandle_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Dev1__FreeRTOS_8c.html#ab91f975a369058a8c38e98ce0d5797f0">phoneBTTaskHandle</a> = NULL</td></tr>
+<tr class="separator:ab91f975a369058a8c38e98ce0d5797f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1763d7b0d199088550df80ecc818e2ff"><td class="memItemLeft" align="right" valign="top">TaskHandle_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Dev1__FreeRTOS_8c.html#a1763d7b0d199088550df80ecc818e2ff">keypadTaskHandle</a> = NULL</td></tr>
 <tr class="separator:a1763d7b0d199088550df80ecc818e2ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae689ac0244424aef0765bf8b7b459b7b"><td class="memItemLeft" align="right" valign="top">SemaphoreHandle_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Dev1__FreeRTOS_8c.html#ae689ac0244424aef0765bf8b7b459b7b">moistureDetectionSemphr</a> = NULL</td></tr>
@@ -138,6 +143,14 @@ Variables</h2></td></tr>
 <tr class="separator:a200a344532f3c716e483303ad3c2e6fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e2fe13ea40233e59233147a599bf2d8"><td class="memItemLeft" align="right" valign="top">SemaphoreHandle_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Dev1__FreeRTOS_8c.html#a5e2fe13ea40233e59233147a599bf2d8">btSemphr</a> = NULL</td></tr>
 <tr class="separator:a5e2fe13ea40233e59233147a599bf2d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c46267efd97b8fa332b1644d69d1ae4"><td class="memItemLeft" align="right" valign="top">SemaphoreHandle_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Dev1__FreeRTOS_8c.html#a1c46267efd97b8fa332b1644d69d1ae4">recordsRequestSemphr</a> = NULL</td></tr>
+<tr class="separator:a1c46267efd97b8fa332b1644d69d1ae4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66945d0a29dced10324c866ffe0fc9e8"><td class="memItemLeft" align="right" valign="top">QueueHandle_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Dev1__FreeRTOS_8c.html#a66945d0a29dced10324c866ffe0fc9e8">phoneBTReceiveQ</a> = NULL</td></tr>
+<tr class="separator:a66945d0a29dced10324c866ffe0fc9e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d0b90187c5a1d53b3f053813fe85ab9"><td class="memItemLeft" align="right" valign="top">QueueHandle_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Dev1__FreeRTOS_8c.html#a1d0b90187c5a1d53b3f053813fe85ab9">dataForThePhoneQ</a> = NULL</td></tr>
+<tr class="separator:a1d0b90187c5a1d53b3f053813fe85ab9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44964dc2dffb947bc51d78205addd8af"><td class="memItemLeft" align="right" valign="top">QueueHandle_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Dev1__FreeRTOS_8c.html#a44964dc2dffb947bc51d78205addd8af">recordsForThePhoneQ</a> = NULL</td></tr>
+<tr class="separator:a44964dc2dffb947bc51d78205addd8af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6182d8ff612f4cbbad993102a01e26a9"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Dev1__FreeRTOS_8c.html#a6182d8ff612f4cbbad993102a01e26a9">alarmType</a></td></tr>
 <tr class="separator:a6182d8ff612f4cbbad993102a01e26a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad87c34c1a035728b77dba6f1deafd536"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Dev1__FreeRTOS_8c.html#ad87c34c1a035728b77dba6f1deafd536">busyWait</a> = false</td></tr>
@@ -160,7 +173,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00044">44</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00053">53</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
 
 </div>
 </div>
@@ -184,7 +197,7 @@ Variables</h2></td></tr>
 <p>FreeRTOS bluetooth task. </p>
 <p>bluetooth task responsible for transmission of data to Dev2. Based on the alarm type received from moisture detection interrupt and rtc interrupt through task notifications sends appropriate flag to Dev2. If 1 - notifies Dev2 mainTask to create a motorTask and if 2 - to create a buzzerTask </p>
 
-<p class="definition">Definition at line <a class="el" href="bluetooth_8c_source.html#l00020">20</a> of file <a class="el" href="bluetooth_8c_source.html">bluetooth.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bluetooth_8c_source.html#l00025">25</a> of file <a class="el" href="bluetooth_8c_source.html">bluetooth.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -221,21 +234,53 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00172">172</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00181">181</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="Dev1__FreeRTOS_8c_a840291bc02cba5474a4cb46a9b9566fe_cgraph.png" border="0" usemap="#Dev1__FreeRTOS_8c_a840291bc02cba5474a4cb46a9b9566fe_cgraph" alt=""/></div>
 <map name="Dev1__FreeRTOS_8c_a840291bc02cba5474a4cb46a9b9566fe_cgraph" id="Dev1__FreeRTOS_8c_a840291bc02cba5474a4cb46a9b9566fe_cgraph">
-<area shape="rect" id="node2" href="moistureDetection_8c.html#ae30ce41ba67c626bf4971733516e382a" title="FreeRTOS main task. " alt="" coords="111,56,190,83"/>
-<area shape="rect" id="node8" href="Dev1__FreeRTOS_8c.html#a24c34e0b60aa6dd249fa701863feaa25" title="FreeRTOS bluetooth task. " alt="" coords="119,107,182,133"/>
-<area shape="rect" id="node9" href="keypad_8c.html#a2ef2a9c92b10e34d69cbc0dee697bc21" title="Task reading values from keypad. " alt="" coords="104,157,197,184"/>
-<area shape="rect" id="node3" href="helperFunctions_8c.html#ad1f66def208f596daf1a973304681630" title="function to configure RTC alarm " alt="" coords="254,5,363,32"/>
-<area shape="rect" id="node4" href="helperFunctions_8c.html#aa6696aeb75979be788e52121a54f3d52" title="function to get current alarm time from the RTC structure " alt="" coords="245,56,372,83"/>
-<area shape="rect" id="node5" href="timeKeeping_8c.html#a471c947052edf8148d2da508d403b3d5" title="FreeRTOS task for user defined time configuration. " alt="" coords="251,107,366,133"/>
-<area shape="rect" id="node6" href="helperFunctions_8c.html#ac285ec53171e96380442e5017b95bcb6" title="function that converts date from user input to userDate_t structure " alt="" coords="421,81,489,108"/>
-<area shape="rect" id="node7" href="helperFunctions_8c.html#a0930fa846b9c2ce7a32c583bc27d9813" title="function that converts time from user input to userTime_t structure " alt="" coords="420,132,489,159"/>
-<area shape="rect" id="node10" href="keypad_8c.html#a8f4139e1acebd3b0e5e42735ebb55890" title="Function scans keypad for keys pressed. " alt="" coords="261,157,356,184"/>
+<area shape="rect" id="node2" href="moistureDetection_8c.html#ae30ce41ba67c626bf4971733516e382a" title="FreeRTOS main task. " alt="" coords="116,132,195,159"/>
+<area shape="rect" id="node11" href="Dev1__FreeRTOS_8c.html#a24c34e0b60aa6dd249fa701863feaa25" title="FreeRTOS bluetooth task. " alt="" coords="124,183,187,209"/>
+<area shape="rect" id="node12" href="Dev1__FreeRTOS_8c.html#af723d0fc3bd6baecee78dfcf8096fcb3" title="phoneBTTask" alt="" coords="104,233,207,260"/>
+<area shape="rect" id="node3" href="helperFunctions_8c.html#af9e06cf9e2f6f76118282e2d59ccd96b" title="Function gets system time from rtc_datetime_t structure and converts it to a string (char*) ..." alt="" coords="275,5,390,32"/>
+<area shape="rect" id="node4" href="helperFunctions_8c.html#acc331eab0cf0ef96cde2b9db622ecad7" title="Function gets system date from rtc_datetime_t structure and converts it to a string (char*) ..." alt="" coords="276,56,389,83"/>
+<area shape="rect" id="node5" href="moistureDetection_8c.html#a54397d6a6306c07896698b95d0e4592f" title="Function converts given structure to a String and returns. " alt="" coords="255,107,411,133"/>
+<area shape="rect" id="node6" href="helperFunctions_8c.html#ad1f66def208f596daf1a973304681630" title="function to configure RTC alarm " alt="" coords="278,157,387,184"/>
+<area shape="rect" id="node7" href="helperFunctions_8c.html#aa6696aeb75979be788e52121a54f3d52" title="function to get current alarm time from the RTC structure " alt="" coords="269,208,396,235"/>
+<area shape="rect" id="node8" href="timeKeeping_8c.html#a471c947052edf8148d2da508d403b3d5" title="FreeRTOS task for user defined time configuration. " alt="" coords="275,259,390,285"/>
+<area shape="rect" id="node9" href="helperFunctions_8c.html#ac285ec53171e96380442e5017b95bcb6" title="function that converts date from user input to userDate_t structure " alt="" coords="459,233,527,260"/>
+<area shape="rect" id="node10" href="helperFunctions_8c.html#a0930fa846b9c2ce7a32c583bc27d9813" title="function that converts time from user input to userTime_t structure " alt="" coords="459,284,528,311"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="af723d0fc3bd6baecee78dfcf8096fcb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af723d0fc3bd6baecee78dfcf8096fcb3">&#9670;&nbsp;</a></span>phoneBTTask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void phoneBTTask </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>TODO: check if connected and receiving characters TODO: send data via queue to bluetooth task</p>
+<p>TODO: if event happens, this task needs to be notified (an LED goes ON) TODO: need to be able to request time and date of previous events from mald ster device (these will probably be recorded in an array of strings at first) (should include time and date, ACK status, maybe length and type of wake-up method used) TODO: need to be able to stop pending alarm if event occurs, event still needs to be recorded TODO: allow for setting time and date through the phone application rather than through LCD and keypad (maybe) </p>
+
+<p class="definition">Definition at line <a class="el" href="bluetooth2_8c_source.html#l00027">27</a> of file <a class="el" href="bluetooth2_8c_source.html">bluetooth2.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="Dev1__FreeRTOS_8c_af723d0fc3bd6baecee78dfcf8096fcb3_icgraph.png" border="0" usemap="#Dev1__FreeRTOS_8c_af723d0fc3bd6baecee78dfcf8096fcb3_icgraph" alt=""/></div>
+<map name="Dev1__FreeRTOS_8c_af723d0fc3bd6baecee78dfcf8096fcb3_icgraph" id="Dev1__FreeRTOS_8c_af723d0fc3bd6baecee78dfcf8096fcb3_icgraph">
+<area shape="rect" id="node2" href="Dev1__FreeRTOS_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="Main function. " alt="" coords="156,5,207,32"/>
 </map>
 </div>
 
@@ -259,7 +304,7 @@ Here is the call graph for this function:</div>
 <p>time configuration interrupt (SW3) </p>
 <p>external interrupt (SW3) that gives semaphore to main task to create userTimeConfig task </p>
 
-<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00071">71</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00080">80</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
 
 </div>
 </div>
@@ -281,7 +326,7 @@ Here is the call graph for this function:</div>
 <p>moisture detection external interrupt (SW2) </p>
 <p>this interrupt simulates interrupt received from moisture detection device. Eventually the switch will be replaced by this device. It should pass a semaphore to moisture detection task that will request current time from timekeeping task and assemble a message that will be transmitted via BT to the other K64F </p>
 
-<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00052">52</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00061">61</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
 
 </div>
 </div>
@@ -303,7 +348,7 @@ Here is the call graph for this function:</div>
 <p>RTC interrupt that sets flag when an alarm interrupt occurs. </p>
 <p>Currently gets set to 10s after moisture detection but in actual run would be set to occur approx 23 hours 45 mins later to try to make the child/person more aware/awake </p>
 
-<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00105">105</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00114">114</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
 
 </div>
 </div>
@@ -320,7 +365,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00033">33</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00035">35</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
 
 </div>
 </div>
@@ -336,7 +381,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00037">37</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00045">45</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
 
 </div>
 </div>
@@ -352,7 +397,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00036">36</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00038">38</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
 
 </div>
 </div>
@@ -368,7 +413,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00029">29</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00030">30</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
 
 </div>
 </div>
@@ -380,6 +425,22 @@ Here is the call graph for this function:</div>
       <table class="memname">
         <tr>
           <td class="memname">bool busyWait = false</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00051">51</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
+
+</div>
+</div>
+<a id="a1d0b90187c5a1d53b3f053813fe85ab9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d0b90187c5a1d53b3f053813fe85ab9">&#9670;&nbsp;</a></span>dataForThePhoneQ</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QueueHandle_t dataForThePhoneQ = NULL</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -400,7 +461,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00030">30</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00032">32</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
 
 </div>
 </div>
@@ -416,7 +477,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00026">26</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00027">27</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
 
 </div>
 </div>
@@ -432,7 +493,71 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00032">32</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00034">34</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
+
+</div>
+</div>
+<a id="a66945d0a29dced10324c866ffe0fc9e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66945d0a29dced10324c866ffe0fc9e8">&#9670;&nbsp;</a></span>phoneBTReceiveQ</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QueueHandle_t phoneBTReceiveQ = NULL</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00041">41</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
+
+</div>
+</div>
+<a id="ab91f975a369058a8c38e98ce0d5797f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab91f975a369058a8c38e98ce0d5797f0">&#9670;&nbsp;</a></span>phoneBTTaskHandle</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TaskHandle_t phoneBTTaskHandle = NULL</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00031">31</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
+
+</div>
+</div>
+<a id="a44964dc2dffb947bc51d78205addd8af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44964dc2dffb947bc51d78205addd8af">&#9670;&nbsp;</a></span>recordsForThePhoneQ</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QueueHandle_t recordsForThePhoneQ = NULL</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00043">43</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
+
+</div>
+</div>
+<a id="a1c46267efd97b8fa332b1644d69d1ae4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c46267efd97b8fa332b1644d69d1ae4">&#9670;&nbsp;</a></span>recordsRequestSemphr</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SemaphoreHandle_t recordsRequestSemphr = NULL</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00039">39</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
 
 </div>
 </div>
@@ -448,7 +573,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00034">34</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00036">36</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
 
 </div>
 </div>
@@ -464,7 +589,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00027">27</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00028">28</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
 
 </div>
 </div>
@@ -480,7 +605,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00028">28</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00029">29</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
 
 </div>
 </div>
@@ -496,7 +621,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00035">35</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Dev1__FreeRTOS_8c_source.html#l00037">37</a> of file <a class="el" href="Dev1__FreeRTOS_8c_source.html">Dev1_FreeRTOS.c</a>.</p>
 
 </div>
 </div>

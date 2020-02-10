@@ -1,0 +1,5 @@
+<map id="phoneBTTask" name="phoneBTTask">
+<area shape="rect" id="node2" href="$bluetooth2_8c.html#a6ae0c36faf80e9882a78a3250a93933a" title="This function sends data to phone via UART3 and Bluetooth module. " alt="" coords="156,5,287,32"/>
+<area shape="rect" id="node3" href="$helperFunctions_8c.html#af9e06cf9e2f6f76118282e2d59ccd96b" title="Function gets system time from rtc_datetime_t structure and converts it to a string (char*) ..." alt="" coords="164,56,279,83"/>
+<area shape="rect" id="node4" href="$helperFunctions_8c.html#acc331eab0cf0ef96cde2b9db622ecad7" title="Function gets system date from rtc_datetime_t structure and converts it to a string (char*) ..." alt="" coords="165,107,278,133"/>
+</map>
