@@ -45,7 +45,8 @@ void mainTask(void* pvParameters)
 {
 	//displayMenu();
 	struct eventData_t events[10] = {};
-	const char* recordsAsStrings[10] = {""};
+	char* recordsAsStrings[10] = {""};
+	char* singleString = "";
 
 	for(;;)
 	{
@@ -78,6 +79,7 @@ void mainTask(void* pvParameters)
 			events[eventCount].eventDate = getSystemDate(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
 			events[eventCount].wasAcknowledged = "no";
 			recordsAsStrings[eventCount] = convertRecordToString(events[eventCount]);
+			singleString = recordsAsStrings[0];
 
 			eventCount++;
 
@@ -106,7 +108,7 @@ void mainTask(void* pvParameters)
 			}
 
 			// send records to the BT2 task
-			xQueueSend(recordsForThePhoneQ, &recordsAsStrings, 0);
+			xQueueSend(recordsForThePhoneQ, &singleString, 0);
 
 		}
 
@@ -148,10 +150,10 @@ void printRecords(struct eventData_t *p_event)
 /// @brief Function converts given structure to a String and returns
 /// @param event structure to convert
 /// @return char* recordAsString
-const char* convertRecordToString(struct eventData_t event)
+char* convertRecordToString(struct eventData_t event)
 {
 	// alocate memory for a string
-	char* recordAsStrings = (char*) malloc(sizeof(char) * 30);
+	char* recordAsStrings = (char*) malloc(sizeof(char) * 20);
 
 	strcpy(recordAsStrings, event.eventDate);
 	strcat(recordAsStrings, SPACER);

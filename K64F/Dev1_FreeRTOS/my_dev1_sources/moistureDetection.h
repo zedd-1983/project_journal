@@ -17,6 +17,6 @@ struct eventData_t {
 // functions
 void mainTask(void*);
 void printRecords(struct eventData_t*);
-const char* convertRecordToString(struct eventData_t);
+char* convertRecordToString(struct eventData_t);
 
 #endif /* MOISTUREDETECTION_H_ */

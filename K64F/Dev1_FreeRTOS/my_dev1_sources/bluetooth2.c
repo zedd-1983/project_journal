@@ -60,7 +60,7 @@ void phoneBTTask(void *pvParameters)
 												PRINTF("\033[32mData received!!!\033[0m\n\r");
 
 												PRINTF("Printing data received!!!\n\r");
-												sendDataToPhone("data data");
+									//			sendDataToPhone("data data");
 //												int i = 0;
 //												while(recordsForPhoneBuffer[i] != NULL)
 //												{
@@ -102,14 +102,14 @@ void phoneBTTask(void *pvParameters)
 /// @return void
 void sendDataToPhone(char* data)
 {
-	//int i = 0;
+	int i = 0;
 
-	UART_WriteBlocking(UART3, &data, sizeof(data));
-//	while(data[i] != '\0')
-//	{
-//		if (kUART_TxDataRegEmptyFlag & UART_GetStatusFlags(UART3)) {
-//			UART_WriteByte(UART3, data[i]);
-//			i++;
-//		}
-//	}
+//	UART_WriteBlocking(UART3, &data, sizeof(data));
+	while(data[i] != '\0')
+	{
+		if (kUART_TxDataRegEmptyFlag & UART_GetStatusFlags(UART3)) {
+			UART_WriteByte(UART3, data[i]);
+			i++;
+		}
+	}
 }
