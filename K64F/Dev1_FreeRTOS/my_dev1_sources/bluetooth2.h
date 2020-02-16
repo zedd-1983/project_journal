@@ -16,5 +16,6 @@
 
 void phoneBTTask(void*);
 void sendDataToPhone(char*);
+void busyDelay(int);
 
 #endif /* BLUETOOTH2_H_ */

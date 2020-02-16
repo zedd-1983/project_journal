@@ -30,6 +30,7 @@ extern SemaphoreHandle_t btSemphr;
 extern SemaphoreHandle_t recordsRequestSemphr;
 extern TaskHandle_t userTimeConfigHandle;
 extern QueueHandle_t recordsForThePhoneQ;
+extern QueueHandle_t singleRecordQueue;
 extern rtc_datetime_t RTC_1_dateTimeStruct;
 static uint8_t eventCount = 0;
 
@@ -78,14 +79,19 @@ void mainTask(void* pvParameters)
 			events[eventCount].eventTime = getSystemTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
 			events[eventCount].eventDate = getSystemDate(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
 			events[eventCount].wasAcknowledged = "no";
+
+			// convert given structure to a single string and add it to a string array
 			recordsAsStrings[eventCount] = convertRecordToString(events[eventCount]);
+
+			// testing - just getting one string to be passed to the queue and
+			// sent to the phone
 			singleString = recordsAsStrings[0];
 
 			eventCount++;
 
 			// struct array set to 10 events only, this is a precaution
 			if(eventCount > 9)
-				eventCount = 0;
+				eventCount = 9;
 
 			configureAlarm(20);
 			displayAlarmTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
@@ -102,13 +108,24 @@ void mainTask(void* pvParameters)
 		// will send data over a Queue to BT2 task to be transmitted back to the phone
 		if(xSemaphoreTake(recordsRequestSemphr, 0) == pdTRUE)
 		{
+			// send only one string
+			PRINTF("\n\rThe ONE string: %s", singleString);
+
+			// put the One string into a queue and transfer to bt2 task
+			xQueueSend(singleRecordQueue, &singleString, 0);
+
+/*
 			PRINTF("\n\rPrinting strings");
 			for(int i = 0; i <= eventCount; i++) {
 				PRINTF("\n\r%s", recordsAsStrings[i]);
 			}
+			if(recordsForThePhoneQ != 0) {
+			// send records to the BT2 task if there are items in the queue
+				if(xQueueSend(recordsForThePhoneQ, &singleString, 0) != pdPASS)
+					PRINTF("\n\rFailed to send the queue");
+			}
 
-			// send records to the BT2 task
-			xQueueSend(recordsForThePhoneQ, &singleString, 0);
+*/
 
 		}
 
@@ -127,6 +144,13 @@ void mainTask(void* pvParameters)
 //		}
 
 		vTaskDelay(pdMS_TO_TICKS(150));
+		//	while(data[i] != '\0')
+		//	{
+		//		if (kUART_TxDataRegEmptyFlag & UART_GetStatusFlags(UART3)) {
+		//			UART_WriteByte(UART3, data[i]);
+		//		}
+		//		i++;
+		//	}
 
 	}	// end of for(;;)
 }
@@ -153,7 +177,8 @@ void printRecords(struct eventData_t *p_event)
 char* convertRecordToString(struct eventData_t event)
 {
 	// alocate memory for a string
-	char* recordAsStrings = (char*) malloc(sizeof(char) * 20);
+	char* recordAsStrings = (char*) malloc(sizeof(char) * 21);
+	//char* recordAsStrings = "";
 
 	strcpy(recordAsStrings, event.eventDate);
 	strcat(recordAsStrings, SPACER);
