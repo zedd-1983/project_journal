@@ -222,7 +222,7 @@ int main(void) {
 
     phoneBTReceiveQ = xQueueCreate(5, sizeof(uint8_t));
     dataForThePhoneQ = xQueueCreate(5, sizeof(uint8_t[12]));
-    recordsForThePhoneQ = xQueueCreate(1, (sizeof(char[22]) * 10));
+    recordsForThePhoneQ = xQueueCreate(1, (sizeof(char[23]) * 3));
     singleRecordQueue = xQueueCreate(1, sizeof(char[21]));
 
     if(xTaskCreate(mainTask, "Main Task", configMINIMAL_STACK_SIZE + 1000, NULL, 2, &mainTaskHandle) == pdFALSE)
