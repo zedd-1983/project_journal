@@ -127,7 +127,8 @@ void mainTask(void* pvParameters)
 			PRINTF("\n\rThe ONE string: %s", singleString);
 
 			// put the One string into a queue and transfer to bt2 task
-			xQueueSend(singleRecordQueue, &singleString, 0);
+//			xQueueSend(singleRecordQueue, &singleString, 0);
+			xQueueSend(recordsForThePhoneQ, &recordsAsStrings, 0);
 
 /*
 			PRINTF("\n\rPrinting strings");

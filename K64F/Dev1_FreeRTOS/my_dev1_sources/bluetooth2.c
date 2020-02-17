@@ -64,47 +64,46 @@ void phoneBTTask(void *pvParameters)
 				case REQUEST_RECORDS:		PRINTF("\n\r\033[33mRequesting records...\033[0m\n\r");
 											xSemaphoreGive(recordsRequestSemphr);
 
-											if(xQueueReceive(singleRecordQueue, &oneRecord, pdMS_TO_TICKS(200)))
-											{
-												PRINTF("\n\rReceived: %s", oneRecord);
-												//PRINTF("\n\rSending data to phone: ");
-												sendDataToPhone(oneRecord);
-											}
+//											if(xQueueReceive(singleRecordQueue, &oneRecord, pdMS_TO_TICKS(200)))
+//											{
+//												PRINTF("\n\rReceived: %s", oneRecord);
+//												//PRINTF("\n\rSending data to phone: ");
+//												sendDataToPhone(oneRecord);
+//											}
 
-											/*
-											if(xQueueReceive(recordsForThePhoneQ, &recordsForPhoneBuffer, pdMS_TO_TICKS(0)))
+
+											if(xQueueReceive(recordsForThePhoneQ, &recordsForPhoneBuffer, pdMS_TO_TICKS(200)))
 											{
 												PRINTF("\033[32mData received!!!\033[0m\n\r");
 
 												//PRINTF("Printing data received!!!\n\r");
 												int i = 0;
-												while(recordsForPhoneBuffer[i] != NULL)
-												{
-													PRINTF("\n\rData in the buffer");
-													PRINTF("\n\r%s", recordsForPhoneBuffer[i]);
-													i++;
-												}
-
-												i = 0;
+//												while(recordsForPhoneBuffer[i] != NULL)
+//												{
+//													PRINTF("\n\rData in the buffer");
+//													PRINTF("\n\r%s", recordsForPhoneBuffer[i]);
+//													i++;
+//												}
+//
+//												i = 0;
 												PRINTF("\n\r\033[32mSending data to Phone!!!\033[0m\n\r");
-												while(recordsForPhoneBuffer[i] != NULL)
+												while(recordsForPhoneBuffer[i] != 0x0)
 												{
 													sendDataToPhone(recordsForPhoneBuffer[i]);
+													busyDelay(20000);
 													i++;
 												}
 												PRINTF("\n\r\033[32mData send!!!\033[0m\n\r");
 											}
-											*/
+
 											break;
 				default:					PRINTF("Invalid request\n\r"); charReceived = '\0'; break;
-			}
+			} // switch
 			charReceived = '\0';
 			UART_ClearStatusFlags(UART3,  kUART_RxDataRegFullFlag);
-		}
+		} // handling requests from phone
 		vTaskDelay(pdMS_TO_TICKS(100));
 	} // for loop
-
-
 /// TODO: 	if event happens, this task needs to be notified (an LED goes ON)
 /// TODO: 	need to be able to request time and date of previous events from mald ster device
 ///			(these will probably be recorded in an array of strings at first)
@@ -113,7 +112,7 @@ void phoneBTTask(void *pvParameters)
 ///			recorded
 /// TODO: 	allow for setting time and date through the phone application rather than through LCD and
 /// 		keypad (maybe)
-}
+} // end of phoneBTTask
 
 /// @brief This function sends data to phone via UART3 and Bluetooth module
 /// @param data string representation of data
@@ -123,7 +122,11 @@ void sendDataToPhone(char* data)
 	int i = 0;
 	int count = 0;
 
-	while(data[i] != '\0')
+	UART_WriteBlocking(UART3, (void*)data, strlen(data) + sizeof(char));
+	PRINTF("\n\rSent: %s", data);
+
+	/*
+	while(data[i] != 0x0)
 	{
 		//PRINTF("%c", data[i]);
 		count++;
@@ -132,14 +135,11 @@ void sendDataToPhone(char* data)
 		// this seems to work, looks like I was sending data too fast
 		// will need to be replaced by a proper interrupt using PIT
 		busyDelay(20000);
-//		if(kUART_TxDataRegEmptyFlag & UART_GetStatusFlags(UART3)) {
-//			UART_WriteByte(UART3, data[i]);
-//
-//		}
 		i++;
 	}
+	*/
 
-	PRINTF("\n\rCount: %d", count);
+	//PRINTF("\n\rCount: %d", count);
 	//UART_WriteBlocking(UART3, (void*)data, sizeof(data[21]));
 //	while(data[i] != '\0')
 //	{

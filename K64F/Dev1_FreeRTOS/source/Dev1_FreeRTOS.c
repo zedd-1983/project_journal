@@ -222,7 +222,7 @@ int main(void) {
 
     phoneBTReceiveQ = xQueueCreate(5, sizeof(uint8_t));
     dataForThePhoneQ = xQueueCreate(5, sizeof(uint8_t[12]));
-    recordsForThePhoneQ = xQueueCreate(1, (sizeof(uint8_t[21]) * 10));
+    recordsForThePhoneQ = xQueueCreate(1, (sizeof(char[22]) * 10));
     singleRecordQueue = xQueueCreate(1, sizeof(char[21]));
 
     if(xTaskCreate(mainTask, "Main Task", configMINIMAL_STACK_SIZE + 1000, NULL, 2, &mainTaskHandle) == pdFALSE)
@@ -235,7 +235,7 @@ int main(void) {
     	PRINTF("\n\rBT Task creation failed\n\r");
     }
 
-    if(xTaskCreate(phoneBTTask, "Phone Bluetooth Task", configMINIMAL_STACK_SIZE + 50, NULL, 2, &phoneBTTaskHandle) == pdFALSE)
+    if(xTaskCreate(phoneBTTask, "Phone Bluetooth Task", configMINIMAL_STACK_SIZE + 300, NULL, 2, &phoneBTTaskHandle) == pdFALSE)
     {
     	PRINTF("\n\rPhone BT Task creation failed\n\r");
     }
