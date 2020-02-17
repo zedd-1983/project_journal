@@ -109,3 +109,23 @@ void userTimeConfig(void* pvParameters)
 			vTaskDelete(NULL);
 		}
 }
+
+/*
+void changeTimeDate(void* pvParameters)
+{
+	char data[20];
+	// sendDataToPhone("Waiting for new date");
+	PRINTF("\n\rWaiting for new date");
+	if(kUART_RxDataRegFullFlag & UART_GetStatusFlags(UART3))
+	{
+		UART_ReadBlocking(UART3, &data, sizeof(data));
+	}
+	PRINTF("Received: %s", data);
+	// receiveData()
+	// if valid sendDataToPhone("Waiting for new time");
+	// 		receiveData()
+	//		if valid sendDataToPhone("Time updated");
+	//
+	// 		else sendDataToPhone("Invalid value, resetting time");
+}
+*/

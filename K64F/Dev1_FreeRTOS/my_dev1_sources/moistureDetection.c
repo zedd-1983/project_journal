@@ -24,13 +24,19 @@
 #include "moistureDetection.h"
 
 extern bool busyWait;
+
 extern SemaphoreHandle_t moistureDetectionSemphr;
 extern SemaphoreHandle_t userTimeConfigSemphr;
 extern SemaphoreHandle_t btSemphr;
 extern SemaphoreHandle_t recordsRequestSemphr;
+extern SemaphoreHandle_t timeChangeRequestSemphr;
+
 extern TaskHandle_t userTimeConfigHandle;
+//extern TaskHandle_t phoneTimeConfigHandle;
+
 extern QueueHandle_t recordsForThePhoneQ;
 extern QueueHandle_t singleRecordQueue;
+
 extern rtc_datetime_t RTC_1_dateTimeStruct;
 static uint8_t eventCount = 0;
 
@@ -97,12 +103,21 @@ void mainTask(void* pvParameters)
 			displayAlarmTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
 		}	 // moistureDetectionSemphr
 
+		// time change via terminal
 		if(xSemaphoreTake(userTimeConfigSemphr, 0) == pdTRUE) {
 		    if(xTaskCreate(userTimeConfig, "UserTimeConfig Task", configMINIMAL_STACK_SIZE + 150, NULL, 3, &userTimeConfigHandle) == pdFALSE)
 		    {
 		    	PRINTF("\r\nFailed to start \"UserTimeConfig Task\"\r\n");
 		    }
 		}
+
+		// time change via phone
+//		if(xSemaphoreTake(timeChangeRequestSemphr, 0) == pdTRUE) {
+//		    if(xTaskCreate(timeConfigFromPhone, "Phone time config", configMINIMAL_STACK_SIZE + 150, NULL, 3, &phoneTimeConfigHandle) == pdFALSE)
+//		    {
+//		    	PRINTF("\r\nFailed to start \"Phone Time Config Task\"\r\n");
+//		    }
+//		}
 
 		// print available records when a request is received from the phone
 		// will send data over a Queue to BT2 task to be transmitted back to the phone

@@ -27,6 +27,7 @@
 TaskHandle_t mainTaskHandle = NULL;
 TaskHandle_t terminalTaskHandle = NULL;
 TaskHandle_t userTimeConfigHandle = NULL;
+//TaskHandle_t phoneTimeConfigHandle = NULL;
 TaskHandle_t btTaskHandle = NULL;
 TaskHandle_t phoneBTTaskHandle = NULL;
 TaskHandle_t keypadTaskHandle = NULL;
@@ -37,6 +38,7 @@ SemaphoreHandle_t setAlarmSemphr = NULL;
 SemaphoreHandle_t userTimeConfigSemphr = NULL;
 SemaphoreHandle_t btSemphr = NULL;
 SemaphoreHandle_t recordsRequestSemphr = NULL;
+SemaphoreHandle_t timeChangeRequestSemphr = NULL;
 
 QueueHandle_t phoneBTReceiveQ = NULL;
 QueueHandle_t dataForThePhoneQ = NULL;
@@ -165,7 +167,7 @@ void RTC_1_COMMON_IRQHANDLER()
 //		if(charReceived != '\0') {
 //			if(charReceived == 't')
 //				printCurrentTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
-//			else if (charReceived == 'a')
+//			else if (charReceived == 'a')time
 //				displayAlarmTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
 //			else
 //				charReceived = '\0';
@@ -254,6 +256,7 @@ int main(void) {
     userTimeConfigSemphr = xSemaphoreCreateBinary();
     btSemphr = xSemaphoreCreateBinary();
     recordsRequestSemphr = xSemaphoreCreateBinary();
+    timeChangeRequestSemphr = xSemaphoreCreateBinary();
 
     vTaskStartScheduler();
 

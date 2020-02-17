@@ -24,6 +24,7 @@ extern QueueHandle_t singleRecordQueue;
 extern TaskHandle_t mainTaskHandle;
 
 extern SemaphoreHandle_t recordsRequestSemphr;
+extern SemaphoreHandle_t timeChangeRequestSemphr;
 
 void phoneBTTask(void *pvParameters)
 {
@@ -54,14 +55,19 @@ void phoneBTTask(void *pvParameters)
 				case SYSTEM_DATE_REQUEST: 	//PRINTF("\n\rDate: %s", getSystemDate(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct));
 											sendDataToPhone(getSystemDate(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct));
 											break;
-				case SYSTEM_TIME_CHANGE:	PRINTF("System time change\n\r"); break;
+				case SYSTEM_TIME_CHANGE:	PRINTF("System time change\n\r");
+//											sendDataToPhone("Insert new date: ");
+//											char* newData = getDataFromPhone();
+//											PRINTF("\n\r%s", newData);
+											//xSemaphoreGive(timeChangeRequestSemphr);
+											break;
 				case REQUEST_RECORDS:		PRINTF("\n\r\033[33mRequesting records...\033[0m\n\r");
 											xSemaphoreGive(recordsRequestSemphr);
 
 											if(xQueueReceive(singleRecordQueue, &oneRecord, pdMS_TO_TICKS(200)))
 											{
 												PRINTF("\n\rReceived: %s", oneRecord);
-												PRINTF("\n\rSending data to phone: ");
+												//PRINTF("\n\rSending data to phone: ");
 												sendDataToPhone(oneRecord);
 											}
 
@@ -119,7 +125,7 @@ void sendDataToPhone(char* data)
 
 	while(data[i] != '\0')
 	{
-		PRINTF("%c", data[i]);
+		//PRINTF("%c", data[i]);
 		count++;
 
 		UART_WriteByte(UART3, data[i]);
@@ -141,10 +147,28 @@ void sendDataToPhone(char* data)
 //			UART_WriteByte(UART3, data[i]);
 //		}
 //		i++;
-//	}
+//	}null
 }
 
 void busyDelay(int noOfLoops)
 {
 	for(int i = 0; i < noOfLoops; i++);
+}
+
+char* getDataFromPhone() {
+	//int i = 0;
+	char* receivedData = "";
+
+	UART_ReadBlocking(UART3, (uint8_t*)&receivedData, sizeof(receivedData));
+
+	PRINTF("\n\r%s", receivedData);
+	// if there are data in the receive register
+//	if(kUART_RxDataRegFullFlag & UART_GetStatusFlags(UART3))
+//	{
+//		while(receivedData[i] != '\0') {
+//			receivedData[i] = UART_ReadByte(UART3);
+//			i++;
+//		}
+//	}
+	return receivedData;
 }
