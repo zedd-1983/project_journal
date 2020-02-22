@@ -10,5 +10,6 @@
 
 void userTimeConfig(void*);
 void configureTimeViaPhone(void*);
+void configureAndDisplayNewTime(char*);
 
 #endif /* TIMEKEEPING_H_ */

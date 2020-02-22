@@ -59,37 +59,16 @@ void phoneBTTask(void *pvParameters)
 				case SYSTEM_TIME_CHANGE:	PRINTF("System time change\n\r");
 											charReceived = '\0';
 											xSemaphoreGive(configureTimeViaPhoneSemphr);
-//											sendDataToPhone("Insert new date: ");
-//											char* newData = getDataFromPhone();
-//											PRINTF("\n\r%s", newData);
-											//xSemaphoreGive(timeChangeRequestSemphr);
 											break;
 				case REQUEST_RECORDS:		PRINTF("\n\r\033[33mRequesting records...\033[0m\n\r");
 											xSemaphoreGive(recordsRequestSemphr);
 
-//											if(xQueueReceive(singleRecordQueue, &oneRecord, pdMS_TO_TICKS(200)))
-//											{
-//												PRINTF("\n\rReceived: %s", oneRecord);
-//												//PRINTF("\n\rSending data to phone: ");
-//												sendDataToPhone(oneRecord);
-//											}
-
-
 											if(xQueueReceive(recordsForThePhoneQ, &recordsForPhoneBuffer, pdMS_TO_TICKS(200)))
 											{
 												PRINTF("\033[32mData received!!!\033[0m\n\r");
-
-												//PRINTF("Printing data received!!!\n\r");
-												int i = 0;
-//												while(recordsForPhoneBuffer[i] != NULL)
-//												{
-//													PRINTF("\n\rData in the buffer");
-//													PRINTF("\n\r%s", recordsForPhoneBuffer[i]);
-//													i++;
-//												}
-//
-//												i = 0;
 												PRINTF("\n\r\033[32mSending data to Phone!!!\033[0m\n\r");
+
+												int i = 0;
 												while(recordsForPhoneBuffer[i] != 0x0)
 												{
 													sendDataToPhone(recordsForPhoneBuffer[i]);
@@ -108,13 +87,8 @@ void phoneBTTask(void *pvParameters)
 		vTaskDelay(pdMS_TO_TICKS(100));
 	} // for loop
 /// TODO: 	if event happens, this task needs to be notified (an LED goes ON)
-/// TODO: 	need to be able to request time and date of previous events from mald ster device
-///			(these will probably be recorded in an array of strings at first)
-///			(should include time and date, ACK status, maybe length and type of wake-up method used)
 /// TODO: 	need to be able to stop pending alarm if event occurs, event still needs to be
 ///			recorded
-/// TODO: 	allow for setting time and date through the phone application rather than through LCD and
-/// 		keypad (maybe)
 } // end of phoneBTTask
 
 /// @brief This function sends data to phone via UART3 and Bluetooth module

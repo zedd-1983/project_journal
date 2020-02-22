@@ -25,18 +25,12 @@ extern rtc_datetime_t RTC_1_dateTimeStruct;
 /// and UART0 interrupts are then enabled again. The task then deletes
 /// itself.
 /// @param pvParameters not used currently
-/// @return none
+/// @return void
 void userTimeConfig(void* pvParameters)
 {
 		char stringDate[11] = "";
 		char stringTime[6] = "";
 		char stringTimeDate[17] = "";
-
-//		char year[5] = "";
-//		char month[3] = "";
-//		char day[3] = "";
-//		char hour[3] = "";
-//		char minute[3] = "";
 
 		uint16_t newYear = 1970;
 		uint8_t newMonth = 1, newDay = 1, newHour = 1, newMinute =1;
@@ -110,13 +104,15 @@ void userTimeConfig(void* pvParameters)
 		}
 }
 
+/// @brief FreeRTOS task for user defined time configuration via phone
+/// @details This task allows the user to change the system time remotely via
+/// bluetooth module connected to UART3. Upon completion, it deletes itself.
+/// @param pvParameters not used currently
+/// @return void
 void configureTimeViaPhone(void* pvParameters)
 {
-	uint16_t newYear = 1970;
-	uint8_t newMonth = 1, newDay = 1, newHour = 1, newMinute =1;
 
 	uint8_t receivedDateTime[17];
-	char* dateAndTimeSplit[2];
 	char* enterValDateTime = "Please enter valid dateTime in [YYYYMMDD-HHMM] format";
 
 	PRINTF("\n\r\033[33mIn configure time via phone\033[0m");
@@ -126,65 +122,54 @@ void configureTimeViaPhone(void* pvParameters)
 
 		switch(UART_ReadBlocking(UART3, receivedDateTime, 17)) {
 			case kStatus_Success 				: 	PRINTF("\n\rReceived: %s", receivedDateTime);
-
-													dateAndTimeSplit[1] = strtok((char*)receivedDateTime, ":");
-													PRINTF("\n\rDate: %s", dateAndTimeSplit[1]);
-													struct userDate_t newDate = getDate(dateAndTimeSplit[1]);
-													newYear = newDate.year;
-													newMonth = newDate.month;
-													newDay = newDate.day;
-
-													dateAndTimeSplit[2] = strtok(NULL, '\0');
-													PRINTF("\n\rTime: %s", dateAndTimeSplit[2]);
-													struct userTime_t newTime = getTime(dateAndTimeSplit[2]);
-													newHour = newTime.hour;
-													newMinute = newTime.minute;
-
-													RTC_StopTimer(RTC_1_PERIPHERAL);
-													RTC_1_dateTimeStruct.year = newYear;
-													RTC_1_dateTimeStruct.month = newMonth;
-													RTC_1_dateTimeStruct.day = newDay;
-													RTC_1_dateTimeStruct.hour = newHour;
-													RTC_1_dateTimeStruct.minute = newMinute;
-													RTC_SetDatetime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
-													RTC_StartTimer(RTC_1_PERIPHERAL);
-
-													char* systemDate = getSystemDate(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
-													UART_WriteBlocking(UART3, (uint8_t*)"System date set to: ", strlen("System date set to: ") + 1);
-													UART_WriteBlocking(UART3, (uint8_t*)systemDate, strlen(systemDate) + 1);
-
-													char* systemTime = getSystemTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
-													UART_WriteBlocking(UART3, (uint8_t*)"System time set to: ", strlen("System time set to: ") + 1);
-													UART_WriteBlocking(UART3, (uint8_t*)systemTime, strlen(systemTime) + 1);
-
-												break;
-			case kStatus_UART_RxHardwareOverrun : PRINTF("\n\rHardware Overrun"); break;
-			case kStatus_UART_NoiseError 		: PRINTF("\n\rNoise Error"); break;
-			case kStatus_UART_FramingError 		: PRINTF("\n\rFraming Error"); break;
-			case kStatus_UART_ParityError 		: PRINTF("\n\rParity Error"); break;
-			default								: PRINTF("\n\rUnknown Error"); break;
+													configureAndDisplayNewTime(receivedDateTime);
+													break;
+			case kStatus_UART_RxHardwareOverrun : 	PRINTF("\n\rHardware Overrun"); break;
+			case kStatus_UART_NoiseError 		: 	PRINTF("\n\rNoise Error"); break;
+			case kStatus_UART_FramingError 		: 	PRINTF("\n\rFraming Error"); break;
+			case kStatus_UART_ParityError 		: 	PRINTF("\n\rParity Error"); break;
+			default								: 	PRINTF("\n\rUnknown Error"); break;
 		}
 		vTaskDelete(NULL);
 	}
 }
 
-
-/*
-void changeTimeDate(void* pvParameters)
+void configureAndDisplayNewTime(char* receivedDateTime)
 {
-	char data[20];
-	// sendDataToPhone("Waiting for new date");
-	PRINTF("\n\rWaiting for new date");
-	if(kUART_RxDataRegFullFlag & UART_GetStatusFlags(UART3))
-	{
-		UART_ReadBlocking(UART3, &data, sizeof(data));
-	}
-	PRINTF("Received: %s", data);
-	// receiveData()
-	// if valid sendDataToPhone("Waiting for new time");
-	// 		receiveData()
-	//		if valid sendDataToPhone("Time updated");
-	//
-	// 		else sendDataToPhone("Invalid value, resetting time");
+	uint16_t newYear = 1970;
+	uint8_t newMonth = 1, newDay = 1, newHour = 1, newMinute =1;
+	char* dateAndTimeSplit[2];
+
+	dateAndTimeSplit[1] = strtok((char*)receivedDateTime, ":");
+	PRINTF("\n\rDate: %s", dateAndTimeSplit[1]);
+	struct userDate_t newDate = getDate(dateAndTimeSplit[1]);
+	newYear = newDate.year;
+	newMonth = newDate.month;
+	newDay = newDate.day;
+
+	dateAndTimeSplit[2] = strtok(NULL, '\0');
+	PRINTF("\n\rTime: %s", dateAndTimeSplit[2]);
+	struct userTime_t newTime = getTime(dateAndTimeSplit[2]);
+	newHour = newTime.hour;
+	newMinute = newTime.minute;
+
+	RTC_StopTimer(RTC_1_PERIPHERAL);
+	RTC_1_dateTimeStruct.year = newYear;
+	RTC_1_dateTimeStruct.month = newMonth;
+	RTC_1_dateTimeStruct.day = newDay;
+	RTC_1_dateTimeStruct.hour = newHour;
+	RTC_1_dateTimeStruct.minute = newMinute;
+	RTC_SetDatetime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
+	RTC_StartTimer(RTC_1_PERIPHERAL);
+
+	// display new date and time on user's phone
+	char* systemDate = getSystemDate(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
+	UART_WriteBlocking(UART3, (uint8_t*)"System date set to: ", strlen("System date set to: ") + 1);
+	UART_WriteBlocking(UART3, (uint8_t*)systemDate, strlen(systemDate) + 1);
+
+	char* systemTime = getSystemTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
+	UART_WriteBlocking(UART3, (uint8_t*)"System time set to: ", strlen("System time set to: ") + 1);
+	UART_WriteBlocking(UART3, (uint8_t*)systemTime, strlen(systemTime) + 1);
+
+
 }
-*/

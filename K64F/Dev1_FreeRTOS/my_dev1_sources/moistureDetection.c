@@ -91,10 +91,6 @@ void mainTask(void* pvParameters)
 			// convert given structure to a single string and add it to a string array
 			recordsAsStrings[eventCount] = convertRecordToString(events[eventCount]);
 
-			// testing - just getting one string to be passed to the queue and
-			// sent to the phone
-			//singleString = recordsAsStrings[0];
-
 			eventCount++;
 
 			// struct array set to 10 events only, this is a precaution
@@ -123,23 +119,10 @@ void mainTask(void* pvParameters)
 		    }
 		}
 
-		// time change via phone
-//		if(xSemaphoreTake(timeChangeRequestSemphr, 0) == pdTRUE) {
-//		    if(xTaskCreate(timeConfigFromPhone, "Phone time config", configMINIMAL_STACK_SIZE + 150, NULL, 3, &phoneTimeConfigHandle) == pdFALSE)
-//		    {
-//		    	PRINTF("\r\nFailed to start \"Phone Time Config Task\"\r\n");
-//		    }
-//		}
-
 		// print available records when a request is received from the phone
 		// will send data over a Queue to BT2 task to be transmitted back to the phone
 		if(xSemaphoreTake(recordsRequestSemphr, 0) == pdTRUE)
 		{
-			// send only one string
-//			PRINTF("\n\rThe ONE string: %s", singleString);
-
-			// put the One string into a queue and transfer to bt2 task
-//			xQueueSend(singleRecordQueue, &singleString, 0);
 			xQueueSend(recordsForThePhoneQ, &recordsAsStrings, 0);
 
 /*
