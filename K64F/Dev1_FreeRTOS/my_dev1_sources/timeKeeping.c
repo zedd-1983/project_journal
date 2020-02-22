@@ -112,6 +112,9 @@ void userTimeConfig(void* pvParameters)
 
 void configureTimeViaPhone(void* pvParameters)
 {
+	uint16_t newYear = 1970;
+	uint8_t newMonth = 1, newDay = 1, newHour = 1, newMinute =1;
+
 	uint8_t receivedDateTime[17];
 	char* dateAndTimeSplit[2];
 	char* enterValDateTime = "Please enter valid dateTime in [YYYYMMDD-HHMM] format";
@@ -126,15 +129,33 @@ void configureTimeViaPhone(void* pvParameters)
 
 													dateAndTimeSplit[1] = strtok((char*)receivedDateTime, ":");
 													PRINTF("\n\rDate: %s", dateAndTimeSplit[1]);
-													//struct userDate_t newDate = getDate(dateAndTimeSplit[1]);
+													struct userDate_t newDate = getDate(dateAndTimeSplit[1]);
+													newYear = newDate.year;
+													newMonth = newDate.month;
+													newDay = newDate.day;
 
 													dateAndTimeSplit[2] = strtok(NULL, '\0');
 													PRINTF("\n\rTime: %s", dateAndTimeSplit[2]);
-													//struct userTime_t newTime = getTime(dateAndTimeSplit[2]);
+													struct userTime_t newTime = getTime(dateAndTimeSplit[2]);
+													newHour = newTime.hour;
+													newMinute = newTime.minute;
 
+													RTC_StopTimer(RTC_1_PERIPHERAL);
+													RTC_1_dateTimeStruct.year = newYear;
+													RTC_1_dateTimeStruct.month = newMonth;
+													RTC_1_dateTimeStruct.day = newDay;
+													RTC_1_dateTimeStruct.hour = newHour;
+													RTC_1_dateTimeStruct.minute = newMinute;
+													RTC_SetDatetime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
+													RTC_StartTimer(RTC_1_PERIPHERAL);
 
+													char* systemDate = getSystemDate(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
+													UART_WriteBlocking(UART3, (uint8_t*)"System date set to: ", strlen("System date set to: ") + 1);
+													UART_WriteBlocking(UART3, (uint8_t*)systemDate, strlen(systemDate) + 1);
 
-
+													char* systemTime = getSystemTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
+													UART_WriteBlocking(UART3, (uint8_t*)"System time set to: ", strlen("System time set to: ") + 1);
+													UART_WriteBlocking(UART3, (uint8_t*)systemTime, strlen(systemTime) + 1);
 
 												break;
 			case kStatus_UART_RxHardwareOverrun : PRINTF("\n\rHardware Overrun"); break;
