@@ -30,8 +30,10 @@ extern SemaphoreHandle_t userTimeConfigSemphr;
 extern SemaphoreHandle_t btSemphr;
 extern SemaphoreHandle_t recordsRequestSemphr;
 extern SemaphoreHandle_t timeChangeRequestSemphr;
+SemaphoreHandle_t configureTimeViaPhoneSemphr = NULL;
 
 extern TaskHandle_t userTimeConfigHandle;
+TaskHandle_t configureTimeViaPhoneHandle;
 //extern TaskHandle_t phoneTimeConfigHandle;
 
 extern QueueHandle_t recordsForThePhoneQ;
@@ -53,7 +55,7 @@ void mainTask(void* pvParameters)
 	//displayMenu();
 	struct eventData_t events[10] = {};
 	char* recordsAsStrings[10] = {""};
-	char* singleString = "";
+	//char* singleString = "";
 
 	for(;;)
 	{
@@ -91,7 +93,7 @@ void mainTask(void* pvParameters)
 
 			// testing - just getting one string to be passed to the queue and
 			// sent to the phone
-			singleString = recordsAsStrings[0];
+			//singleString = recordsAsStrings[0];
 
 			eventCount++;
 
@@ -105,9 +107,19 @@ void mainTask(void* pvParameters)
 
 		// time change via terminal
 		if(xSemaphoreTake(userTimeConfigSemphr, 0) == pdTRUE) {
-		    if(xTaskCreate(userTimeConfig, "UserTimeConfig Task", configMINIMAL_STACK_SIZE + 150, NULL, 3, &userTimeConfigHandle) == pdFALSE)
+		    if(xTaskCreate(userTimeConfig, "UserTimeConfig Task", configMINIMAL_STACK_SIZE + 150,
+		    		NULL, 3, &userTimeConfigHandle) == pdFALSE)
 		    {
 		    	PRINTF("\r\nFailed to start \"UserTimeConfig Task\"\r\n");
+		    }
+		}
+
+		// time change via phone
+		if(xSemaphoreTake(configureTimeViaPhoneSemphr, 0) == pdTRUE) {
+		    if(xTaskCreate(configureTimeViaPhone, "Phone time config Task", configMINIMAL_STACK_SIZE + 300,
+		    		NULL, 5, &configureTimeViaPhoneHandle) == pdFALSE)
+		    {
+		    	PRINTF("\r\nFailed to start \"Phone time config Task\"\r\n");
 		    }
 		}
 
@@ -124,7 +136,7 @@ void mainTask(void* pvParameters)
 		if(xSemaphoreTake(recordsRequestSemphr, 0) == pdTRUE)
 		{
 			// send only one string
-			PRINTF("\n\rThe ONE string: %s", singleString);
+//			PRINTF("\n\rThe ONE string: %s", singleString);
 
 			// put the One string into a queue and transfer to bt2 task
 //			xQueueSend(singleRecordQueue, &singleString, 0);

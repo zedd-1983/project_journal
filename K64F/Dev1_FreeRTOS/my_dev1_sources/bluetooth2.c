@@ -25,6 +25,7 @@ extern TaskHandle_t mainTaskHandle;
 
 extern SemaphoreHandle_t recordsRequestSemphr;
 extern SemaphoreHandle_t timeChangeRequestSemphr;
+extern SemaphoreHandle_t configureTimeViaPhoneSemphr;
 
 void phoneBTTask(void *pvParameters)
 {
@@ -56,6 +57,8 @@ void phoneBTTask(void *pvParameters)
 											sendDataToPhone(getSystemDate(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct));
 											break;
 				case SYSTEM_TIME_CHANGE:	PRINTF("System time change\n\r");
+											charReceived = '\0';
+											xSemaphoreGive(configureTimeViaPhoneSemphr);
 //											sendDataToPhone("Insert new date: ");
 //											char* newData = getDataFromPhone();
 //											PRINTF("\n\r%s", newData);

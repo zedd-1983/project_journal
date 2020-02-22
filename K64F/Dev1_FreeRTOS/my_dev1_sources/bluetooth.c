@@ -50,26 +50,26 @@ void btTask(void* pvParameters) {
 			if(queueBuffer == 'a')
 			{
 				PRINTF("\n\rACKNOWLEDGED in bluetooth task, transmitting to Dev2");
-				//UART_WriteByte(UART4, queueBuffer);
+				UART_WriteByte(UART4, queueBuffer);
 			}
-			else if(queueBuffer == 'b')
-			{
-				PRINTF("%c", queueBuffer);
-				PRINTF("\n\rACKNOWLEDGED in bluetooth task, transmitting to Dev2");
-
-				uint8_t hr = RTC_1_dateTimeStruct.hour;
-				PRINTF("%d", hr);
-
-
-
-				//char* hr = getSystemTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
-				//uint8_t count = 0;
-
-//				while(hr[count] != '\0') {
-//					UART_WriteByte(UART3, hr[count]);
-//					count++;
-//				}
-			}
+//			else if(queueBuffer == 'b')
+//			{
+//				PRINTF("%c", queueBuffer);
+//				PRINTF("\n\rACKNOWLEDGED in bluetooth task, transmitting to Dev2");
+//
+//				uint8_t hr = RTC_1_dateTimeStruct.hour;
+//				PRINTF("%d", hr);
+//
+//
+//
+//				//char* hr = getSystemTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
+//				//uint8_t count = 0;
+//
+////				while(hr[count] != '\0') {
+////					UART_WriteByte(UART3, hr[count]);
+////					count++;
+////				}
+//			}
 		}
 		vTaskDelay(pdMS_TO_TICKS(150));
 	}

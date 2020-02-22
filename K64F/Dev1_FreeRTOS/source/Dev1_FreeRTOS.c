@@ -39,7 +39,7 @@ SemaphoreHandle_t userTimeConfigSemphr = NULL;
 SemaphoreHandle_t btSemphr = NULL;
 SemaphoreHandle_t recordsRequestSemphr = NULL;
 SemaphoreHandle_t timeChangeRequestSemphr = NULL;
-
+extern SemaphoreHandle_t configureTimeViaPhoneSemphr;
 QueueHandle_t phoneBTReceiveQ = NULL;
 QueueHandle_t dataForThePhoneQ = NULL;
 QueueHandle_t recordsForThePhoneQ = NULL;
@@ -257,6 +257,7 @@ int main(void) {
     btSemphr = xSemaphoreCreateBinary();
     recordsRequestSemphr = xSemaphoreCreateBinary();
     timeChangeRequestSemphr = xSemaphoreCreateBinary();
+    configureTimeViaPhoneSemphr = xSemaphoreCreateBinary();
 
     vTaskStartScheduler();
 

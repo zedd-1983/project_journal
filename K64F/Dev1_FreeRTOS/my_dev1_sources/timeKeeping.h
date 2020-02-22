@@ -9,5 +9,6 @@
 #define TIMEKEEPING_H_
 
 void userTimeConfig(void*);
+void configureTimeViaPhone(void*);
 
 #endif /* TIMEKEEPING_H_ */
