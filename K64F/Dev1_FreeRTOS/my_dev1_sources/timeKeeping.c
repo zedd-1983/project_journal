@@ -112,55 +112,41 @@ void userTimeConfig(void* pvParameters)
 
 void configureTimeViaPhone(void* pvParameters)
 {
-	uint8_t receivedDate[9];
-	uint8_t receivedTime[5];
-	uint8_t receivedDateTime[14];
-	char* enterValDate = "Please enter valid date";
-	char* enterValTime = "Please enter valid time";
+	uint8_t receivedDateTime[17];
+	char* dateAndTimeSplit[2];
 	char* enterValDateTime = "Please enter valid dateTime in [YYYYMMDD-HHMM] format";
-	PRINTF("\n\r\033[34mIn configure time via phone\033[0m");
+
+	PRINTF("\n\r\033[33mIn configure time via phone\033[0m");
 
 	for(;;) {
 		UART_WriteBlocking(UART3, (uint8_t*)enterValDateTime, strlen(enterValDateTime) + 1 );
 
-		// wait for data
-//		while((kUART_RxDataRegFullFlag & UART_GetStatusFlags(UART3)) == 0)
-//		{}
+		switch(UART_ReadBlocking(UART3, receivedDateTime, 17)) {
+			case kStatus_Success 				: 	PRINTF("\n\rReceived: %s", receivedDateTime);
 
-		switch(UART_ReadBlocking(UART3, receivedDateTime, 14)) {
-			case kStatus_Success 				: PRINTF("\n\rReceived: %s", receivedDateTime); break;
+													dateAndTimeSplit[1] = strtok((char*)receivedDateTime, ":");
+													PRINTF("\n\rDate: %s", dateAndTimeSplit[1]);
+													//struct userDate_t newDate = getDate(dateAndTimeSplit[1]);
+
+													dateAndTimeSplit[2] = strtok(NULL, '\0');
+													PRINTF("\n\rTime: %s", dateAndTimeSplit[2]);
+													//struct userTime_t newTime = getTime(dateAndTimeSplit[2]);
+
+
+
+
+
+												break;
 			case kStatus_UART_RxHardwareOverrun : PRINTF("\n\rHardware Overrun"); break;
 			case kStatus_UART_NoiseError 		: PRINTF("\n\rNoise Error"); break;
 			case kStatus_UART_FramingError 		: PRINTF("\n\rFraming Error"); break;
 			case kStatus_UART_ParityError 		: PRINTF("\n\rParity Error"); break;
 			default								: PRINTF("\n\rUnknown Error"); break;
 		}
-
-//		// Get new time
-//		UART_WriteBlocking(UART3, (uint8_t*)enterValTime, strlen(enterValTime) + 1);
-//
-//		switch(UART_ReadBlocking(UART3, receivedTime, 5)) {
-//			case kStatus_Success 				: PRINTF("\n\rReceived: %s", receivedTime); break;
-//			case kStatus_UART_RxHardwareOverrun : PRINTF("\n\rHardware Overrun"); break;
-//			case kStatus_UART_NoiseError 		: PRINTF("\n\rNoise Error"); break;
-//			case kStatus_UART_FramingError 		: PRINTF("\n\rFraming Error"); break;
-//			case kStatus_UART_ParityError 		: PRINTF("\n\rParity Error"); break;
-//			default								: PRINTF("\n\rUnknown Error"); break;
-//		}
-//		else
-//			PRINTF("\n\rReceived nothing");
-
-
-//		if(kUART_RxDataRegFullFlag & UART_GetStatusFlags(UART3)) {
-//			UART_ReadBlocking(UART3, (uint8_t*)&receivedData, sizeof(receivedData));
-//			while(receivedData == NULL)
-//				UART_ReadBlocking(UART3, (uint8_t*)&receivedData, sizeof(receivedData));
-//
-//			PRINTF("\n\rReceived: %s", receivedData);
-//		}
 		vTaskDelete(NULL);
 	}
 }
+
 
 /*
 void changeTimeDate(void* pvParameters)
