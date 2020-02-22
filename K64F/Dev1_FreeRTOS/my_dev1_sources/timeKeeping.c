@@ -147,11 +147,24 @@ void configureAndDisplayNewTime(char* receivedDateTime)
 	newMonth = newDate.month;
 	newDay = newDate.day;
 
+	if((newYear < 1970 || newYear > 2099) ||
+			(newMonth < 1 || newMonth > 12) ||
+			(newDay   < 1 || newDay > 31)) {
+		UART_WriteBlocking(UART3, (uint8_t*)"Invalid date", strlen("Invalid date") + 1);
+		return;
+	}
+
 	dateAndTimeSplit[2] = strtok(NULL, '\0');
 	PRINTF("\n\rTime: %s", dateAndTimeSplit[2]);
 	struct userTime_t newTime = getTime(dateAndTimeSplit[2]);
 	newHour = newTime.hour;
 	newMinute = newTime.minute;
+
+	if((newHour < 0 || newHour > 23) || (newMinute < 0 || newMinute > 59))
+	{
+		UART_WriteBlocking(UART3, (uint8_t*)"Invalid time", strlen("Invalid time") + 1);
+		return;
+	}
 
 	RTC_StopTimer(RTC_1_PERIPHERAL);
 	RTC_1_dateTimeStruct.year = newYear;
