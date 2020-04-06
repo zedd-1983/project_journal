@@ -195,3 +195,12 @@ At the moment the application is able to establish the Bluetooth connection to t
 time and date. I plan to expand the functionality today with additional buttons, to receive incident data as well as to re-jig  
 the layout of the application, as it's a bit messy at the moment. I will further need to allow the application to change system  
 time and date as well as properly handle the incident data and hopefully store these in a database.
+
+#### 06/04/2020
+I have made some improvements to the layout of the application, as well as added additional buttons. Next step is to figure out  
+how to change the time and date of the Easysleep device from the application. This worked with the third party application mentioned  
+earlier so it should be mainly work on my own Android application. Time, date and requested data now display correctly and not  
+after one another. Strangely, the incoming data from the Easysleep come in broken into segments that I have to glue together in  
+the Android application. Will need to look this over again.  
+I plan to work on the changeDateTime functionality tomorrow. Once this is working I can start looking into the database stuff for  
+storing the data from the device on the phone.
