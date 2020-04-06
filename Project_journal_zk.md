@@ -177,3 +177,21 @@ Some BT2 configuration details:
   - UART 38400, 8, N, 1
   - ADDR 98d3:32:70b920
   - 
+
+#### 06/04/2020
+In past few months I've been working on the implementation of second BT module with the K64F that would allow me to communicate  
+with an Android phone. Initially I have used an app downloaded from Play store but the idea was, that I would develop my own  
+application to suit my needs and the needs of the project. I have started working on this only recently as I have encountered a  
+number of issues. First, my computer proved to be too slow to run Android Studio effectively so I have borrowed a computer from  
+the college with the permission of Michael Keaveney. However, I had some interesting technical issues with it. For no apparent  
+reason, the computer would not run if the screen is plugged into the same outlet. As this issue was really odd it took as few  
+weeks to resolve as neither me or Michael would have anticipated this.  
+The computer is running now from two different circuits so I have started work on the application. I have followed a number of  
+tutorials on Youtube and android.developers website. It is my intention to modify and expand the code to suit the project.  
+The tutorials I have followed were mainly related to establishment of Bluetooth communication between the Android phone and  
+secondary device. The code also loosely follows the provided BluetoothChat application that comes with Android Studio. This will  
+have to be referenced in the final project report.  
+At the moment the application is able to establish the Bluetooth connection to the Easysleep device as well as query it's system  
+time and date. I plan to expand the functionality today with additional buttons, to receive incident data as well as to re-jig  
+the layout of the application, as it's a bit messy at the moment. I will further need to allow the application to change system  
+time and date as well as properly handle the incident data and hopefully store these in a database.
