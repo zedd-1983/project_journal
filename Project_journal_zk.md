@@ -204,3 +204,23 @@ after one another. Strangely, the incoming data from the Easysleep come in broke
 the Android application. Will need to look this over again.  
 I plan to work on the changeDateTime functionality tomorrow. Once this is working I can start looking into the database stuff for  
 storing the data from the device on the phone.
+
+#### 07/04/2020  
+Just had to connect to K64F via terminal. Was in a bit of a struggle to remember the appropriate Serial port parameters so just  
+thought that I might jot them down for reference:  
+- Baudrate : 115200  
+- 8bits  
+- no parity  
+- 1 stop bit  
+- usually connects on /dev/ttyACM0  
+
+**Minicom command**: sudo minicom -b 115200 /dev/ttyACM0  
+
+I have been working on time and date change via phone application this morning. This now works althought the output isn't very  
+pretty. The dateTime has to be submitted in following format: **YYYY-MM-DD:HH-mm**. As it was quite some time since I've tested  
+this functionality it took me a while to sort through the code and find the correct format. Probably should have noted this  
+somewhere in my notes.  
+Will try now to improve the layout again as it is getting quite crowded. Maybe even figure out how to display another activity  
+view focused on sending and receiving commands from the K64F. This view could come up upon successful connection.  
+
+
