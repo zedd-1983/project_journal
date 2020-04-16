@@ -223,4 +223,9 @@ somewhere in my notes.
 Will try now to improve the layout again as it is getting quite crowded. Maybe even figure out how to display another activity  
 view focused on sending and receiving commands from the K64F. This view could come up upon successful connection.  
 
-
+#### 16/04/2020  
+I have build the interfacing circuit for the vibration motor today. I have tested it just by applying voltage to the base pin of  
+the BC108 transistor and everything seems to work as expected. I am using 2k resistor to limit current on the base pin so the GPIO  
+on the K64F wouldn't get damaged as it is limited to 5mA per pin. The pins on K64F are able to provide 3.3V so based on my  
+calculation, the output current should be about 1.7 mA which is well below this limit. I have prototyped the circuit on the  
+prototyping board first.
