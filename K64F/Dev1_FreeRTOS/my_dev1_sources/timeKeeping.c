@@ -113,7 +113,7 @@ void configureTimeViaPhone(void* pvParameters)
 {
 
 	uint8_t receivedDateTime[17];
-	char* enterValDateTime = "Please enter valid dateTime in [YYYYMMDD-HHMM] format";
+	char* enterValDateTime = "Please enter valid dateTime in [YYYY-MM-DD:HH-MM] format";
 
 	PRINTF("\n\r\033[33mIn configure time via phone\033[0m");
 
