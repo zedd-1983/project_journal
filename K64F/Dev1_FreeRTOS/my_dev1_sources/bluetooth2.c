@@ -26,6 +26,7 @@ extern TaskHandle_t mainTaskHandle;
 extern SemaphoreHandle_t recordsRequestSemphr;
 extern SemaphoreHandle_t timeChangeRequestSemphr;
 extern SemaphoreHandle_t configureTimeViaPhoneSemphr;
+extern SemaphoreHandle_t startAlarm;
 
 void phoneBTTask(void *pvParameters)
 {
@@ -84,6 +85,10 @@ void phoneBTTask(void *pvParameters)
 			charReceived = '\0';
 			UART_ClearStatusFlags(UART3,  kUART_RxDataRegFullFlag);
 		} // handling requests from phone
+
+		if(xSemaphoreTake(startAlarm, 0) == pdTRUE) {
+			sendDataToPhone("X");
+		}
 		vTaskDelay(pdMS_TO_TICKS(100));
 	} // for loop
 /// TODO: 	if event happens, this task needs to be notified (an LED goes ON)

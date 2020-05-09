@@ -31,6 +31,7 @@ extern SemaphoreHandle_t btSemphr;
 extern SemaphoreHandle_t recordsRequestSemphr;
 extern SemaphoreHandle_t timeChangeRequestSemphr;
 SemaphoreHandle_t configureTimeViaPhoneSemphr = NULL;
+SemaphoreHandle_t startAlarm = NULL;
 
 extern TaskHandle_t userTimeConfigHandle;
 TaskHandle_t configureTimeViaPhoneHandle;
@@ -56,6 +57,7 @@ void mainTask(void* pvParameters)
 	struct eventData_t events[10] = {};
 	char* recordsAsStrings[10] = {""};
 	//char* singleString = "";
+	startAlarm = xSemaphoreCreateBinary();
 
 	for(;;)
 	{
@@ -99,6 +101,7 @@ void mainTask(void* pvParameters)
 
 			configureAlarm(20);
 			displayAlarmTime(RTC_1_PERIPHERAL, &RTC_1_dateTimeStruct);
+			xSemaphoreGive(startAlarm);
 		}	 // moistureDetectionSemphr
 
 		// time change via terminal
